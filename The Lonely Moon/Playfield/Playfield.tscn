@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Playfield/Playfield.gd" type="Script" id=1]
-[ext_resource path="res://Playfield/Earth/Earth.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Playfield/Satellite/Satellite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Playfield/Satellite/Satellite.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Playfield/Earth/Earth.tscn" type="PackedScene" id=3]
 
 [node name="Node" type="Container" index="0"]
 
@@ -17,20 +17,21 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+Satellite = ExtResource( 2 )
 
 [node name="Background" type="Node2D" parent="." index="0"]
 
-[node name="Earth" parent="." index="1" instance=ExtResource( 2 )]
+[node name="Earth" parent="." index="1" instance=ExtResource( 3 )]
 
-[node name="Sprite2" parent="Earth" index="1" instance=ExtResource( 3 )]
+[node name="Sprite2" parent="Earth" index="1" instance=ExtResource( 2 )]
 
 position = Vector2( 926, 188 )
 
-[node name="Sprite3" parent="Earth" index="2" instance=ExtResource( 3 )]
+[node name="Sprite3" parent="Earth" index="2" instance=ExtResource( 2 )]
 
 position = Vector2( 921, 98 )
 
-[node name="Sprite4" parent="Earth" index="3" instance=ExtResource( 3 )]
+[node name="Sprite4" parent="Earth" index="3" instance=ExtResource( 2 )]
 
 position = Vector2( 159, 187 )
 
