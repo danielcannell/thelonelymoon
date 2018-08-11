@@ -3,48 +3,64 @@ extends Node
 func _ready():
 	pass
 
-const SHIP_CONFIG = [
+const MENU_CONFIG = [
 	{
-		'name': 'cube_sat',
+		'id': 'cube_sat',
 		'display_name': 'CubeSat',
 		'description': 'Pretend that you\'re NASA, on the cheap.',
+		'type': 'satellite',
+		'cost': 500,
+		'build_time': 5,
+	},
+	{
+		'id': 'spy_satellite',
+		'display_name': 'Spy Satellite',
+		'description': 'Keep an eye on the neighbours.',
+		'cost': 1000,
+		'build_time': 15,
+	},
+	{
+		'id': 'science_station',
+		'display_name': 'Science Station',
+		'description': 'We\'re doing science and we\'re still alive',
+		'cost': 10000,
+		'build_time': 20,
+	},
+	{ 
+		'id': 'space_hotel',
+		'display_name': 'Space Hotel',
+		'description': '"***: Not much atmosphere, but great views."',
+		'cost': 100000,
+		'build_time': 30,
+	}
+]
+
+const SHIP_CONFIG = {
+	'cube_sat': {
 	 	'alt_min': 350,
 	 	'alt_max': 380,
 	 	'delta_v': 50,
-		'cost': 500,
 		'income': 10,
 	},
-	{
-		'name': 'spy_satellite',
-		'display_name': 'Spy Satellite',
-		'description': 'Keep an eye on the neighbours.',
+	'spy_satellite': {
 	 	'alt_min': 500,
 	 	'alt_max': 520,
 	 	'delta_v': 100,
-		'cost': 1000,
 		'income': 25,
 	},
-	{
-		'name': 'science_station',
-		'display_name': 'Science Station',
-		'description': 'We\'re doing science and we\'re still alive',
+	'science_station': {
 	 	'alt_min': 600,
 	 	'alt_max': 700,
 	 	'delta_v': 150,
-		'cost': 10000,
 		'income': 100,
 	},
-	{
-		'name': 'space_hotel',
-		'display_name': 'Space Hotel',
-		'description': '***: Not much atmosphere, but great views.',
+	'space_hotel': {
 	 	'alt_min': 300,
 	 	'alt_max': 600,
 	 	'delta_v': 150,
 		'cost': 100000,
-		'income': 1000,
 	}
-]
+}
 
 const METRES_PER_SCREEN_UNIT = 1.0 / 200.0;
 
