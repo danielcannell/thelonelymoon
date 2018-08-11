@@ -67,6 +67,12 @@ func satellite_clicked(sat):
         selected_sat.deselect()
     selected_sat = sat
     sat.select()
+    
+    var alt_range = sat.alt_range()
+    var good_orbit_range = get_node('GoodOrbitRange')
+    good_orbit_range.set_range(alt_range[0], alt_range[1])
+    good_orbit_range.visible = true
+    
     emit_signal("satellite_selected", sat)
 
 

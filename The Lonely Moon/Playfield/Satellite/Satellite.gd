@@ -37,6 +37,13 @@ func burn_retrograde(delta):
     vel -= vel.normalized() * delta * BURN_RATE
 
 
+func alt_range():
+    return [
+        global.SHIP_CONFIG[type]['alt_min'],
+        global.SHIP_CONFIG[type]['alt_max']
+    ]
+
+
 func _ready():
     deselect()
 
