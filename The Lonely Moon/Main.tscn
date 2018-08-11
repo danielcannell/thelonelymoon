@@ -15,4 +15,6 @@ _sections_unfolded = [ "Anchor" ]
 
 [node name="UI" parent="." index="1" instance=ExtResource( 2 )]
 
+[connection signal="satellite_summary" from="Playfield" to="UI" method="_on_Playfield_satellite_summary"]
+
 
