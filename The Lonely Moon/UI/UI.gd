@@ -13,7 +13,8 @@ func _ready():
     # Create buttons from config
     for x in global.MENU_CONFIG:
         var btn = shop_item.instance()
-        btn.connect("clicked", self, "btn_click", [btn])
+        btn.connect("clicked", self, "btn_clicked", [btn])
+        btn.connect("finished", self, "btn_finished", [btn])
         btn.set_thing(x)
         shop_items.append(btn)
         get_node("Shop/Background/Container/Tiles").add_child(btn)
@@ -21,10 +22,17 @@ func _ready():
     set_money(0)
 
 
-func btn_click(btn):
+func btn_clicked(btn):
+    var thing = btn.thing
+    var cost = thing.cost
+    get_node("Economy").spend_money(cost)
+
+
+func btn_finished(btn):
     var thing = btn.thing
     var type = thing.type
     var id = thing.id
+
     if type == "satellite":
         make_satellite(id)
     elif type == "fundraise":

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/ShopButton.gd" type="Script" id=1]
 [ext_resource path="res://UI/cell_bg.png" type="Texture" id=2]
-[ext_resource path="res://UI/ShopButtonTheme.theme" type="Theme" id=3]
+[ext_resource path="res://UI/Wipe.gd" type="Script" id=3]
+[ext_resource path="res://UI/ShopButtonTheme.theme" type="Theme" id=4]
 
 [node name="ShopButton" type="Container" index="0"]
 
@@ -45,7 +46,7 @@ patch_margin_right = 8
 patch_margin_bottom = 8
 _sections_unfolded = [ "Margin" ]
 
-[node name="Button" type="Button" parent="Background" index="0"]
+[node name="Wipe" type="Control" parent="Background" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -53,19 +54,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-theme = ExtResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-flat = false
-align = 1
-_sections_unfolded = [ "Theme" ]
+script = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Name" type="Label" parent="Background" index="1"]
 
@@ -109,5 +103,27 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Size Flags" ]
+
+[node name="Button" type="Button" parent="Background" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+_sections_unfolded = [ "Theme" ]
 
 
