@@ -5,7 +5,7 @@
 [ext_resource path="res://UI/bg.png" type="Texture" id=3]
 [ext_resource path="res://UI/Economy.gd" type="Script" id=4]
 
-[node name="UI" type="VBoxContainer"]
+[node name="UI" type="VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
