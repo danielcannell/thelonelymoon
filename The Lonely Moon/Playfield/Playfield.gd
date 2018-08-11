@@ -1,4 +1,4 @@
-extends Container
+extends Node2D
 
 signal satellite_summary
 
