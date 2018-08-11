@@ -12,7 +12,7 @@ height = 20.0
 [node name="KinematicBody2D" type="KinematicBody2D" index="0"]
 
 scale = Vector2( 0.1, 0.1 )
-input_pickable = false
+input_pickable = true
 collision_layer = 2
 collision_mask = 3
 collision/safe_margin = 0.08
@@ -32,5 +32,14 @@ position = Vector2( -3.83831, 0.960914 )
 scale = Vector2( 0.194618, 0.194618 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Selectbox" type="Line2D" parent="." index="2"]
+
+points = PoolVector2Array( -100, 60, 100, 60, 100, -60, -100, -60, -100, 60 )
+width = 10.0
+default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = -13556705
+sharp_limit = 2.0
+round_precision = 8
 
 

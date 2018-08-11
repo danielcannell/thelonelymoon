@@ -4,6 +4,8 @@ signal satellite_summary
 
 export (PackedScene) var Satellite
 
+var selected_sat = null
+
 
 func _ready():
     pass
@@ -23,6 +25,8 @@ func new_craft(type):
     var y = alt * sin(theta)
     craft.position = Vector2(x, y)
     craft.vel = get_node('Physics').vel_for_pos(craft.pos)
+    
+    craft.connect("clicked", self, "satellite_clicked")
 
 
 func destroy_craft(craft):
@@ -41,8 +45,21 @@ func state():
     return st
 
 
+func satellite_clicked(sat):
+    if selected_sat:
+        selected_sat.deselect()
+    selected_sat = sat
+    sat.select()
+
+
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
+    
+    if selected_sat:
+        if Input.is_action_pressed("burn_prograde"):
+            selected_sat.burn_prograde(delta)
+        elif Input.is_action_pressed("burn_retrograde"):
+            selected_sat.burn_retrograde(delta)
     
 
 func handle_game_over():
