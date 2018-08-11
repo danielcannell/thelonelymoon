@@ -3,7 +3,6 @@ extends Node2D
 signal satellite_summary
 signal satellite_selected
 
-var Satellite = preload("res://Playfield/Satellite/Satellite.tscn");
 var Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
 var SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatellite.tscn");
 var CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
