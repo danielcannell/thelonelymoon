@@ -10,7 +10,7 @@ func _ready():
 	pass
 
 
-var METRES_PER_SCREEN_UNIT = 1 / 200;
+const METRES_PER_SCREEN_UNIT = 1.0 / 200.0;
 
 
 func screen_to_metres(vec):
