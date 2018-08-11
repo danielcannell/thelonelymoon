@@ -1,11 +1,11 @@
 extends Node2D
 
 const ANGULAR_VELOCITY = 0.2 # Radians per second
-const FALL_SPEED = 1
+const FALL_SPEED = 40
 const MASS = 0.1
 
 var theta = 0
-var distance = 500
+var distance = 5000
 
 var pos = Vector2() setget set_pos, get_pos
 

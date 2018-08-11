@@ -29,7 +29,7 @@ func _input(event):
             # zoom out
             if event.button_index == BUTTON_WHEEL_DOWN:
                 var new_scale = get_node("Game").scale.x * 0.9
-                new_scale = max(new_scale, 0.1)
+                new_scale = max(new_scale, 0.05)
 
                 var g = get_node("Game")
                 g.scale.x = new_scale
