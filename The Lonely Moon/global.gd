@@ -39,7 +39,7 @@ const MENU_CONFIG = [
     {
         'id': 'science_station',
         'display_name': 'Science Station',
-        'description': 'We\'re doing science and we\'re still alive',
+        'description': 'We\'re doing science and we\'re still alive <3',
         'type': 'satellite',
         'cost': 10000,
         'build_time': 20,
@@ -51,6 +51,22 @@ const MENU_CONFIG = [
         'type': 'satellite',
         'cost': 100000,
         'build_time': 30,
+    },
+    { 
+        'id': 'space_telescope',
+        'display_name': 'Space Telescope',
+        'description': 'As if the close-up of the moon wasn\'t already close enough',
+        'type': 'satellite',
+        'cost': 100000,
+        'build_time': 30,
+    },
+    {
+        'id': 'ark',
+        'display_name': 'The Ark',
+        'description': 'Escape the moon\'s destruction in the lap of refined luxury!',
+        'type': 'ark',
+        'cost': 999999,
+        'build_time': 60,
     }
 ]
 
