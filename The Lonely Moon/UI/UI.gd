@@ -65,3 +65,6 @@ func set_money(amt):
 
 func _on_Playfield_satellite_summary(delta, state):
     get_node("Economy").receive_state(delta, state)
+
+func on_satellite_selected(sat):
+    get_node("SatInfo").on_satellite_selected(sat)

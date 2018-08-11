@@ -24,7 +24,6 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="UiLayer" type="CanvasLayer" parent="." index="1"]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -67,6 +66,8 @@ script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
 [connection signal="spawn_satellite" from="UiLayer/UI" to="Playfield" method="new_craft"]
+
+[connection signal="satellite_selected" from="Playfield" to="UiLayer/UI" method="on_satellite_selected"]
 
 [connection signal="satellite_summary" from="Playfield" to="UiLayer/UI" method="_on_Playfield_satellite_summary"]
 

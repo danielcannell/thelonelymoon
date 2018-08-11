@@ -1,8 +1,16 @@
 extends Node2D
 
 signal satellite_summary
+signal satellite_selected
 
-export (PackedScene) var Satellite
+var Satellite = preload("res://Playfield/Satellite/Satellite.tscn");
+var Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
+
+
+var satellites = {
+    "cube_sat": Satellite,
+    "debris": Debris,
+}
 
 var selected_sat = null
 
@@ -13,8 +21,13 @@ func _ready():
 
 func new_craft(type):
     var config = global.ship_config(type)
-
-    var craft = Satellite.instance()
+    var craft
+    if type in satellites:
+        craft = satellites[type].instance()
+    else:
+        craft = Debris.instance()
+        
+        
     add_child(craft)
     craft.add_to_group("satellites")
     craft.configure(type)
@@ -50,6 +63,7 @@ func satellite_clicked(sat):
         selected_sat.deselect()
     selected_sat = sat
     sat.select()
+    emit_signal("satellite_selected", sat)
 
 
 func _process(delta):
