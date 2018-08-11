@@ -24,18 +24,19 @@ func _ready():
 	new_craft('spy_satellite')
 	new_craft('science_station')
 
-func _process(delta):
-	# Called every frame. Delta is time since last frame.
-	# Update game logic here.
-	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
 
 func new_craft(type):
 	var config
 	for t in spawn_config:
 		if t.name == type:
 			config = t
-			break	
-	
+			break
+
 	var craft = Satellite.instance()
 	add_child(craft)
 	craft.add_to_group("satellites")
@@ -45,6 +46,6 @@ func new_craft(type):
 	var x = alt * cos(theta)
 	var y = alt * sin(theta)
 	craft.position = Vector2(x, y)
-	
+
 func get_satellites():
 	return get_tree().get_nodes_in_group("satellites")
