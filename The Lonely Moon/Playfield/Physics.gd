@@ -19,11 +19,15 @@ func _ready():
     pass
 
 
-func _process(delta):
+func _physics_process(delta):
     var massive_bodies = [get_node('../Moon'), get_node('../Earth')]
     var satellites = get_node('..').get_satellites()
     
     for s in satellites:
         var a = calculate_accel(s, massive_bodies)
         s.vel += a * delta
-        s.pos += s.vel * delta
+        var collision_info = s.move_and_collide(global.metres_to_screen(s.vel * delta))
+        if collision_info:
+            print("Collision!")
+            get_node("..").destroy_craft(s)
+        
