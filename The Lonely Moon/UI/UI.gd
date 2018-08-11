@@ -23,13 +23,14 @@ func _ready():
 
 
 func create_notification(text):
-    print(text)
+    get_node("Notifications").add_notification(text)
 
 
 func btn_clicked(btn):
     var thing = btn.thing
     var cost = thing.cost
     get_node("Economy").spend_money(cost)
+    create_notification("Spent " + str(cost) + " btc")
 
 
 func btn_finished(btn):
