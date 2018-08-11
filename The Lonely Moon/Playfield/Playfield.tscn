@@ -25,4 +25,13 @@ script = ExtResource( 4 )
 
 position = Vector2( 359.811, -137.26 )
 
+[node name="Orbit" type="Line2D" parent="." index="4"]
+
+points = PoolVector2Array(  )
+width = 10.0
+default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = 6357102
+sharp_limit = 2.0
+round_precision = 8
+
 

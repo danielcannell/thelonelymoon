@@ -16,7 +16,7 @@ var selected_sat = null
 
 
 func _ready():
-    pass
+    var orbit = get_node('Orbit')
 
 
 func new_craft(type):
@@ -74,6 +74,11 @@ func _process(delta):
             selected_sat.burn_prograde(delta)
         elif Input.is_action_pressed("burn_retrograde"):
             selected_sat.burn_retrograde(delta)
+            
+        var predicted_orbit = get_node('Physics').predict_orbit(selected_sat)
+        var orbit = get_node('Orbit')
+        orbit.points = PoolVector2Array(predicted_orbit)
+        orbit.width = 2 * global.current_scale()
     
 
 func handle_game_over():

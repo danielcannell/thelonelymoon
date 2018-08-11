@@ -128,3 +128,6 @@ func get_pos_metres(node):
     
 func set_pos_metres(node, pos):
     node.position = metres_to_screen(pos)
+
+func current_scale():
+    return get_node('/root/Node/Playfield/Camera').zoom.x
