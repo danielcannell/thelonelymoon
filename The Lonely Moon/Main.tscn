@@ -5,7 +5,7 @@
 [ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Camera.gd" type="Script" id=4]
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 [node name="StarfieldLayer" type="CanvasLayer" parent="." index="0"]
 
@@ -66,6 +66,8 @@ script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
 [connection signal="spawn_satellite" from="UiLayer/UI" to="Playfield" method="new_craft"]
+
+[connection signal="satellite_selected" from="Playfield" to="UiLayer/UI" method="on_satellite_selected"]
 
 [connection signal="satellite_summary" from="Playfield" to="UiLayer/UI" method="_on_Playfield_satellite_summary"]
 

@@ -1,7 +1,7 @@
 extends Node2D
 
 signal satellite_summary
-signal satellite_selected(sat)
+signal satellite_selected
 
 export (PackedScene) var Satellite
 
