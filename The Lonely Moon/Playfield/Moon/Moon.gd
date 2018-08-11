@@ -20,10 +20,6 @@ func get_pos():
     return global.screen_to_metres(position)
 
 
-func _ready():
-    self.connect("game_over", self, "game_over_fn")
-
-
 func _process(delta):
     theta += ANGULAR_VELOCITY * delta
     distance -= FALL_SPEED * delta
