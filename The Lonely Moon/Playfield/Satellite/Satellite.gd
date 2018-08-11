@@ -28,6 +28,7 @@ func configure(typename):
     type = typename
     config = global.ship_config(type)
 
+
 func state():
     var alt = sqrt(pow(position[0], 2) + pow(position[1], 2))
     var in_range = alt < config.alt_max && alt > config.alt_min

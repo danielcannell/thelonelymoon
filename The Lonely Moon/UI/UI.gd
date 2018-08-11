@@ -6,6 +6,7 @@ export (PackedScene) var shop_item
 
 var shop_items = []
 
+
 func _ready():
     # Create buttons from config
     for x in global.MENU_CONFIG:
@@ -27,3 +28,7 @@ func set_money(x):
 
     # TODO: disable buttons based on cost
 
+
+
+func _on_Playfield_satellite_summary(delta, state):
+	get_node("Economy").receive_state(delta, state)

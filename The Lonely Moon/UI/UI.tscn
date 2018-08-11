@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://UI/ShopButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/bg.png" type="Texture" id=3]
+[ext_resource path="res://UI/Economy.gd" type="Script" id=4]
 
 [node name="UI" type="VBoxContainer"]
 
@@ -217,5 +218,9 @@ custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 2
 _sections_unfolded = [ "Rect", "custom_constants" ]
+
+[node name="Economy" type="Node" parent="." index="2"]
+
+script = ExtResource( 4 )
 
 
