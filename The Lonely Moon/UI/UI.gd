@@ -25,11 +25,12 @@ func btn_click(btn):
     print(btn)
 
 
-func set_money(x):
-    get_node("Money/Background/Labels/Amount").text = str(floor(x))
+func set_money(amt):
+    get_node("Money/Background/Labels/Amount").text = str(floor(amt))
 
-    # TODO: disable buttons based on cost
-
+    # Disable buttons based on cost
+    for item in shop_items:
+        item.set_enabled(item.thing['cost'] <= amt)
 
 
 func _on_Playfield_satellite_summary(delta, state):

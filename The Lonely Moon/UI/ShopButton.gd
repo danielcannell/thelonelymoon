@@ -21,3 +21,6 @@ func _ready():
 
 func set_thing(x):
     thing = x
+
+func set_enabled(enabled):
+    get_node("Background/Button").disabled = !enabled
