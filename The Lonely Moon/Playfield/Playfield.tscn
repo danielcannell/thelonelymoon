@@ -22,11 +22,11 @@ size_flags_vertical = 1
 
 [node name="Sprite" parent="." index="2" instance=ExtResource( 2 )]
 
-position = Vector2( -3, 1 )
+position = Vector2( 926, 188 )
 
 [node name="Sprite2" parent="." index="3" instance=ExtResource( 2 )]
 
-position = Vector2( 671, 19 )
+position = Vector2( 921, 98 )
 
 [node name="Sprite3" parent="." index="4" instance=ExtResource( 2 )]
 
