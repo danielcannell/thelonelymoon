@@ -1,18 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=3]
 
 [node name="Node" type="Node" index="0"]
 
-[node name="Playfield" parent="." index="0" instance=ExtResource( 1 )]
+script = ExtResource( 1 )
 
-margin_left = 616.0
-margin_top = 292.0
-margin_right = 616.0
-margin_bottom = 292.0
-_sections_unfolded = [ "Anchor" ]
+[node name="UI" parent="." index="0" instance=ExtResource( 2 )]
 
-[node name="UI" parent="." index="1" instance=ExtResource( 2 )]
+[node name="Game" type="Node2D" parent="." index="1"]
+
+position = Vector2( 612, 300 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Playfield" parent="Game" index="0" instance=ExtResource( 3 )]
+
+_sections_unfolded = [ "Anchor", "Rect" ]
 
 
