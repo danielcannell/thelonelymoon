@@ -4,7 +4,7 @@ signal game_over;
 
 const ANGULAR_VELOCITY = 0.2 # Radians per second
 const FALL_SPEED = 40
-const MASS = 0.1
+const MASS = 0.123
 
 var theta = 0
 var distance = 5000
