@@ -22,8 +22,10 @@ func receive_state(delta, state):
 
 func make_fundraise(id):
     var f = global.FUNDRAISE_CONFIG[id]
-    balance += rand_range(f.raised_min, f.raised_max)
+    var amt = rand_range(f.raised_min, f.raised_max)
+    balance += amt
     emit_signal("update_balance", balance)
+    get_node("..").create_notification("Campaign complete! Earned " + str(floor(amt)) + " btc!")
 
 
 func spend_money(amount):

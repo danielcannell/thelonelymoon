@@ -22,6 +22,10 @@ func _ready():
     set_money(0)
 
 
+func create_notification(text):
+    print(text)
+
+
 func btn_clicked(btn):
     var thing = btn.thing
     var cost = thing.cost
@@ -34,15 +38,16 @@ func btn_finished(btn):
     var id = thing.id
 
     if type == "satellite":
-        make_satellite(id)
+        make_satellite(id, thing.display_name)
     elif type == "fundraise":
         make_fundraise(id)
     elif type == "ark":
         get_tree().change_scene("res://Victory.tscn")
 
 
-func make_satellite(id):
+func make_satellite(id, name):
     emit_signal("spawn_satellite", id)
+    create_notification(name + " launched!")
 
 
 func make_fundraise(id):
