@@ -1,12 +1,9 @@
-extends Sprite
+extends Node2D
 
-
-var velocity = Vector2(50, -50)
-
+const MASS = 1
 
 func _ready():
     pass
-
 
 func _process(delta):
     pass
