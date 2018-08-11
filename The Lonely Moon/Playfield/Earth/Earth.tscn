@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Playfield/Earth/Earth.gd" type="Script" id=1]
-[ext_resource path="res://Playfield/Earth/The_Earth_seen_from_Apollo_17.png" type="Texture" id=2]
+[ext_resource path="res://Playfield/Earth/north_pole_earth.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -17,16 +17,17 @@ collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
-scale = Vector2( 0.03, 0.03 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 scale = Vector2( 4.05198, 4.05198 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="north_pole_earth" type="Sprite" parent="." index="1"]
+
+position = Vector2( -0.0778377, 0.174634 )
+scale = Vector2( 0.0784724, 0.0784724 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset" ]
 
 
