@@ -33,4 +33,4 @@ func set_money(x):
 
 
 func _on_Playfield_satellite_summary(delta, state):
-	get_node("Economy").receive_state(delta, state)
+    get_node("Economy").receive_state(delta, state)
