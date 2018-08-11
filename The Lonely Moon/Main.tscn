@@ -3,13 +3,13 @@
 [ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=2]
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 [node name="Playfield" parent="." index="0" instance=ExtResource( 1 )]
 
-margin_left = 616.0
+margin_left = 533.0
 margin_top = 292.0
-margin_right = 616.0
+margin_right = 533.0
 margin_bottom = 292.0
 _sections_unfolded = [ "Anchor" ]
 
