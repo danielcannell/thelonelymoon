@@ -11,12 +11,12 @@ extents = Vector2( 10, 10 )
 [node name="KinematicBody2D" type="KinematicBody2D"]
 
 scale = Vector2( 0.02, 0.02 )
-input_pickable = false
+input_pickable = true
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Pickable", "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
