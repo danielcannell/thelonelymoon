@@ -65,11 +65,7 @@ const SHIP_CONFIG = {
 const METRES_PER_SCREEN_UNIT = 1.0 / 200.0;
 
 func ship_config(name):
-	for s in SHIP_CONFIG:
-		if s.name == name:
-			return s
-	
-	return {}
+	return SHIP_CONFIG[name]
 
 func screen_to_metres(vec):
 	return vec / METRES_PER_SCREEN_UNIT
