@@ -8,7 +8,6 @@
 [ext_resource path="res://UI/Notification.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/SatInfo.gd" type="Script" id=7]
 
-
 [node name="UI" type="Container" index="0"]
 
 anchor_left = 0.0
@@ -292,7 +291,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 824.0
-margin_top = 535.0
+margin_top = 520.0
 margin_right = 1024.0
 margin_bottom = 600.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -312,7 +311,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
 margin_right = 200.0
-margin_bottom = 65.0
+margin_bottom = 80.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -326,7 +325,7 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 _sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="Container" type="VBoxContainer" parent="SatInfo/Background" index="0"]
+[node name="C" type="VBoxContainer" parent="SatInfo/Background" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -343,7 +342,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin", "Rect" ]
 
-[node name="Title" type="Label" parent="SatInfo/Background/Container" index="0"]
+[node name="Title" type="Label" parent="SatInfo/Background/C" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -366,7 +365,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="SatInfo/Background/Container" index="1"]
+[node name="Type" type="HBoxContainer" parent="SatInfo/Background/C" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -383,33 +382,36 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="Label" type="Label" parent="SatInfo/Background/Container/HBoxContainer2" index="0"]
+[node name="Label" type="Label" parent="SatInfo/Background/C/Type" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 30.0
+margin_right = 70.0
 margin_bottom = 14.0
+rect_min_size = Vector2( 70, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "Type"
+text = "Type:"
+align = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "Rect" ]
 
-[node name="TypeVal" type="Label" parent="SatInfo/Background/Container/HBoxContainer2" index="1"]
+[node name="TypeVal" type="Label" parent="SatInfo/Background/C/Type" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 34.0
-margin_right = 90.0
+margin_left = 74.0
+margin_right = 130.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -422,7 +424,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SatInfo/Background/Container" index="2"]
+[node name="Uptime" type="HBoxContainer" parent="SatInfo/Background/C" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -439,13 +441,36 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="Label" type="Label" parent="SatInfo/Background/Container/HBoxContainer" index="0"]
+[node name="Label" type="Label" parent="SatInfo/Background/C/Uptime" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 27.0
+margin_right = 70.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 70, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Uptime:"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect" ]
+
+[node name="UptimeVal" type="Label" parent="SatInfo/Background/C/Uptime" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 74.0
+margin_right = 89.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -453,19 +478,58 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "Fuel"
+text = "0s"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="FuelVal" type="Label" parent="SatInfo/Background/Container/HBoxContainer" index="1"]
+[node name="InRange" type="HBoxContainer" parent="SatInfo/Background/C" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 31.0
-margin_right = 67.0
+margin_top = 60.0
+margin_right = 176.0
+margin_bottom = 74.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="Label" type="Label" parent="SatInfo/Background/C/InRange" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 70.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 70, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "In range:"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect" ]
+
+[node name="InRangeVal" type="Label" parent="SatInfo/Background/C/InRange" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 74.0
+margin_right = 90.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -473,7 +537,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "100%"
+text = "no"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

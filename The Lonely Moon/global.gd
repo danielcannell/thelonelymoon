@@ -10,7 +10,7 @@ const MENU_CONFIG = [
         'description': 'Generate hype, get some of that VC funding!',
         'type': 'fundraise',
         'cost': 0,
-        'build_time': 10
+        'build_time': 1
     },
     {
         'id': 'indiegogo',
@@ -18,7 +18,7 @@ const MENU_CONFIG = [
         'description': 'Venture capital not working out? Try taking money from strangers!',
         'type': 'fundraise',
         'cost': 200,
-        'build_time': 25
+        'build_time': 2
     },
     {
         'id': 'cube_sat',
@@ -26,7 +26,7 @@ const MENU_CONFIG = [
         'description': 'Pretend that you\'re NASA, on the cheap.',
         'type': 'satellite',
         'cost': 500,
-        'build_time': 5,
+        'build_time': 1,
     },
     {
         'id': 'spy_satellite',
@@ -34,7 +34,7 @@ const MENU_CONFIG = [
         'description': 'Keep an eye on the neighbours.',
         'type': 'satellite',
         'cost': 1000,
-        'build_time': 15,
+        'build_time': 1,
     },
     {
         'id': 'science_station',
@@ -128,3 +128,6 @@ func get_pos_metres(node):
     
 func set_pos_metres(node, pos):
     node.position = metres_to_screen(pos)
+
+func current_scale():
+    return get_node('/root/Node/Playfield/Camera').zoom.x
