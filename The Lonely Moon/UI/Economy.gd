@@ -24,3 +24,7 @@ func make_fundraise(id):
     var f = global.FUNDRAISE_CONFIG[id]
     balance += rand_range(f.raised_min, f.raised_max)
     emit_signal("update_balance", balance)
+
+
+func spend_money(amount):
+    balance -= amount
