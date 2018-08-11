@@ -98,13 +98,13 @@ func ship_config(name):
 	return SHIP_CONFIG[name]
 
 func screen_to_metres(vec):
-	return vec / METRES_PER_SCREEN_UNIT
+	return vec * METRES_PER_SCREEN_UNIT
 	
 func metres_to_screen(vec):
-	return vec * METRES_PER_SCREEN_UNIT
+	return vec / METRES_PER_SCREEN_UNIT
 
-func get_pos_metres(node, pos):
-	node.position = screen_to_metres(pos)
+func get_pos_metres(node):
+	return screen_to_metres(node.position)
 	
 func set_pos_metres(node, pos):
 	node.position = metres_to_screen(pos)
