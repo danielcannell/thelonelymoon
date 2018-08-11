@@ -1,6 +1,7 @@
 extends Node2D
 
 signal satellite_summary
+signal satellite_selected
 
 var Satellite = preload("res://Playfield/Satellite/Satellite.tscn");
 var Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
@@ -10,6 +11,8 @@ var satellites = {
     "cube_sat": Satellite,
     "debris": Debris,
 }
+
+var selected_sat = null
 
 
 func _ready():
@@ -35,6 +38,8 @@ func new_craft(type):
     var y = alt * sin(theta)
     craft.position = Vector2(x, y)
     craft.vel = get_node('Physics').vel_for_pos(craft.pos)
+    
+    craft.connect("clicked", self, "satellite_clicked")
 
 
 func destroy_craft(craft):
@@ -53,8 +58,22 @@ func state():
     return st
 
 
+func satellite_clicked(sat):
+    if selected_sat:
+        selected_sat.deselect()
+    selected_sat = sat
+    sat.select()
+    emit_signal("satellite_selected", sat)
+
+
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
+    
+    if selected_sat:
+        if Input.is_action_pressed("burn_prograde"):
+            selected_sat.burn_prograde(delta)
+        elif Input.is_action_pressed("burn_retrograde"):
+            selected_sat.burn_retrograde(delta)
     
 
 func handle_game_over():

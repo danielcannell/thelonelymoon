@@ -1,7 +1,7 @@
 extends Node
 
 
-const GRAVITY = 1
+const GRAVITY = 0.1
 
 
 func vel_for_pos(pos):

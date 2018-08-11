@@ -1,11 +1,16 @@
 extends KinematicBody2D
 
+const BURN_RATE = 0.1
+
 var pos = Vector2() setget set_pos, get_pos
 var vel = Vector2(0.1, -0.1)
 
 var config = {}
 var type = ""
 var uptime = 0
+
+
+signal clicked(sat)
 
 
 func set_pos(pos):
@@ -16,8 +21,30 @@ func get_pos():
     return global.screen_to_metres(position)
 
 
+func select():
+    get_node("Selectbox").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
+    
+
+func deselect():
+    get_node("Selectbox").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
+
+
+func burn_prograde(delta):
+    vel += vel.normalized() * delta * BURN_RATE
+
+
+func burn_retrograde(delta):
+    vel -= vel.normalized() * delta * BURN_RATE
+
+
 func _ready():
-    pass
+    deselect()
+
+
+func _input_event(viewport, event, shape_idx):
+    if event is InputEventMouseButton:
+        if event.button_index == BUTTON_LEFT and event.pressed:
+            emit_signal("clicked", self)
 
 
 func _process(delta):

@@ -23,13 +23,14 @@ func _ready():
 
 
 func create_notification(text):
-    print(text)
+    get_node("Notifications").add_notification(text)
 
 
 func btn_clicked(btn):
     var thing = btn.thing
     var cost = thing.cost
     get_node("Economy").spend_money(cost)
+    create_notification("Spent " + str(cost) + " btc")
 
 
 func btn_finished(btn):
@@ -64,3 +65,6 @@ func set_money(amt):
 
 func _on_Playfield_satellite_summary(delta, state):
     get_node("Economy").receive_state(delta, state)
+
+func on_satellite_selected(sat):
+    get_node("SatInfo").on_satellite_selected(sat)
