@@ -29,6 +29,7 @@ func _draw():
 func _process(delta):
     update()
 
+
 func set_percent(x):
     percent = x
     update()
