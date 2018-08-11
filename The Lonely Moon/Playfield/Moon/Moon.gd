@@ -1,5 +1,7 @@
 extends Node2D
 
+signal game_over;
+
 const ANGULAR_VELOCITY = 0.2 # Radians per second
 const FALL_SPEED = 40
 const MASS = 0.1
@@ -19,10 +21,12 @@ func get_pos():
 
 
 func _ready():
-    pass
+    self.connect("game_over", self, "game_over_fn")
 
 
 func _process(delta):
     theta += ANGULAR_VELOCITY * delta
     distance -= FALL_SPEED * delta
     position = distance * Vector2(sin(theta), cos(theta))
+    if overlaps_body(get_node('../Earth')):
+        emit_signal("game_over")
