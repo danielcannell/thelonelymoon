@@ -1,29 +1,29 @@
 extends Container
 
+export (PackedScene) var Satellite
 
-const GRAVITY = 1e8
-
-
-func calculate_accel(pos):
-    var distance = pos.length()
-    return GRAVITY * -pos / pow(distance, 3)
-
+# class member variables go here, for example:
+# var a = 2
+# var b = "textvar"
 
 func _ready():
-    pass
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	new_craft('foo')
+	new_craft('foo')
+	new_craft('foo')
+	pass
 
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
 
-func _process(delta):
-    var satellites = [
-        get_node("Satellite1"),
-        get_node("Satellite2"),
-        get_node("Satellite3"),
-    ]
-    
-    for s in satellites:
-        var pos = s.position
-        var vel = s.velocity
-        var a = calculate_accel(pos)
-        vel += a * delta
-        pos += vel * delta
-        s.position = pos
+func new_craft(type):
+	# create a new craft
+	var craft = Satellite.instance()
+	add_child(craft)
+	craft.add_to_group("satellites")
+
+func get_satellites():
+	return get_tree().get_nodes_in_group("satellites")
