@@ -43,3 +43,7 @@ func state():
 
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
+    
+
+func handle_game_over():
+    get_tree().change_scene('res://GameOver.tscn')
