@@ -56,31 +56,31 @@ const MENU_CONFIG = [
 
 const SHIP_CONFIG = {
     'cube_sat': {
-         'alt_min': 100,
-         'alt_max': 200,
-         'delta_v': 50,
+        'alt_min': 100,
+        'alt_max': 200,
+        'delta_v': 50,
         'income': 10,
         'time_constant': 5000,
     },
     'spy_satellite': {
-         'alt_min': 500,
-         'alt_max': 520,
-         'delta_v': 100,
+        'alt_min': 500,
+        'alt_max': 520,
+        'delta_v': 100,
         'income': 25,
         'time_constant': 5000,
     },
     'science_station': {
-         'alt_min': 600,
-         'alt_max': 700,
-         'delta_v': 150,
+        'alt_min': 600,
+        'alt_max': 700,
+        'delta_v': 150,
         'income': 100,
         'time_constant': 5000,
     },
     'space_hotel': {
-         'alt_min': 300,
-         'alt_max': 600,
-         'delta_v': 150,
-        'cost': 100000,
+        'alt_min': 300,
+        'alt_max': 600,
+        'delta_v': 150,
+        'income': 10000,
         'time_constant': 5000,
     }
 }
