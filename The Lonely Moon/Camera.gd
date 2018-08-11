@@ -1,6 +1,6 @@
 extends Camera2D
 
-func update_scale(ratio):
+func update_zoom(ratio):
     var new_scale = self.zoom.x * ratio
     new_scale = min(new_scale, 8.0)
     new_scale = max(new_scale, 0.1)
@@ -15,9 +15,9 @@ func _input(event):
         if event.is_pressed():
             # zoom in
             if event.button_index == BUTTON_WHEEL_UP:
-                update_scale(1.1)
+                update_zoom(0.9)
 
             # zoom out
             if event.button_index == BUTTON_WHEEL_DOWN:
-                update_scale(0.9)
+                update_zoom(1.1)
                 
