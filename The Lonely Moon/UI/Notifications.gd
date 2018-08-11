@@ -12,7 +12,6 @@ func add_notification(text):
     timer.wait_time = 3
     timer.connect("timeout", self, "pop_notification")
     n.add_child(timer)
-    add_child(n)
     notifications.append(n)
     timer.start()
 
