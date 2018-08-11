@@ -25,7 +25,7 @@ shop_item = ExtResource( 2 )
 
 script = ExtResource( 3 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
+[node name="Shop" type="VBoxContainer" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.5
@@ -42,7 +42,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 3
 alignment = 0
 
-[node name="Money" type="MarginContainer" parent="VBoxContainer" index="0"]
+[node name="Money" type="MarginContainer" parent="Shop" index="0"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -59,7 +59,7 @@ size_flags_horizontal = 5
 size_flags_vertical = 4
 _sections_unfolded = [ "Margin" ]
 
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/Money" index="0"]
+[node name="Background" type="NinePatchRect" parent="Shop/Money" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -81,7 +81,7 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 _sections_unfolded = [ "Margin" ]
 
-[node name="Labels" type="HBoxContainer" parent="VBoxContainer/Money/Background" index="0"]
+[node name="Labels" type="HBoxContainer" parent="Shop/Money/Background" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -100,7 +100,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin" ]
 
-[node name="Label" type="Label" parent="VBoxContainer/Money/Background/Labels" index="0"]
+[node name="Label" type="Label" parent="Shop/Money/Background/Labels" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -121,7 +121,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Amount" type="Label" parent="VBoxContainer/Money/Background/Labels" index="1"]
+[node name="Amount" type="Label" parent="Shop/Money/Background/Labels" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -141,7 +141,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Unit" type="Label" parent="VBoxContainer/Money/Background/Labels" index="2"]
+[node name="Unit" type="Label" parent="Shop/Money/Background/Labels" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -163,7 +163,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Shop" type="MarginContainer" parent="VBoxContainer" index="1"]
+[node name="Shop" type="MarginContainer" parent="Shop" index="1"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -181,7 +181,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 3
 _sections_unfolded = [ "Margin" ]
 
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/Shop" index="0"]
+[node name="Background" type="NinePatchRect" parent="Shop/Shop" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -203,7 +203,7 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 _sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="Container" type="VBoxContainer" parent="VBoxContainer/Shop/Background" index="0"]
+[node name="Container" type="VBoxContainer" parent="Shop/Shop/Background" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -218,7 +218,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin", "Rect" ]
 
-[node name="Title" type="Label" parent="VBoxContainer/Shop/Background/Container" index="0"]
+[node name="Title" type="Label" parent="Shop/Shop/Background/Container" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -241,7 +241,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
-[node name="Tiles" type="GridContainer" parent="VBoxContainer/Shop/Background/Container" index="1"]
+[node name="Tiles" type="GridContainer" parent="Shop/Shop/Background/Container" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0

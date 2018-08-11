@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Container
 
 signal spawn_satellite
 
@@ -17,7 +17,7 @@ func _ready():
         btn.connect("finished", self, "btn_finished", [btn])
         btn.set_thing(x)
         shop_items.append(btn)
-        get_node("Shop/Background/Container/Tiles").add_child(btn)
+        get_node("Shop/Shop/Background/Container/Tiles").add_child(btn)
 
     set_money(0)
 
@@ -50,7 +50,7 @@ func make_fundraise(id):
 
 
 func set_money(amt):
-    get_node("Money/Background/Labels/Amount").text = str(floor(amt))
+    get_node("Shop/Money/Background/Labels/Amount").text = str(floor(amt))
 
     # Disable buttons based on cost
     for item in shop_items:
