@@ -4,7 +4,7 @@ extends "res://Playfield/Satellite/Satellite.gd"
 # var a = 2
 # var b = "textvar"
 
-const type = "spy_satellite";
+const type = "space_hotel";
 
 
 func _ready():

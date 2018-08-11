@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/debris_1.png-d524daa887dc832af08dcff7f8a858cb.stex"
+path="res://.import/hotel_sat.png-94edbd2d906453ea7cba4f71003c4b78.stex"
 
 [deps]
 
-source_file="res://Playfield/Satellite/debris_1.png"
-dest_files=[ "res://.import/debris_1.png-d524daa887dc832af08dcff7f8a858cb.stex" ]
+source_file="res://Playfield/Satellite/space_hotel/hotel_sat.png"
+dest_files=[ "res://.import/hotel_sat.png-94edbd2d906453ea7cba4f71003c4b78.stex" ]
 
 [params]
 

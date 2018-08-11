@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Playfield/Satellite/science_station/ScienceStation.gd" type="Script" id=1]
+[ext_resource path="res://Playfield/Satellite/science_station/science_station.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+
+scale = Vector2( 0.02, 0.02 )
+input_pickable = true
+collision_layer = 2
+collision_mask = 3
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -5.0106, -20.5948 )
+scale = Vector2( 78.974, 37.7839 )
+shape = SubResource( 1 )
+
+[node name="Selectbox" type="Line2D" parent="." index="2"]
+
+position = Vector2( 8.72981, -11.664 )
+scale = Vector2( 7.46091, 6.50669 )
+points = PoolVector2Array( -100, 60, 100, 60, 100, -60, -100, -60, -100, 60 )
+width = 10.0
+default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = -13556705
+sharp_limit = 2.0
+round_precision = 8
+_sections_unfolded = [ "Transform" ]
+
+

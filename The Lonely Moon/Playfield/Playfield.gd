@@ -7,12 +7,16 @@ var Satellite = preload("res://Playfield/Satellite/Satellite.tscn");
 var Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
 var SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatellite.tscn");
 var CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
+var ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
+var SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
 
 
 var satellites = {
     "debris": Debris,
     "cube_sat": CubeSat,
     "spy_satellite": SpySatellite,
+    "science_station": ScienceStation,
+    "space_hotel": SpaceHotel,
 }
 
 var selected_sat = null
