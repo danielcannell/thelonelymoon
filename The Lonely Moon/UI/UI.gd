@@ -8,6 +8,8 @@ var shop_items = []
 
 
 func _ready():
+    get_node("Economy").connect("update_balance", self, "set_money")
+
     # Create buttons from config
     for x in global.MENU_CONFIG:
         var btn = shop_item.instance()
@@ -24,7 +26,7 @@ func btn_click(btn):
 
 
 func set_money(x):
-    get_node("Money/Background/Labels/Amount").text = str(x)
+    get_node("Money/Background/Labels/Amount").text = str(floor(x))
 
     # TODO: disable buttons based on cost
 

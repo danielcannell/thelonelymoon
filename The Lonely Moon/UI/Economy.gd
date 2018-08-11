@@ -2,6 +2,8 @@ extends Node
 
 var balance = 0
 
+signal update_balance;
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -15,5 +17,4 @@ func receive_state(delta, state):
 			income += delta * c.income * exp(ship.uptime / c.time_constant)
 	balance += income
 
-func _process(delta):
-	print(balance)
+	emit_signal("update_balance", balance)
