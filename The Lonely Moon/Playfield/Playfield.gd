@@ -34,4 +34,4 @@ func state():
 	return st
 
 func _process(delta):
-	emit_signal("satellite_summary", state())
+	emit_signal("satellite_summary", delta, state())
