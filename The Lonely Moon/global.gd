@@ -56,8 +56,8 @@ const MENU_CONFIG = [
 
 const SHIP_CONFIG = {
 	'cube_sat': {
-	 	'alt_min': 350,
-	 	'alt_max': 380,
+	 	'alt_min': 100,
+	 	'alt_max': 200,
 	 	'delta_v': 50,
 		'income': 10,
 	},

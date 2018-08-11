@@ -5,7 +5,7 @@ signal satellite_summary
 export (PackedScene) var Satellite
 
 func _ready():
-	new_craft('spy_satellite')
+	new_craft('cube_sat')
 	new_craft('spy_satellite')
 	new_craft('science_station')
 
@@ -23,6 +23,7 @@ func new_craft(type):
 	var x = alt * cos(theta)
 	var y = alt * sin(theta)
 	craft.position = Vector2(x, y)
+	craft.vel = get_node('Physics').vel_for_pos(craft.pos)
 
 func get_satellites():
 	return get_tree().get_nodes_in_group("satellites")

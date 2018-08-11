@@ -3,7 +3,7 @@
 [ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=2]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="Playfield" parent="." index="0" instance=ExtResource( 1 )]
 
