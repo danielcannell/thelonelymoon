@@ -72,8 +72,11 @@ func _physics_process(delta):
         var result = integrate_orbit(delta, s.pos, s.vel, massive_bodies)
         s.pos = result[0]
         s.vel = result[1]
-#        var collision_info = s.move_and_collide(global.metres_to_screen(pos - s.pos))
-#        if collision_info:
-#            print("Collision!")
-#            get_node("..").destroy_craft(s)
+        var collision_info = s.move_and_collide_metres(result[0] - s.pos)
+        if collision_info:
+            print(collision_info.collider.type + " Collision")
+            if collision_info.collider.type == "earth":
+                get_node("..").destroy_craft(s)
+            else:
+                print("Satellite Collision!")
         

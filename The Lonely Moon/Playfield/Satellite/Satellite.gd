@@ -54,6 +54,9 @@ func _process(delta):
 func configure(typename):
     type = typename
     config = global.ship_config(type)
+    
+func move_and_collide_metres(vec):
+    return self.move_and_collide(global.metres_to_screen(vec))
 
 
 func state():

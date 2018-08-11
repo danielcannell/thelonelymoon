@@ -3,6 +3,8 @@ extends KinematicBody2D
 const MASS = 1
 const ANGULAR_VELOCITY = 2
 
+const type = "earth"
+
 var pos = Vector2() setget set_pos, get_pos
 
 

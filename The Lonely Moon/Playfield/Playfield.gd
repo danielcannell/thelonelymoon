@@ -47,7 +47,8 @@ func new_craft(type):
 
 func destroy_craft(craft):
     remove_child(craft)
-    craft.free()
+    craft.remove_from_group("satellites")
+    # craft.free()
 
 
 func get_satellites():
