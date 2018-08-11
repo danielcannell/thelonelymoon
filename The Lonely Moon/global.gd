@@ -5,6 +5,22 @@ func _ready():
 
 const MENU_CONFIG = [
 	{
+		'id': 'press_conference',
+		'display_name': 'Hold Press Conference',
+		'description': 'Generate hype, get some of that VC funding!',
+		'type': 'fundraise',
+		'cost': 0,
+		'build_time': 10
+	},
+	{
+		'id': 'indiegogo',
+		'display_name': 'Indiegogo',
+		'description': 'Venture capital not working out? Try taking money from strangers!',
+		'type': 'fundraise',
+		'cost': 200,
+		'build_time': 25
+	},
+	{
 		'id': 'cube_sat',
 		'display_name': 'CubeSat',
 		'description': 'Pretend that you\'re NASA, on the cheap.',
@@ -16,6 +32,7 @@ const MENU_CONFIG = [
 		'id': 'spy_satellite',
 		'display_name': 'Spy Satellite',
 		'description': 'Keep an eye on the neighbours.',
+		'type': 'satellite',
 		'cost': 1000,
 		'build_time': 15,
 	},
@@ -23,13 +40,15 @@ const MENU_CONFIG = [
 		'id': 'science_station',
 		'display_name': 'Science Station',
 		'description': 'We\'re doing science and we\'re still alive',
+		'type': 'satellite',
 		'cost': 10000,
 		'build_time': 20,
 	},
 	{ 
 		'id': 'space_hotel',
 		'display_name': 'Space Hotel',
-		'description': '"***: Not much atmosphere, but great views."',
+		'description': '"****: Not much atmosphere, but great views."',
+		'type': 'satellite',
 		'cost': 100000,
 		'build_time': 30,
 	}
@@ -62,6 +81,17 @@ const SHIP_CONFIG = {
 	}
 }
 
+const FUNDRAISE_CONFIG = {
+	'press_conference': {
+		'raised_min': 500,
+		'raised_max': 1000,
+	},
+	'indiegogo': {
+		'raised_min': 2000,
+		'raised_max': 4000,
+	}
+}
+
 const METRES_PER_SCREEN_UNIT = 1.0 / 200.0;
 
 func ship_config(name):
@@ -78,5 +108,3 @@ func get_pos_metres(node, pos):
 	
 func set_pos_metres(node, pos):
 	node.position = metres_to_screen(pos)
-	
-	
