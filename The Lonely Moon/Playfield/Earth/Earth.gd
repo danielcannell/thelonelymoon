@@ -1,4 +1,4 @@
-extends Node2D
+extends KinematicBody2D
 
 const MASS = 1
 

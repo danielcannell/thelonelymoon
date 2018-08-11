@@ -23,16 +23,20 @@ func new_craft(type):
 	var x = alt * cos(theta)
 	var y = alt * sin(theta)
 	craft.position = Vector2(x, y)
-	craft.vel = get_node('Physics').vel_for_pos(craft.pos)
+    craft.vel = get_node('Physics').vel_for_pos(craft.pos)
+    
+func destroy_craft(craft):
+    remove_child(craft)
+    craft.free()
 
 func get_satellites():
-	return get_tree().get_nodes_in_group("satellites")
+    return get_tree().get_nodes_in_group("satellites")
 
 func state():
-	var st = []
-	for sat in get_satellites():
-		st.append(sat.state())
-	return st
+    var st = []
+    for sat in get_satellites():
+        st.append(sat.state())
+    return st
 
 func _process(delta):
 	emit_signal("satellite_summary", delta, state())
