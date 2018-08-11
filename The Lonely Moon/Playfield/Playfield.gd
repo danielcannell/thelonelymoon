@@ -23,7 +23,7 @@ func new_craft(type):
 	var x = alt * cos(theta)
 	var y = alt * sin(theta)
 	craft.position = Vector2(x, y)
-    craft.vel = get_node('Physics').vel_for_pos(craft.pos)
+	craft.vel = get_node('Physics').vel_for_pos(craft.pos)
     
 func destroy_craft(craft):
     remove_child(craft)
