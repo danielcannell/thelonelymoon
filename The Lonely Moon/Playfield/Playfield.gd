@@ -1,6 +1,7 @@
 extends Node2D
 
 signal satellite_summary
+signal satellite_selected(sat)
 
 export (PackedScene) var Satellite
 
@@ -50,6 +51,7 @@ func satellite_clicked(sat):
         selected_sat.deselect()
     selected_sat = sat
     sat.select()
+    emit_signal("satellite_selected", sat)
 
 
 func _process(delta):
