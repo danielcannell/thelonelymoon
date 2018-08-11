@@ -5,18 +5,17 @@
 [ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Camera.gd" type="Script" id=4]
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
+[node name="StarfieldLayer" type="CanvasLayer" parent="." index="0"]
 
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-_sections_unfolded = [ "Pause" ]
 
-[node name="starfield2" type="Sprite" parent="CanvasLayer" index="0"]
+[node name="starfield2" type="Sprite" parent="StarfieldLayer" index="0"]
 
 position = Vector2( 612, 300 )
 z_index = -100
@@ -25,6 +24,7 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="UiLayer" type="CanvasLayer" parent="." index="1"]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0

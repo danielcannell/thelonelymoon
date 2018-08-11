@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Playfield/Earth/Earth.gd" type="Script" id=1]
-[ext_resource path="res://Playfield/Earth/The_Earth_seen_from_Apollo_17.jpg" type="Texture" id=2]
+[ext_resource path="res://Playfield/Earth/The_Earth_seen_from_Apollo_17.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 
