@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Playfield/Earth/The_Earth_seen_from_Apollo_17.jpg" type="Texture" id=1]
 
-[node name="Earth" type="Node2D" index="0"]
+[node name="Earth" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
