@@ -3,11 +3,11 @@
 [ext_resource path="res://Success.png" type="Texture" id=1]
 [ext_resource path="res://ResetButton.gd" type="Script" id=2]
 
-[node name="Sprite" type="Sprite"]
+[node name="Sprite" type="Sprite" index="0"]
 
-position = Vector2( 445.075, 289.689 )
-scale = Vector2( 0.689923, 0.689923 )
+position = Vector2( 512, 300 )
 texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Button" type="Button" parent="." index="0"]
 

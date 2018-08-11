@@ -4,7 +4,7 @@
 
 [node name="Node2D" type="Sprite" index="0"]
 
-position = Vector2( 524.312, 297.208 )
+position = Vector2( 512, 300 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
