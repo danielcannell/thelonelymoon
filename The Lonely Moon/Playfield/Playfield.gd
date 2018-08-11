@@ -1,5 +1,7 @@
 extends Container
 
+signal satellite_summary
+
 export (PackedScene) var Satellite
 
 func _ready():
@@ -14,6 +16,7 @@ func new_craft(type):
 	var craft = Satellite.instance()
 	add_child(craft)
 	craft.add_to_group("satellites")
+	craft.configure(type)
 	
 	var alt = rand_range(config.alt_min, config.alt_max)
 	var theta = rand_range(0, 2 * PI)
@@ -23,3 +26,12 @@ func new_craft(type):
 
 func get_satellites():
 	return get_tree().get_nodes_in_group("satellites")
+
+func state():
+	var st = []
+	for sat in get_satellites():
+		st.append(sat.state())
+	return st
+
+func _process(delta):
+	emit_signal("satellite_summary", state())
