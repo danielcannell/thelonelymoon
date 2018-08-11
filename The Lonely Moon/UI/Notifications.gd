@@ -1,21 +1,17 @@
 extends VBoxContainer
 
-export (PackedScene) var notification_template;
-
-var notifications = []
+export (PackedScene) var notification_template
 
 func add_notification(text):
     var n = notification_template.instance()
     n.set_text(text)
     add_child(n)
     var timer = Timer.new()
-    timer.wait_time = 3
-    timer.connect("timeout", self, "pop_notification")
+    timer.wait_time = 5
+    timer.connect("timeout", self, "pop_notification", [n])
     n.add_child(timer)
-    notifications.append(n)
     timer.start()
 
 
-func pop_notification():
-    var n = notifications.pop_front()
+func pop_notification(n):
     remove_child(n)
