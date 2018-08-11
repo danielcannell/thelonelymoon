@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-signal on_purchase;
+signal spawn_satellite
 
 export (PackedScene) var shop_item
 
@@ -22,7 +22,21 @@ func _ready():
 
 
 func btn_click(btn):
-    print(btn)
+    var thing = btn.thing
+    var type = thing.type
+    var id = thing.id
+    if type == "satellite":
+        make_satellite(id)
+    elif type == "fundraise":
+        make_fundraise(id)
+
+
+func make_satellite(id):
+    emit_signal("spawn_satellite", id)
+
+
+func make_fundraise(id):
+    get_node("Economy").make_fundraise(id)
 
 
 func set_money(amt):
@@ -30,7 +44,7 @@ func set_money(amt):
 
     # Disable buttons based on cost
     for item in shop_items:
-        item.set_enabled(item.thing['cost'] <= amt)
+        item.set_enabled(item.thing.cost <= amt)
 
 
 func _on_Playfield_satellite_summary(delta, state):
