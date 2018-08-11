@@ -20,9 +20,18 @@ var satellites = {
 
 var selected_sat = null
 
+var clicks = []
+
 
 func _ready():
     var orbit = get_node('Orbit')
+
+
+func _unhandled_input(event):
+    if event is InputEventMouseButton:
+        if event.button_index == 1:
+            if event.pressed:
+                clicks.append(event)
 
 
 func new_craft(type):
@@ -65,22 +74,42 @@ func state():
     return st
 
 
-func satellite_clicked(sat):
+func select_satellite(sat):
     if selected_sat:
         selected_sat.deselect()
     selected_sat = sat
-    sat.select()
-    
-    var alt_range = sat.alt_range()
+
     var good_orbit_range = get_node('GoodOrbitRange')
-    good_orbit_range.set_range(alt_range[0], alt_range[1])
-    good_orbit_range.visible = true
+    var orbit = get_node('Orbit')
+
+    if sat:
+        sat.select()
+        var alt_range = sat.alt_range()
+        good_orbit_range.set_range(alt_range[0], alt_range[1])
+        good_orbit_range.visible = true
+        orbit.visible = true
+    else:
+        good_orbit_range.visible = false
+        orbit.visible = false
     
     emit_signal("satellite_selected", sat)
 
 
+func satellite_clicked(sat, event):
+    # Eat this click
+    if event in clicks:
+        clicks.remove(clicks.find(event))
+
+    select_satellite(sat)
+
+
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
+
+    for click_left in clicks:
+        # This click was not eaten by a satellite
+        select_satellite(null)
+    clicks.clear()
     
     if selected_sat:
         if Input.is_action_pressed("burn_prograde"):
