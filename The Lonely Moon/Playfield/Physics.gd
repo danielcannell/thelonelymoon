@@ -37,8 +37,9 @@ func _physics_process(delta):
         pos += vel * delta / 2
 
         s.vel = vel
-        var collision_info = s.move_and_collide(global.metres_to_screen(pos - s.pos))
-        if collision_info:
-            print("Collision!")
-            get_node("..").destroy_craft(s)
+        s.pos = pos
+#        var collision_info = s.move_and_collide(global.metres_to_screen(pos - s.pos))
+#        if collision_info:
+#            print("Collision!")
+#            get_node("..").destroy_craft(s)
         
