@@ -10,7 +10,8 @@ func _ready():
     # Create buttons from config
     for x in global.MENU_CONFIG:
         var btn = shop_item.instance()
-        btn.connect("click", self, "btn_click", [btn])
+        btn.connect("clicked", self, "btn_click", [btn])
+        btn.set_thing(x)
         shop_items.append(btn)
         get_node("Shop/Background/Container/Tiles").add_child(btn)
 
