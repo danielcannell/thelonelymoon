@@ -9,13 +9,13 @@ func vel_for_pos(pos):
     return speed * Vector2(pos.y, -pos.x).normalized()
 
 
-func calculate_accel(s, massive_bodies):
+func calculate_accel(pos, massive_bodies):
     var a = Vector2(0, 0)
     
     for b in massive_bodies:
-        var offset = b.pos - s.pos
+        var offset = b.pos - pos
         var distance = offset.length()
-        a += offset / pow(distance, 3)    
+        a += b.MASS * offset / pow(distance, 3)    
     
     return GRAVITY * a
 
@@ -29,9 +29,15 @@ func _physics_process(delta):
     var satellites = get_node('..').get_satellites()
 
     for s in satellites:
-        var a = calculate_accel(s, massive_bodies)
-        s.vel += a * delta
-        var collision_info = s.move_and_collide(global.metres_to_screen(s.vel * delta))
+        var vel = s.vel
+        var pos = s.pos
+        
+        pos += vel * delta / 2
+        vel += calculate_accel(pos, massive_bodies) * delta
+        pos += vel * delta / 2
+
+        s.vel = vel
+        var collision_info = s.move_and_collide(global.metres_to_screen(pos - s.pos))
         if collision_info:
             print("Collision!")
             get_node("..").destroy_craft(s)
