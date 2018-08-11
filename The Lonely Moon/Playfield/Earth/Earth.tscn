@@ -6,7 +6,7 @@
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-scale = Vector2( 0.188446, 0.188446 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
