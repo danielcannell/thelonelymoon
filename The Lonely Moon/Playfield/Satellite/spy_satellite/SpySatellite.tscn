@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Playfield/Satellite/debris/Debris.gd" type="Script" id=1]
-[ext_resource path="res://Playfield/Satellite/debris/debris_1.png" type="Texture" id=2]
+[ext_resource path="res://Playfield/Satellite/spy_satellite/SpySatellite.gd" type="Script" id=1]
+[ext_resource path="res://Playfield/Satellite/spy_satellite/spy_sat.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 10.0
+extents = Vector2( 10, 10 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
+[node name="KinematicBody2D" type="KinematicBody2D"]
 
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.02, 0.02 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -20,25 +20,24 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-scale = Vector2( 0.160049, 0.160049 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-scale = Vector2( 4.05401, 4.05401 )
+position = Vector2( -5.0106, 3.33984 )
+scale = Vector2( 78.974, 55.7232 )
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="Selectbox" type="Line2D" parent="." index="2"]
 
-position = Vector2( -0.372728, 1.12548 )
-scale = Vector2( 0.401014, 0.591339 )
+position = Vector2( 8.72981, 7.8682 )
+scale = Vector2( 7.46091, 8.41044 )
 points = PoolVector2Array( -100, 60, 100, 60, 100, -60, -100, -60, -100, 60 )
 width = 10.0
 default_color = Color( 0.4, 0.5, 1, 1 )
 texture_mode = -13556705
 sharp_limit = 2.0
 round_precision = 8
+_sections_unfolded = [ "Transform" ]
 
 
