@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const MASS = 1
+const ANGULAR_VELOCITY = 2
 
 var pos = Vector2() setget set_pos, get_pos
 
@@ -17,4 +18,4 @@ func _ready():
     pass
 
 func _process(delta):
-    pass
+    rotate(-ANGULAR_VELOCITY * delta)
