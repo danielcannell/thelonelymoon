@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Playfield/Satellite/Rosetta_spacecraft_model.png" type="Texture" id=1]
+
+[node name="Sprite" type="Sprite" index="0"]
+
+position = Vector2( 222.41, 134.757 )
+scale = Vector2( 0.115606, 0.115606 )
+texture = ExtResource( 1 )
+
+
