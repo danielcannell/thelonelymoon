@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Playfield/Satellite/Satellite.gd" type="Script" id=1]
-[ext_resource path="res://Playfield/Satellite/Rosetta_spacecraft_model.png" type="Texture" id=2]
+[ext_resource path="res://Playfield/Satellite/cube_sat.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -9,7 +9,7 @@ custom_solver_bias = 0.0
 radius = 10.2089
 height = 20.0
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
 
 scale = Vector2( 0.1, 0.1 )
 input_pickable = false
@@ -19,19 +19,18 @@ collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -20, -1.84774e-005 )
-rotation = -0.357792
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Pickable", "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
-position = Vector2( -14.9012, -3.01687 )
-scale = Vector2( 16.4783, 2.46797 )
+position = Vector2( -4.51011, 1.57526 )
+scale = Vector2( 14.9659, 2.40051 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="cube_sat" type="Sprite" parent="." index="1"]
+
+position = Vector2( -3.83831, 0.960914 )
+scale = Vector2( 0.194618, 0.194618 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 
