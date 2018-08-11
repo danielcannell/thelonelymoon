@@ -1,7 +1,7 @@
 extends Node
 
 
-const GRAVITY = 1e8
+const GRAVITY = 1e7
 
 
 func calculate_accel(pos):
@@ -22,4 +22,5 @@ func _process(delta):
         var a = calculate_accel(pos)
         vel += a * delta
         pos += vel * delta
+        s.velocity = vel
         s.position = pos
