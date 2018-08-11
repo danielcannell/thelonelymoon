@@ -20,4 +20,6 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 _sections_unfolded = [ "Anchor", "Rect", "Visibility" ]
 
+[connection signal="satellite_summary" from="Game/Playfield" to="UI" method="_on_Playfield_satellite_summary"]
+
 
