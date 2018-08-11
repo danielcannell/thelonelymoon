@@ -7,6 +7,7 @@ var config = {}
 var type = ""
 var uptime = 0
 
+
 func set_pos(pos):
     position = global.metres_to_screen(pos)
 
@@ -19,7 +20,6 @@ func _ready():
     pass
 
 
-
 func _process(delta):
     uptime += delta
 
@@ -30,7 +30,7 @@ func configure(typename):
 
 
 func state():
-    var alt = sqrt(pow(position[0], 2) + pow(position[1], 2))
+    var alt = position.length()
     var in_range = alt < config.alt_max && alt > config.alt_min
     return {
         'in_range': in_range,

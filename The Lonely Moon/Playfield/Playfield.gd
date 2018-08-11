@@ -4,10 +4,9 @@ signal satellite_summary
 
 export (PackedScene) var Satellite
 
+
 func _ready():
-    new_craft('cube_sat')
-    new_craft('spy_satellite')
-    new_craft('science_station')
+    pass
 
 
 func new_craft(type):
@@ -25,18 +24,22 @@ func new_craft(type):
     craft.position = Vector2(x, y)
     craft.vel = get_node('Physics').vel_for_pos(craft.pos)
 
+
 func destroy_craft(craft):
     remove_child(craft)
     craft.free()
 
+
 func get_satellites():
     return get_tree().get_nodes_in_group("satellites")
+
 
 func state():
     var st = []
     for sat in get_satellites():
         st.append(sat.state())
     return st
+
 
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
