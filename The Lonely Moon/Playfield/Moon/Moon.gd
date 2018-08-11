@@ -25,4 +25,4 @@ func _process(delta):
     distance -= FALL_SPEED * delta
     position = distance * Vector2(sin(theta), cos(theta))
     if overlaps_body(get_node('../Earth')):
-        emit_signal("game_over")
+        get_node('..').handle_game_over()

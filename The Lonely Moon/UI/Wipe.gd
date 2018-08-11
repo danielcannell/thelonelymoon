@@ -1,6 +1,6 @@
 extends Control
 
-var percent = 100
+var percent = 50
 
 const npoints = 32
 const red = Color(1.0, 1.0, 1.0, 0.25)
@@ -28,6 +28,7 @@ func _draw():
 
 func _process(delta):
     update()
+
 
 func set_percent(x):
     percent = x

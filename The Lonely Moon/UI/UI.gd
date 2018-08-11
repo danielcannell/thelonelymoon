@@ -37,6 +37,8 @@ func btn_finished(btn):
         make_satellite(id)
     elif type == "fundraise":
         make_fundraise(id)
+    elif type == "ark":
+        get_tree().change_scene("res://Victory.tscn")
 
 
 func make_satellite(id):
