@@ -25,7 +25,7 @@ func _draw():
         var point = alt_min * Vector2(sin(theta), cos(theta))
         points.push_back(point)
         
-    draw_colored_polygon(points, Color(0.1, 0.1, 0.8, 0.2))
+    draw_colored_polygon(points, Color(0.1, 0.8, 0.1, 0.2))
     
 
 func _ready():
