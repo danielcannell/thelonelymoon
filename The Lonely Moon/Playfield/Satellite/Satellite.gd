@@ -13,6 +13,7 @@ var pos = Vector2() setget set_pos, get_pos
 var vel = Vector2(0, 0)
 var alt_range = [] setget , get_alt_range
 
+var selected = false
 var active = true
 var invunerable = true
 var uptime = 0
@@ -111,7 +112,7 @@ func add_glow():
         return
 
     # Debris and missiles don't have a glow
-    if type in ["debris", "missile"]:
+    if type in ["debris", "missile", "ark", "cleanup_sat"]:
         return
 
     has_glow = true
@@ -130,7 +131,10 @@ func get_pos():
 
 
 func get_alt_range():
-    return [global.SPACE_REGIONS[self.props.region].alt_min, global.SPACE_REGIONS[self.props.region].alt_max]
+    if props.region:
+        return [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
+    else:
+        return null
 
 
 func destroy():
@@ -139,12 +143,14 @@ func destroy():
 
 
 func select():
+    selected = true
     var node = get_node("Selectbox")
     if node:
         node.set_default_color(Color(0.2, 1.0, 0.2, 1.0))
 
 
 func deselect():
+    selected = false
     var node = get_node("Selectbox")
     if node:
         node.set_default_color(Color(0.0, 0.0, 0.0, 0.0))
@@ -189,8 +195,7 @@ func _process(delta):
     if invunerable and uptime > 0.1:
         invunerable = false
 
-    if not in_orbit:
-        rotation = vel.angle() + PI/2
+    rotation = vel.angle() + PI/2
 
 
     if animation:

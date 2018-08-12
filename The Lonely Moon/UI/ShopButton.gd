@@ -20,6 +20,7 @@ func _ready():
     get_node("Background/Cost").text = str(thing['cost']) + "btc"
     get_node("Background/Name").text = thing['display_name']
     get_node("Background/Button").hint_tooltip = description()
+    get_node("Background/Sprite").texture = load("res://UI/" + thing.id + "_icon.png")
 
 
 func _process(delta):

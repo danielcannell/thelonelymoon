@@ -8,6 +8,7 @@ const Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
 const Explosion = preload("res://Playfield/Satellite/Explosion.tscn");
 const SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatellite.tscn");
 const CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
+const CleanupSat = preload("res://Playfield/Satellite/cleanup_sat/CleanupSat.tscn");
 const ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
 const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
 const Ark =  preload("res://Playfield/Satellite/ark/Ark.tscn");
@@ -19,6 +20,7 @@ const UsedLaunchVehicle = preload("res://Playfield/Satellite/used_launch_vehicle
 const satellites = {
     "debris": Debris,
     "cube_sat": CubeSat,
+    "cleanup_sat": CleanupSat,
     "spy_satellite": SpySatellite,
     "science_station": ScienceStation,
     "space_hotel": SpaceHotel,
@@ -59,11 +61,12 @@ func _unhandled_input(event):
 
 func show_satellite_range(id):
     var region = global.SHIP_CONFIG[id].region
-    var alt_min = global.SPACE_REGIONS[region].alt_min
-    var alt_max = global.SPACE_REGIONS[region].alt_max
-    var orbit_range = get_node("ShopOrbitRange")
-    orbit_range.set_range(alt_min, alt_max)
-    orbit_range.visible = true
+    if region:
+        var alt_min = global.SPACE_REGIONS[region].alt_min
+        var alt_max = global.SPACE_REGIONS[region].alt_max
+        var orbit_range = get_node("ShopOrbitRange")
+        orbit_range.set_range(alt_min, alt_max)
+        orbit_range.visible = true
 
 
 func hide_satellite_range():
@@ -131,14 +134,13 @@ func explode(position, scale=1):
     splode.play()
 
 
-func earth_collision(craft):
+func no_debris_collision(craft, name):
     if not craft.invunerable:
         explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
-        
-        var name1 = global.id_display_lookup[craft.type]
-        var name2 = "Earth"
-        report_collision(name1, name2)
+
+        var craft_name = global.id_display_lookup[craft.type]
+        report_collision(craft_name, name)
 
 
 func moon_collision(craft):
@@ -149,7 +151,7 @@ func moon_collision(craft):
     if not craft.invunerable:
         explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
-        
+
         var name1 = global.id_display_lookup[craft.type]
         var name2 = "Moon"
         report_collision(name1, name2)
@@ -204,7 +206,7 @@ func craft_collision(craft1, craft2):
                       craft2.props.debris.amount, craft2.props.debris.radius, craft2.props.debris.impluse)
         explode(craft2.position, craft2.props.explosion.scale)
         destroy_craft(craft2)
-        
+
     var name1 = global.id_display_lookup[craft1.type]
     var name2 = global.id_display_lookup[craft2.type]
     report_collision(name1, name2)
@@ -213,15 +215,15 @@ func craft_collision(craft1, craft2):
 func report_collision(name1, name2):
     var message = "%s was destroyed colliding with %s!"
     var namearr = [name1, name2]
-    
+
     if name1 == "Debris":
         name1 = name2
         name2 = "Debris"
-    
+
     # If this is only a debris/celestial body object, ignore
     if name2 == "Debris" and ["Earth", "Moon"].has(name1):
         return
-        
+
     emit_signal("notify", message % [name1, name2])
 
 
@@ -252,8 +254,9 @@ func select_satellite(sat):
     if sat:
         sat.select()
         var alt_range = sat.alt_range
-        good_orbit_range.set_range(alt_range[0], alt_range[1])
-        good_orbit_range.visible = true
+        if alt_range:
+            good_orbit_range.set_range(alt_range[0], alt_range[1])
+            good_orbit_range.visible = true
         orbit.visible = true
     else:
         good_orbit_range.visible = false
@@ -367,7 +370,7 @@ func _process(delta):
 
     if laser_charge > 0:
         get_node("LaserCharge").value = laser_charge / global.LASER_CONFIG.laser_charge.time_earned
-        
+
 
 func _input(event):
     if event.is_action_pressed("missile"):

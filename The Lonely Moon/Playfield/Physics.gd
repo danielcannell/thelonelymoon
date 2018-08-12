@@ -101,7 +101,7 @@ func _physics_process(delta):
 
             if collision_info:
                 if collision_info.collider.type == "earth":
-                    get_node("..").earth_collision(s)
+                    get_node("..").no_debris_collision(s, 'Earth')
                 else:
                     get_node("..").craft_collision(s, collision_info.collider)
 
