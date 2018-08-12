@@ -105,10 +105,10 @@ const SHIP_CONFIG = {
     },
     'ark': {
         'region': 'outer_space',
-        'delta_v': 150,
+        'delta_v': 100,
         'income': 0,
         'time_constant': 1,
-        'drag_ratio': 0.5,
+        'drag_ratio': 0.2,
         'thrust': 0.01,
     },
     "debris": {
