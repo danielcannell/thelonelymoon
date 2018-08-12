@@ -68,24 +68,28 @@ const SHIP_CONFIG = {
         'delta_v': 50,
         'income': 10,
         'time_constant': 5000,
+        'drag_ratio': 0.1
     },
     'spy_satellite': {
         'region': 'region2',
         'delta_v': 100,
         'income': 25,
         'time_constant': 5000,
+        'drag_ratio': 0.3
     },
     'science_station': {
         'region': 'region3',
         'delta_v': 150,
         'income': 100,
         'time_constant': 5000,
+        'drag_ratio': 0.7
     },
     'space_hotel': {
         'region': 'region4',
         'delta_v': 150,
         'income': 10000,
         'time_constant': 5000,
+        'drag_ratio': 2
     }
 }
 
