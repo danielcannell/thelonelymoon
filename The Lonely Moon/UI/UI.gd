@@ -47,7 +47,7 @@ func btn_finished(btn):
     elif type == "fundraise":
         make_fundraise(id)
     elif type == "laser":
-        emit_signal("charge_laser")
+        make_laser()
     elif type == "ark":
         get_tree().change_scene("res://Victory.tscn")
 
@@ -69,6 +69,11 @@ func make_satellite(id, name):
 
 func make_fundraise(id):
     get_node("Economy").make_fundraise(id)
+
+
+func make_laser():
+    emit_signal("charge_laser")
+    create_notification("Laser recharged!")
 
 
 func set_money(amt):
