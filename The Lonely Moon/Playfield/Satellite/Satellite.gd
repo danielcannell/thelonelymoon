@@ -80,6 +80,7 @@ func launch(lv, p, leo_alt, leo_vel_theta):
     in_orbit = false
 
     launch_vehicle = lv
+    lv.scale = Vector2(1 / scale.x, 1 / scale.y)
     add_child(lv)
 
     self.leo_alt = leo_alt

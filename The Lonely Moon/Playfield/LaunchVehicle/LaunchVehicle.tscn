@@ -19,16 +19,18 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Tail" type="Sprite" parent="." index="0"]
 
-position = Vector2( 0, 65 )
-rotation = 4.71239
+position = Vector2( -0.161767, 24.7412 )
+rotation = -1.5708
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 offset = Vector2( -19.5556, -0.550032 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Body" type="Sprite" parent="." index="1"]
 
-position = Vector2( 0, 30 )
+position = Vector2( 0, 12 )
 rotation = 4.71239
+scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
