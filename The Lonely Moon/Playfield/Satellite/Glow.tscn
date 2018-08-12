@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Playfield/Satellite/glow_bad.png" type="Texture" id=1]
+[ext_resource path="res://Playfield/Satellite/glow_good.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "bad",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "good",
+"speed": 5.0
+} ]
+
+[node name="Glow" type="Node2D" index="0"]
+
+[node name="Animation" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "good"
+
+

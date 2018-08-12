@@ -309,11 +309,11 @@ func _process(delta):
 
     if laser_charge > 0:
         get_node("LaserCharge").value = laser_charge / laser_max_charge
-        
+
+
 func _input(event):
     if event.is_action_pressed("missile"):
         new_craft("missile")
-
 
 
 func handle_game_over():

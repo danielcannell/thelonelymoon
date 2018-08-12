@@ -3,6 +3,8 @@ extends KinematicBody2D
 const BURN_RATE = 0.1
 const type = "satellite"
 
+var glow_template = preload("res://Playfield/Satellite/Glow.tscn")
+
 
 ## state ##
 var pos = Vector2() setget set_pos, get_pos
@@ -22,6 +24,9 @@ var launch_alt = 0
 var launch_vel_theta = 0
 var launch_vel_r = 0
 
+# Glow
+var has_glow = false
+var animation = null
 
 # props
 var props = {
@@ -43,6 +48,7 @@ func init(props=null):
     self.props = props
     delta_v = self.props.delta_v / 100.0
 
+
 func launch_trajectory():
     var progress = (self.pos.length() - launch_alt) / (leo_alt - launch_alt)
     var vel_theta = launch_vel_theta + progress * (leo_vel_theta - launch_vel_theta)
@@ -54,6 +60,7 @@ func launch_trajectory():
 
     if progress > 0.99:
         in_orbit = true
+        add_glow()
 
     return vel
 
@@ -70,6 +77,15 @@ func launch(p, leo_alt, leo_vel_theta):
     self.pos = p
 
 
+func add_glow():
+    if has_glow:
+        return
+    has_glow = true
+    var glow = glow_template.instance()
+    add_child(glow)
+    animation = glow.get_node("Animation")
+
+
 func set_pos(pos):
     position = global.metres_to_screen(pos)
 
@@ -77,8 +93,10 @@ func set_pos(pos):
 func get_pos():
     return global.screen_to_metres(position)
 
+
 func get_alt_range():
     return [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
+
 
 func destroy():
     active = false
@@ -100,6 +118,7 @@ func deselect():
 func burn(delta, is_prograde, is_fine):
     # Abandon launch trajectory if the player takes control
     in_orbit = true
+    add_glow()
 
     var dv = delta * props['thrust']
     if is_fine:
@@ -134,6 +153,10 @@ func _process(delta):
 
     if invunerable and uptime > 0.1:
         invunerable = false
+
+    if animation:
+        animation.set_animation("good" if in_range() else "bad")
+
 
 func move_and_collide_metres(vec):
     return self.move_and_collide(global.metres_to_screen(vec))
