@@ -4,7 +4,7 @@
 [ext_resource path="res://Playfield/Earth/Earth.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Playfield/Physics.gd" type="Script" id=3]
 [ext_resource path="res://Playfield/Moon/Moon.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Playfield/GoodOrbitRange.gd" type="Script" id=5]
+[ext_resource path="res://Playfield/OrbitRange.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Playfield/Atmosphere/atmosphere.png" type="Texture" id=6]
 [ext_resource path="res://Playfield/SelectionBox.gd" type="Script" id=7]
 
@@ -13,7 +13,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="Node" type="Node2D" index="0"]
+[node name="Playfield" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -40,20 +40,18 @@ texture_mode = 6357102
 sharp_limit = 2.0
 round_precision = 8
 
-[node name="GoodOrbitRange" type="Node2D" parent="." index="5"]
+[node name="GoodOrbitRange" parent="." index="5" instance=ExtResource( 5 )]
 
-visible = false
-script = ExtResource( 5 )
-_sections_unfolded = [ "Visibility" ]
+[node name="ShopOrbitRange" parent="." index="6" instance=ExtResource( 5 )]
 
-[node name="Atmosphere" type="Sprite" parent="." index="6"]
+[node name="Atmosphere" type="Sprite" parent="." index="7"]
 
 scale = Vector2( 0.175, 0.175 )
 z_index = -10
 texture = ExtResource( 6 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
-[node name="SelectionBox" type="Area2D" parent="." index="7"]
+[node name="SelectionBox" type="Area2D" parent="." index="8"]
 
 visible = false
 input_pickable = true

@@ -17,11 +17,12 @@ func _ready():
 
 
 func _process(delta):
+    var wipe = get_node("Background/Wipe")
     if busy:
         var percent = 1 - (timer.time_left / time_left)
-        get_node("Background/Wipe").set_percent(percent * 100)
+        wipe.set_percent(percent * 100)
 
-    get_node("Background/Wipe").visible = busy
+    wipe.visible = busy
 
 
 func set_thing(x):
