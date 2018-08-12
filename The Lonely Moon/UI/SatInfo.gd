@@ -3,10 +3,6 @@ extends MarginContainer
 var Economy = preload('res://UI/Economy.gd')
 var curr_sat = null
 
-func _ready():
-    # Called when the node is added to the scene for the first time.
-    # Initialization here
-    pass
 
 func lookup_sat_name(type):
     for e in global.MENU_CONFIG:
@@ -14,6 +10,7 @@ func lookup_sat_name(type):
             return e['display_name']
 
     return "UNKNOWN"
+
 
 func _process(delta):
     # Called every frame. Delta is time since last frame.
@@ -27,9 +24,11 @@ func _process(delta):
         if state['in_range']:
             in_range_str = "yes"
         get_node("Background/C/InRange/InRangeVal").text = in_range_str
-        get_node("Background/C/Deltav/DeltavVal").text = "%.1f" % state['delta_v']
+        get_node("Background/C/Deltav/PrgBar/Text").text = "%.1f" % state['delta_v']
+        get_node("Background/C/Deltav/PrgBar").value = (state['delta_v'] / state['delta_v_max']) * 100
         var income = Economy.ship_income(state['uptime'], state['type']) if state['in_range'] else 0.0
         get_node("Background/C/Income/IncomeVal").text = "%.1f btc/s" % income
+
 
 func on_satellite_selected(sat):
     curr_sat = sat
