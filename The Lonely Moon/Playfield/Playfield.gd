@@ -165,10 +165,13 @@ func get_satellites():
 
 func state():
     var st = []
+    var debris_count = 0
     for sat in get_satellites():
         if sat.active and sat.type != "debris":
             st.append(sat.state())
-    return st
+        elif sat.active and sat.type == 'debris':
+            debris_count += 1
+    return [st, debris_count]
 
 
 func select_satellite(sat):

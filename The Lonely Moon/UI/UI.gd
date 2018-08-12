@@ -77,7 +77,15 @@ func set_money(amt):
 
 
 func _on_Playfield_satellite_summary(delta, state):
-    get_node("Economy").receive_state(delta, state)
+    var satellites = state[0]
+    var debris_count = state[1]
+    get_node("Economy").receive_state(delta, satellites)
+    get_node("StatsPanel").update_stats(delta, satellites, debris_count)
+
 
 func on_satellite_selected(sat):
     get_node("SatInfo").on_satellite_selected(sat)
+
+
+func on_showstats_toggled(button_pressed):
+    get_node("StatsPanel").visible = button_pressed
