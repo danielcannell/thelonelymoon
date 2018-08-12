@@ -29,6 +29,14 @@ const MENU_CONFIG = [
         'build_time': 1,
     },
     {
+        'id': 'laser_charge',
+        'display_name': 'Laser Charge',
+        'description': 'Clear the skies with a blast of light.',
+        'type': 'laser',
+        'cost': 1000,
+        'build_time': 5,
+    },
+    {
         'id': 'spy_satellite',
         'display_name': 'Spy Satellite',
         'description': 'Keep an eye on the neighbours.',

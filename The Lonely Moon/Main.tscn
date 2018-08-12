@@ -65,6 +65,8 @@ editor_draw_drag_margin = false
 script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
+[connection signal="charge_laser" from="UiLayer/UI" to="Playfield" method="charge_laser"]
+
 [connection signal="hide_satellite_range" from="UiLayer/UI" to="Playfield" method="hide_satellite_range"]
 
 [connection signal="show_satellite_range" from="UiLayer/UI" to="Playfield" method="show_satellite_range"]

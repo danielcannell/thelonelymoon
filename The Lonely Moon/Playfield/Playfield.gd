@@ -24,11 +24,17 @@ var selected_sat = null
 var clicks = []
 var dragging = false
 
+const laser_max_charge = 2
+var laser_charge = 0
+var laser_active = false
+
 var inactive_debris = []
 
 
 func _ready():
     var orbit = get_node('Orbit')
+    get_node("LaserCharge/FireButton").connect("button_down", self, "fire_button_pressed")
+    get_node("LaserCharge/FireButton").connect("button_up", self, "fire_button_released")
 
 
 func _unhandled_input(event):
@@ -201,6 +207,16 @@ func satellite_clicked(sat, event):
     select_satellite(sat)
 
 
+func fire_button_pressed():
+    get_node("Earth").fire_laser()
+    laser_active = true
+
+
+func fire_button_released():
+    get_node("Earth").stop_laser()
+    laser_active = false
+
+
 func _physics_process(delta):
     pass
 
@@ -232,6 +248,11 @@ func finish_dragging(event):
             nearest_dist = dist
             nearest = sat
     select_satellite(nearest)
+
+
+func charge_laser():
+    laser_charge = laser_max_charge
+    get_node("LaserCharge").visible = true
 
 
 func _process(delta):
@@ -270,6 +291,16 @@ func _process(delta):
     
     if inactive_debris:
         inactive_debris = []
+
+    if laser_active:
+        laser_charge -= delta
+        if laser_charge <= 0:
+            laser_active = false
+            get_node("Earth").stop_laser()
+            get_node("LaserCharge").visible = false
+
+    if laser_charge > 0:
+        get_node("LaserCharge").value = laser_charge / laser_max_charge
     
 
 func handle_game_over():
