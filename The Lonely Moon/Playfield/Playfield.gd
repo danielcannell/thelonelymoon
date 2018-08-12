@@ -14,6 +14,7 @@ const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.ts
 const Ark =  preload("res://Playfield/Satellite/ark/Ark.tscn");
 const Missile = preload("res://Playfield/Satellite/missile/Missile.tscn");
 const LaunchVehicle = preload("res://Playfield/LaunchVehicle/LaunchVehicle.tscn");
+const UsedLaunchVehicle = preload("res://Playfield/Satellite/used_launch_vehicle/UsedLaunchVehicle.tscn");
 
 
 const satellites = {
@@ -24,7 +25,8 @@ const satellites = {
     "science_station": ScienceStation,
     "space_hotel": SpaceHotel,
     "ark": Ark,
-    "missile": Missile
+    "missile": Missile,
+    "used_launch_vehicle": UsedLaunchVehicle
 }
 
 var selected_sat = null
@@ -91,9 +93,24 @@ func new_craft(type):
     var y = alt * sin(theta)
     var leo_alt = 0.5
 
-    craft.launch(LaunchVehicle.instance(), Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
-
+    var lv = LaunchVehicle.instance()
+    craft.connect("satellite_entered_orbit", self, "_on_satellite_entered_orbit")
     craft.connect("clicked", self, "satellite_clicked")
+    craft.launch(lv, Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
+
+
+func _on_satellite_entered_orbit(craft, lv):
+    var ulv = UsedLaunchVehicle.instance()
+    ulv.init()
+
+    ulv.pos = craft.pos - craft.vel.normalized() * (0.09 + craft.props.debris.radius)
+    ulv.set_rotation(craft.vel.angle())
+    ulv.vel = craft.vel * 0.9
+
+    self.add_child(ulv)
+    ulv.add_to_group("satellites")
+
+    craft.disconnect("satellite_entered_orbit", self, "_on_satellite_entered_orbit")
 
 
 func new_missile():
@@ -142,14 +159,13 @@ func explode(position, scale=1):
     splode.play()
 
 
-func earth_collision(craft):
+func no_debris_collision(craft, name):
     if not craft.invunerable:
         explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
-        
-        var name1 = global.id_display_lookup[craft.type]
-        var name2 = "Earth"
-        report_collision(name1, name2)
+
+        var craft_name = global.id_display_lookup[craft.type]
+        report_collision(craft_name, name)
 
 
 func moon_collision(craft):
@@ -160,7 +176,7 @@ func moon_collision(craft):
     if not craft.invunerable:
         explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
-        
+
         var name1 = global.id_display_lookup[craft.type]
         var name2 = "Moon"
         report_collision(name1, name2)
@@ -215,7 +231,7 @@ func craft_collision(craft1, craft2):
                       craft2.props.debris.amount, craft2.props.debris.radius, craft2.props.debris.impluse)
         explode(craft2.position, craft2.props.explosion.scale)
         destroy_craft(craft2)
-        
+
     var name1 = global.id_display_lookup[craft1.type]
     var name2 = global.id_display_lookup[craft2.type]
     report_collision(name1, name2)
@@ -224,15 +240,15 @@ func craft_collision(craft1, craft2):
 func report_collision(name1, name2):
     var message = "%s was destroyed colliding with %s!"
     var namearr = [name1, name2]
-    
+
     if name1 == "Debris":
         name1 = name2
         name2 = "Debris"
-    
+
     # If this is only a debris/celestial body object, ignore
     if name2 == "Debris" and ["Earth", "Moon"].has(name1):
         return
-        
+
     emit_signal("notify", message % [name1, name2])
 
 

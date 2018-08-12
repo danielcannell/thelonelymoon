@@ -9,6 +9,7 @@ func _ready():
         id_menu_lookup[m.id] = m
         id_display_lookup[m.id] = m['display_name']
     id_display_lookup['debris'] = "Debris"
+    id_display_lookup['debris.used_launch_vehicle'] = "Debris"
     id_display_lookup['missile'] = "Missile"
 
 
@@ -47,7 +48,7 @@ const MENU_CONFIG = [
     },
     {
         'id': 'cleanup_sat',
-        'display_name': 'Clean-up Satellite',
+        'display_name': 'Laser Satellite',
         'description': 'Clear space with a blast of light (push space).',
         'type': 'satellite',
         'cost': 1000,
@@ -89,6 +90,7 @@ const MENU_CONFIG = [
 
 const SHIP_CONFIG = {
     'cube_sat': {
+        "match_rot_to_vel": true,
         'region': 'leo',
         'delta_v': 50,
         'income': 10,
@@ -105,6 +107,7 @@ const SHIP_CONFIG = {
         }
     },
     'cleanup_sat': {
+        "match_rot_to_vel": true,
         'region': null,
         'delta_v': 100,
         'income': 0,
@@ -121,6 +124,7 @@ const SHIP_CONFIG = {
         }
     },
     'spy_satellite': {
+        "match_rot_to_vel": true,
         'region': 'region2',
         'delta_v': 100,
         'income': 25,
@@ -137,6 +141,7 @@ const SHIP_CONFIG = {
         }
     },
     'science_station': {
+        "match_rot_to_vel": true,
         'region': 'region3',
         'delta_v': 150,
         'income': 100,
@@ -154,6 +159,7 @@ const SHIP_CONFIG = {
         }
     },
     'space_hotel': {
+        "match_rot_to_vel": true,
         'region': 'region4',
         'delta_v': 150,
         'income': 10000,
@@ -171,6 +177,7 @@ const SHIP_CONFIG = {
         }
     },
     'ark': {
+        "match_rot_to_vel": true,
         'region': 'outer_space',
         'delta_v': 100,
         'income': 0,
@@ -188,6 +195,7 @@ const SHIP_CONFIG = {
         }
     },
     "debris": {
+        "match_rot_to_vel": false,
         'region': null,
         'delta_v': 0,
         'income': 0,
@@ -200,7 +208,26 @@ const SHIP_CONFIG = {
             "scale": 0.2
         }
     },
+    "debris.used_launch_vehicle": {
+        "match_rot_to_vel": false,
+        'region': null,
+        'delta_v': 0,
+        'income': 0,
+        'time_constant': 0,
+        'drag_ratio': 1.5,
+        'thrust': 0,
+        "radius":  0.04,
+        "debris": {
+            "radius": 0.05,
+            "amount": 3,
+            "impluse": 0.1,
+        },
+        "explosion": {
+            "scale": 0.7
+        }
+    },
     "missile": {
+        "match_rot_to_vel": true,
         'region': null,
         'delta_v': 0,
         'income': 0,
@@ -261,7 +288,10 @@ const LASER_CONFIG = {
 const METRES_PER_SCREEN_UNIT = 1.0 / 200.0;
 
 func ship_config(name):
-    return SHIP_CONFIG[name]
+    if name in SHIP_CONFIG:
+        return SHIP_CONFIG[name]
+    else:
+        return null
 
 func screen_to_metres(vec):
     return vec * METRES_PER_SCREEN_UNIT

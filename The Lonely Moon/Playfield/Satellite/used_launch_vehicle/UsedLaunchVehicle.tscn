@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Playfield/Satellite/used_launch_vehicle/UsedLaunchVehicle.gd" type="Script" id=1]
+[ext_resource path="res://Playfield/Satellite/used_launch_vehicle/used_launch_vehicle.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[node name="UsedLaunchVehicle" type="KinematicBody2D" index="0"]
+
+scale = Vector2( 0.55, 0.55 )
+input_pickable = false
+collision_layer = 2
+collision_mask = 3
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "collision" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+rotation = 1.5708
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -7.87904, -3.44404e-007 )
+rotation = 1.5708
+scale = Vector2( 0.682803, 1.44972 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PlacementArea" type="Area2D" parent="." index="2"]
+
+input_pickable = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitorable = false
+collision_layer = 2
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementArea" index="0"]
+
+modulate = Color( 0.75, 0.562834, 0.146484, 1 )
+show_behind_parent = true
+rotation = 1.5708
+scale = Vector2( 1.71772, 1.49538 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+

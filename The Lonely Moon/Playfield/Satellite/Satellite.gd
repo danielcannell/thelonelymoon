@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal satellite_entered_orbit
+
 const BURN_RATE = 0.1
 const type = "satellite"
 
@@ -34,11 +36,12 @@ var launch_vehicle = null
 
 
 # props
-var props = {
+const default_props = {
     "region": "leo",
-    "delta_v": 50,
-    "income": 10,
-    "time_constant": 5000,
+    "match_rot_to_vel": true,
+    "delta_v": 0,
+    "income": 0,
+    "time_constant": 0,
     "drag_ratio": 0.1,
     "thrust": 0.1,
     "debris": {
@@ -51,12 +54,16 @@ var props = {
     }
 }
 
+var props = {}
+
 signal clicked(sat)
 
 func init(props=null):
     if props == null:
         if type in global.SHIP_CONFIG:
             props = global.SHIP_CONFIG[type]
+        else:
+            props = default_props
 
     self.props = props
     delta_v_max = self.props.delta_v / 100.0
@@ -97,8 +104,10 @@ func launch(lv, p, leo_alt, leo_vel_theta):
 func enter_orbit():
     in_orbit = true
     remove_child(launch_vehicle)
-    launch_vehicle = null
     add_glow()
+    
+    emit_signal("satellite_entered_orbit", self, launch_vehicle)
+    launch_vehicle = null
 
 
 func add_glow():
@@ -189,7 +198,8 @@ func _process(delta):
     if invunerable and uptime > 0.1:
         invunerable = false
 
-    rotation = vel.angle() + PI/2
+    if not self.in_orbit or self.props.match_rot_to_vel:
+        rotation = vel.angle() + PI/2
 
 
     if animation:

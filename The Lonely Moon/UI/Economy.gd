@@ -12,6 +12,9 @@ func _ready():
 
 static func ship_income(uptime, type):
     var c = global.ship_config(type)
+    if c == null:
+        return 0
+    
     if uptime < c.time_constant:
         return c.income
     
