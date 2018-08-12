@@ -146,7 +146,7 @@ const SPACE_REGIONS = {
         'alt_max': 600,
     },
     'outer_space': {
-        'alt_min': 6000,
+        'alt_min': 2000,
         'alt_max': 6000,
     },
 }

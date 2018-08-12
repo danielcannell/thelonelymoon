@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://UI/StatsPanel.gd" type="Script" id=1]
-[ext_resource path="res://UI/bg.png" type="Texture" id=2]
+[ext_resource path="res://UI/bg_transparent.png" type="Texture" id=2]
 
 [node name="StatsPanel" type="VBoxContainer" index="0"]
 
