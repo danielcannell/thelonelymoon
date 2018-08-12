@@ -4,6 +4,7 @@ signal satellite_summary
 signal satellite_selected
 
 var Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
+var Explosion = preload("res://Playfield/Satellite/Explosion.tscn");
 var SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatellite.tscn");
 var CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
 var ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
@@ -60,9 +61,19 @@ func new_craft(type):
 
 
 func destroy_craft(craft):
-    remove_child(craft)
+    if selected_sat == craft:
+        select_satellite(null) 
     craft.remove_from_group("satellites")
-    # craft.free()
+    var p = craft.position
+    remove_child(craft)
+
+    var splode = Explosion.instance()
+    add_child(splode)
+    splode.position = p
+    splode.connect("animation_finished", self, "remove_child", [splode])
+    splode.show()
+    splode.play()
+
 
 
 func get_satellites():
