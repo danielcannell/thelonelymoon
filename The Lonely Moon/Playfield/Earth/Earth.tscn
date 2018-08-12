@@ -43,7 +43,6 @@ _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="laser_cannon" type="Sprite" parent="." index="2"]
 
-visible = false
 position = Vector2( 0, -51 )
 scale = Vector2( 0.428749, 0.428749 )
 texture = ExtResource( 3 )
@@ -88,8 +87,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="SpaceCenter" parent="." index="4" instance=ExtResource( 4 )]
 
-position = Vector2( 28.6714, -28.8752 )
-rotation = 0.815229
-scale = Vector2( 0.128097, 0.128097 )
+position = Vector2( 32.9968, -24.3235 )
+rotation = 0.921546
+scale = Vector2( 0.250934, 0.250934 )
 
 

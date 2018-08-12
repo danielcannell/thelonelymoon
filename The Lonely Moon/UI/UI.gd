@@ -4,6 +4,7 @@ signal spawn_satellite
 signal charge_laser
 signal show_satellite_range
 signal hide_satellite_range
+signal satellite_building
 
 export (PackedScene) var shop_item
 
@@ -35,6 +36,9 @@ func btn_clicked(btn):
     var thing = btn.thing
     var cost = thing.cost
     get_node("Economy").spend_money(cost)
+
+    if thing.type == "satellite":
+        emit_signal("satellite_building", thing.id)
 
 
 func btn_finished(btn):
