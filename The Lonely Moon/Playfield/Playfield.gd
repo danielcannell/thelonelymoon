@@ -3,20 +3,24 @@ extends Node2D
 signal satellite_summary
 signal satellite_selected
 
-var Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
-var Explosion = preload("res://Playfield/Satellite/Explosion.tscn");
-var SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatellite.tscn");
-var CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
-var ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
-var SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
+const Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
+const Explosion = preload("res://Playfield/Satellite/Explosion.tscn");
+const SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatellite.tscn");
+const CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
+const ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
+const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
+const Ark =  preload("res://Playfield/Satellite/ark/Ark.tscn");
+const Missile = preload("res://Playfield/Satellite/missile/Missile.tscn");
 
 
-var satellites = {
+const satellites = {
     "debris": Debris,
     "cube_sat": CubeSat,
     "spy_satellite": SpySatellite,
     "science_station": ScienceStation,
     "space_hotel": SpaceHotel,
+    "ark": Ark,
+    "missile": Missile
 }
 
 var selected_sat = null
@@ -24,11 +28,17 @@ var selected_sat = null
 var clicks = []
 var dragging = false
 
+const laser_max_charge = 2
+var laser_charge = 0
+var laser_active = false
+
 var inactive_debris = []
 
 
 func _ready():
     var orbit = get_node('Orbit')
+    get_node("LaserCharge/FireButton").connect("button_down", self, "fire_button_pressed")
+    get_node("LaserCharge/FireButton").connect("button_up", self, "fire_button_released")
 
 
 func _unhandled_input(event):
@@ -62,13 +72,12 @@ func new_craft(type):
     var craft
     if type in satellites:
         craft = satellites[type].instance()
+        craft.init()
     else:
-        craft = Debris.instance()
-
+        return
 
     add_child(craft)
     craft.add_to_group("satellites")
-    craft.configure(type)
 
     var region = config.region
     var alt = 0.3
@@ -84,7 +93,7 @@ func new_craft(type):
 
 func destroy_craft(craft):
     if selected_sat == craft:
-        select_satellite(null) 
+        select_satellite(null)
 
     remove_child(craft)
     craft.set_collision_layer_bit(1, false)
@@ -143,7 +152,7 @@ func create_debris(pos, vel, amount):
 func craft_collision(craft1, craft2):
     if craft1.type == "debris" and craft2.type == "debris":
         return
-        
+
     if not craft1.active or not craft2.active:
         return
 
@@ -205,6 +214,16 @@ func satellite_clicked(sat, event):
     select_satellite(sat)
 
 
+func fire_button_pressed():
+    get_node("Earth").fire_laser()
+    laser_active = true
+
+
+func fire_button_released():
+    get_node("Earth").stop_laser()
+    laser_active = false
+
+
 func _physics_process(delta):
     pass
 
@@ -238,6 +257,11 @@ func finish_dragging(event):
     select_satellite(nearest)
 
 
+func charge_laser():
+    laser_charge = laser_max_charge
+    get_node("LaserCharge").visible = true
+
+
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
 
@@ -266,15 +290,30 @@ func _process(delta):
         var colliding_bodies = d.get_node("PlacementArea").get_overlapping_bodies()
         d.get_node("PlacementArea").monitorable = false
         d.get_node("PlacementArea").monitoring = false
-        if colliding_bodies: 
+        if colliding_bodies:
             destroy_craft(d)
         else:
             d.add_to_group("satellites")
             d.active = true
-    
+
     if inactive_debris:
         inactive_debris = []
-    
+
+    if laser_active:
+        laser_charge -= delta
+        if laser_charge <= 0:
+            laser_active = false
+            get_node("Earth").stop_laser()
+            get_node("LaserCharge").visible = false
+
+    if laser_charge > 0:
+        get_node("LaserCharge").value = laser_charge / laser_max_charge
+        
+func _input(event):
+    if event.is_action_pressed("missile"):
+        new_craft("missile")
+
+
 
 func handle_game_over():
     get_tree().change_scene('res://GameOver.tscn')

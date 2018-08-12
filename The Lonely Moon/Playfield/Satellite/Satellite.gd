@@ -1,17 +1,18 @@
 extends KinematicBody2D
 
 const BURN_RATE = 0.1
+const type = "satellite"
 
+
+## state ##
 var pos = Vector2() setget set_pos, get_pos
 var vel = Vector2(0, 0)
+var alt_range = [] setget , get_alt_range
 
 var active = true
-var config = {}
-var alt_range = [0,1]
-var type = ""
+var invunerable = true
 var uptime = 0
 var delta_v = 0
-var invunerable = true
 
 # Launch
 var in_orbit = true
@@ -21,8 +22,26 @@ var launch_alt = 0
 var launch_vel_theta = 0
 var launch_vel_r = 0
 
+
+# props
+var props = {
+    "region": "leo",
+    "delta_v": 50,
+    "income": 10,
+    "time_constant": 5000,
+    "drag_ratio": 0.1,
+    "thrust": 0.1,
+}
+
 signal clicked(sat)
 
+func init(props=null):
+    if props == null:
+        if type in global.SHIP_CONFIG:
+            props = global.SHIP_CONFIG[type]
+
+    self.props = props
+    delta_v = self.props.delta_v / 100.0
 
 func launch_trajectory():
     var progress = (self.pos.length() - launch_alt) / (leo_alt - launch_alt)
@@ -58,24 +77,31 @@ func set_pos(pos):
 func get_pos():
     return global.screen_to_metres(position)
 
+func get_alt_range():
+    return [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
+
 func destroy():
     active = false
     remove_from_group("satellites")
 
 
 func select():
-    get_node("Selectbox").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
+    var node = get_node("Selectbox")
+    if node:
+        node.set_default_color(Color(0.2, 1.0, 0.2, 1.0))
 
 
 func deselect():
-    get_node("Selectbox").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
+    var node = get_node("Selectbox")
+    if node:
+        node.set_default_color(Color(0.0, 0.0, 0.0, 0.0))
 
 
 func burn(delta, is_prograde, is_fine):
     # Abandon launch trajectory if the player takes control
     in_orbit = true
 
-    var dv = delta * BURN_RATE
+    var dv = delta * props['thrust']
     if is_fine:
         dv *= 0.2
     if dv > delta_v:
@@ -102,24 +128,21 @@ func _process(delta):
     if invunerable and uptime > 0.1:
         invunerable = false
 
-
-func configure(typename):
-    type = typename
-    config = global.ship_config(type)
-    var region = config.region
-    alt_range = [global.SPACE_REGIONS[region].alt_min, global.SPACE_REGIONS[region].alt_max]
-    delta_v = config['delta_v']
-
 func move_and_collide_metres(vec):
     return self.move_and_collide(global.metres_to_screen(vec))
 
 
 func state():
     var alt = position.length()
-    var in_range = alt < alt_range[1] && alt > alt_range[0]
+    var in_range = false
+    if props.region:
+         var alt_range = [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
+         in_range = alt < alt_range[1] && alt > alt_range[0]
+    
+
     return {
         'in_range': in_range,
         'uptime': uptime,
         'type': type,
-        'delta_v': delta_v,
+        'delta_v': 100 * delta_v,
     }

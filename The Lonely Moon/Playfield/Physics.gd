@@ -29,7 +29,7 @@ func atmospheric_drag(s, pos, vel):
     if dist < ATMOS_MIN:
         dist = ATMOS_MIN
 
-    var scale = s.config.drag_ratio * vel.length()
+    var scale = s.props.drag_ratio * vel.length()
 
     # Compute drag in opposite direction to velocity
     var drag = - scale * 0.5 * exp((ATMOS_MIN - dist)/ATMOS_MIN) * vel

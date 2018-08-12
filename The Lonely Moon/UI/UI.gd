@@ -1,6 +1,7 @@
 extends Container
 
 signal spawn_satellite
+signal charge_laser
 signal show_satellite_range
 signal hide_satellite_range
 
@@ -45,6 +46,8 @@ func btn_finished(btn):
         make_satellite(id, thing.display_name)
     elif type == "fundraise":
         make_fundraise(id)
+    elif type == "laser":
+        make_laser()
     elif type == "ark":
         get_tree().change_scene("res://Victory.tscn")
 
@@ -66,6 +69,11 @@ func make_satellite(id, name):
 
 func make_fundraise(id):
     get_node("Economy").make_fundraise(id)
+
+
+func make_laser():
+    emit_signal("charge_laser")
+    create_notification("Laser recharged!")
 
 
 func set_money(amt):

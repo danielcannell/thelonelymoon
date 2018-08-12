@@ -18,8 +18,23 @@ func _on_body_entered(body):
     # called when a Physics body entered the earth
     get_node("..").earth_collision(body)
 
+
 func _ready():
     connect("body_entered", self, "_on_body_entered")
+    get_node("LaserBeam").connect("body_entered", self, "_on_body_entered")
     
+
 func _process(delta):
     rotate(-ANGULAR_VELOCITY * delta)
+
+
+func fire_laser():
+    var laser_beam = get_node("LaserBeam")
+    laser_beam.visible = true
+    laser_beam.monitoring = true
+
+
+func stop_laser():
+    var laser_beam = get_node("LaserBeam")
+    laser_beam.visible = false
+    laser_beam.monitoring = false
