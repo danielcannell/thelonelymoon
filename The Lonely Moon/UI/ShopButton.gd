@@ -13,7 +13,7 @@ func _ready():
     get_node("Background/Button").connect("pressed", self, "clicked")
     get_node("Background/Cost").text = str(thing['cost']) + "btc"
     get_node("Background/Name").text = thing['display_name']
-    get_node("Background/Button").hint_tooltip = thing['description']
+    get_node("Background/Button").hint_tooltip = description()
 
 
 func _process(delta):
@@ -55,3 +55,21 @@ func finish_building():
     remove_child(timer)
     timer = null
     emit_signal("finished")
+    
+    
+func description():
+    var usage
+    var stats
+    if thing.type == "fundraise":
+        var c = global.FUNDRAISE_CONFIG[thing.id]
+        usage = "Earn money when task completes."
+        stats = 'Income: Between %d and %d btc.' % [c.raised_min, c.raised_max]
+    elif thing.type == "satellite":
+        var c = global.SHIP_CONFIG[thing.id]
+        usage = "Launch satellite when task completes."
+        stats = 'Starting Income: %d btc/second.\nDelta-V: %d' % [c.income, c.delta_v]
+    else:
+        usage = 'ERROR'
+        stats = 'ERROR'
+    return thing.description + '\n\n' + usage + '\n\n' + stats
+    
