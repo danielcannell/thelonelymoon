@@ -31,20 +31,16 @@ func deselect():
     get_node("Selectbox").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
 
 
-func burn_prograde(delta):
+func burn(delta, is_prograde, is_fine):
     var dv = delta * BURN_RATE
+    if is_fine:
+        dv *= 0.2
     if dv > delta_v:
         dv = delta_v
     delta_v -= dv
+    if not is_prograde:
+        dv = -dv
     vel += vel.normalized() * dv
-
-
-func burn_retrograde(delta):
-    var dv = delta * BURN_RATE
-    if dv > delta_v:
-        dv = delta_v
-    delta_v -= dv
-    vel -= vel.normalized() * dv
 
 
 func _ready():

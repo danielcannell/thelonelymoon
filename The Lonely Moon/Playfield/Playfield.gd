@@ -152,10 +152,11 @@ func _process(delta):
     clicks.clear()
 
     if selected_sat:
+        var burn_fine = Input.is_action_pressed("burn_fine")
         if Input.is_action_pressed("burn_prograde"):
-            selected_sat.burn_prograde(delta)
+            selected_sat.burn(delta, true, burn_fine)
         elif Input.is_action_pressed("burn_retrograde"):
-            selected_sat.burn_retrograde(delta)
+            selected_sat.burn(delta, false, burn_fine)
 
         var predicted_orbit = get_node('Physics').predict_orbit(selected_sat)
         var orbit = get_node('Orbit')
