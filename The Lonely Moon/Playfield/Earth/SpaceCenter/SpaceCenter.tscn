@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Playfield/Earth/SpaceCenter/SpaceCenter.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Earth/SpaceCenter/launch_tower.png" type="Texture" id=2]
 [ext_resource path="res://Playfield/Earth/SpaceCenter/payload_rocket.png" type="Texture" id=3]
+[ext_resource path="res://Sound/launch.wav" type="AudioStream" id=4]
 
 [node name="SpaceCenter" type="Node2D"]
 
@@ -19,5 +20,16 @@ texture = ExtResource( 2 )
 position = Vector2( 10.3895, -13.8853 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Visibility" ]
+
+[node name="LaunchSound" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 

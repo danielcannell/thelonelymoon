@@ -71,6 +71,7 @@ func start_building():
     timer.connect("timeout", self, "finish_building")
     add_child(timer)
     timer.start()
+    get_node("IssueBuild").play()
 
 
 func finish_building():

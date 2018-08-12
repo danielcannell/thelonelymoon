@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Playfield/Satellite/explosion_frames/0001.png" type="Texture" id=1]
 [ext_resource path="res://Playfield/Satellite/explosion_frames/0002.png" type="Texture" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Playfield/Satellite/explosion_frames/0028.png" type="Texture" id=28]
 [ext_resource path="res://Playfield/Satellite/explosion_frames/0029.png" type="Texture" id=29]
 [ext_resource path="res://Playfield/Satellite/explosion_frames/0030.png" type="Texture" id=30]
+[ext_resource path="res://Sound/explode.wav" type="AudioStream" id=31]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -47,5 +48,16 @@ scale = Vector2( 0.529787, 0.529787 )
 frames = SubResource( 1 )
 animation = "default"
 _sections_unfolded = [ "Transform" ]
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." index="0"]
+
+stream = ExtResource( 31 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 

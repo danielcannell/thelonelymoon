@@ -17,6 +17,7 @@ func _on_satellite_built(id):
     building_satellites.erase(id)
     if self.building_satellites.size() == 0:
         self.remove_rocket()
+    get_node("LaunchSound").play()
         
 
 func place_rocket():

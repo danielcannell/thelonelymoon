@@ -37,6 +37,7 @@ func btn_clicked(btn):
     var thing = btn.thing
     var cost = thing.cost
     get_node("Economy").spend_money(cost)
+    btn.get_node("IssueBuild").play()
 
     if thing.type == "satellite":
         emit_signal("satellite_building", thing.id)
@@ -50,6 +51,7 @@ func btn_finished(btn):
     if type == "satellite":
         make_satellite(id, thing.display_name)
     elif type == "fundraise":
+        btn.get_node("MoneyArrival").play()
         make_fundraise(id)
     elif type == "laser":
         make_laser()
