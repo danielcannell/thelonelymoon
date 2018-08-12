@@ -92,10 +92,11 @@ func destroy_craft(craft):
     craft.remove_from_group("satellites")
 
 
-func explode(position):
+func explode(position, scale=0.5):
     var p = position
     var splode = Explosion.instance()
     add_child(splode)
+    splode.scale = Vector2(scale, scale)
     splode.position = p
     splode.connect("animation_finished", self, "remove_child", [splode])
     splode.show()
@@ -103,8 +104,9 @@ func explode(position):
 
 
 func earth_collision(craft):
+    var scale = 0.1 if craft.type == 'debris' else 0.5
     if not craft.invunerable:
-        explode(craft.position)
+        explode(craft.position, scale)
         destroy_craft(craft)
 
 
