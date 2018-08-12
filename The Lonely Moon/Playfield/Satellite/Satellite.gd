@@ -11,6 +11,7 @@ var alt_range = [0,1]
 var type = ""
 var uptime = 0
 var delta_v = 0
+var invunerable = true
 
 # Launch
 var in_orbit = true
@@ -97,6 +98,9 @@ func _input_event(viewport, event, shape_idx):
 
 func _process(delta):
     uptime += delta
+
+    if invunerable and uptime > 0.1:
+        invunerable = false
 
 
 func configure(typename):

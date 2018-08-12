@@ -8,12 +8,16 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Earth" type="KinematicBody2D" index="0"]
+[node name="Earth" type="Area2D" index="0"]
 
-input_pickable = false
-collision_layer = 1
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
 collision_mask = 2
-collision/safe_margin = 0.08
+audio_bus_override = false
+audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
 

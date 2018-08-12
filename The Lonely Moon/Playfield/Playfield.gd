@@ -103,8 +103,9 @@ func explode(position):
 
 
 func earth_collision(craft):
-    explode(craft.position)
-    destroy_craft(craft)
+    if not craft.invunerable:
+        explode(craft.position)
+        destroy_craft(craft)
 
 
 func create_debris(pos, vel, amount):
