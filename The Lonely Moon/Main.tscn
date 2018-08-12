@@ -5,7 +5,7 @@
 [ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Camera.gd" type="Script" id=4]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="StarfieldLayer" type="CanvasLayer" parent="." index="0"]
 

@@ -43,10 +43,10 @@ func launch(p, leo_alt, leo_vel_theta):
     in_orbit = false
 
     self.leo_alt = leo_alt
-    self.leo_vel_theta = leo_vel_theta
+    self.leo_vel_theta = -leo_vel_theta
 
     launch_alt = p.length()
-    launch_vel_theta = 0.1
+    launch_vel_theta = -0.1
     launch_vel_r = 0.1
     self.pos = p
 
