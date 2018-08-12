@@ -26,8 +26,7 @@ func launch(p):
     self.leo_vel_theta = -10
 
     # Give up early
-    #self.orbit_progress_threshold = 0.2
-    self.orbit_progress_threshold = 0.05
+    self.orbit_progress_threshold = 0.25
 
     launch_alt = p.length()
     launch_vel_theta = -0.1
