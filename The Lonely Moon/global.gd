@@ -52,18 +52,10 @@ const MENU_CONFIG = [
         'cost': 100000,
         'build_time': 30,
     },
-    { 
-        'id': 'space_telescope',
-        'display_name': 'Space Telescope',
-        'description': 'As if the close-up of the moon wasn\'t already close enough',
-        'type': 'satellite',
-        'cost': 100000,
-        'build_time': 30,
-    },
     {
         'id': 'ark',
         'display_name': 'The Ark',
-        'description': 'Escape the moon\'s destruction in the lap of refined luxury!',
+        'description': 'Escape the world\'s destruction in the lap of refined luxury!',
         'type': 'ark',
         'cost': 999999,
         'build_time': 60,
@@ -72,32 +64,47 @@ const MENU_CONFIG = [
 
 const SHIP_CONFIG = {
     'cube_sat': {
-        'alt_min': 100,
-        'alt_max': 200,
+        'region': 'leo',
         'delta_v': 50,
         'income': 10,
         'time_constant': 5000,
     },
     'spy_satellite': {
-        'alt_min': 500,
-        'alt_max': 520,
+        'region': 'region2',
         'delta_v': 100,
         'income': 25,
         'time_constant': 5000,
     },
     'science_station': {
-        'alt_min': 600,
-        'alt_max': 700,
+        'region': 'region3',
         'delta_v': 150,
         'income': 100,
         'time_constant': 5000,
     },
     'space_hotel': {
-        'alt_min': 300,
-        'alt_max': 600,
+        'region': 'region4',
         'delta_v': 150,
         'income': 10000,
         'time_constant': 5000,
+    }
+}
+
+const SPACE_REGIONS = {
+    'leo': {
+        'alt_min': 100,
+        'alt_max': 200,
+    },
+    'region2': {
+        'alt_min': 500,
+        'alt_max': 520,
+    },
+    'region3': {
+        'alt_min': 600,
+        'alt_max': 700,
+    },
+    'region4': {
+        'alt_min': 300,
+        'alt_max': 600,
     }
 }
 

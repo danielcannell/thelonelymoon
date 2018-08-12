@@ -8,8 +8,10 @@ var mass = 1
 
 var active = true
 var config = {}
+var alt_range = [0,1]
 var type = ""
 var uptime = 0
+var delta_v = 0
 
 
 signal clicked(sat)
@@ -29,25 +31,22 @@ func destroy():
 
 func select():
     get_node("Selectbox").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
-    
+
 
 func deselect():
     get_node("Selectbox").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
 
 
-func burn_prograde(delta):
-    vel += vel.normalized() * delta * BURN_RATE
-
-
-func burn_retrograde(delta):
-    vel -= vel.normalized() * delta * BURN_RATE
-
-
-func alt_range():
-    return [
-        global.SHIP_CONFIG[type]['alt_min'],
-        global.SHIP_CONFIG[type]['alt_max']
-    ]
+func burn(delta, is_prograde, is_fine):
+    var dv = delta * BURN_RATE
+    if is_fine:
+        dv *= 0.2
+    if dv > delta_v:
+        dv = delta_v
+    delta_v -= dv
+    if not is_prograde:
+        dv = -dv
+    vel += vel.normalized() * dv
 
 
 func _ready():
@@ -67,16 +66,20 @@ func _process(delta):
 func configure(typename):
     type = typename
     config = global.ship_config(type)
-    
+    var region = config.region
+    alt_range = [global.SPACE_REGIONS[region].alt_min, global.SPACE_REGIONS[region].alt_max]
+    delta_v = config['delta_v']
+
 func move_and_collide_metres(vec):
     return self.move_and_collide(global.metres_to_screen(vec))
 
 
 func state():
     var alt = position.length()
-    var in_range = alt < config.alt_max && alt > config.alt_min
+    var in_range = alt < alt_range[1] && alt > alt_range[0]
     return {
         'in_range': in_range,
         'uptime': uptime,
         'type': type,
+        'delta_v': delta_v,
     }

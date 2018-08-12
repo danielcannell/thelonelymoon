@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Playfield/OrbitRange.gd" type="Script" id=1]
+
+[node name="OrbitRange" type="Node2D" index="0"]
+
+visible = false
+script = ExtResource( 1 )
+_sections_unfolded = [ "Visibility" ]
+
+
