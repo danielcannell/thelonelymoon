@@ -10,6 +10,7 @@ func _ready():
     # Initialization here
     type = "debris"
     mass = 0.2
+    config.drag_ratio = 1
     pass
 
 #func _process(delta):
