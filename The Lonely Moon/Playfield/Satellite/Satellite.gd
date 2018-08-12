@@ -120,6 +120,13 @@ func burn(delta, is_prograde, is_fine):
     vel += vel.normalized() * dv
 
 
+func in_range():
+    if props.region:
+        var alt = position.length()
+        return alt < self.alt_range[1] && alt > self.alt_range[0]
+    return false
+
+
 func _ready():
     deselect()
 
@@ -141,15 +148,8 @@ func move_and_collide_metres(vec):
 
 
 func state():
-    var alt = position.length()
-    var in_range = false
-    if props.region:
-         var alt_range = [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
-         in_range = alt < alt_range[1] && alt > alt_range[0]
-    
-
     return {
-        'in_range': in_range,
+        'in_range': in_range(),
         'uptime': uptime,
         'type': type,
         'delta_v': 100 * delta_v,

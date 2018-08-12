@@ -203,7 +203,7 @@ const SPACE_REGIONS = {
         'alt_max': 600,
     },
     'outer_space': {
-        'alt_min': 6000,
+        'alt_min': 2000,
         'alt_max': 6000,
     },
 }
@@ -216,6 +216,12 @@ const FUNDRAISE_CONFIG = {
     'indiegogo': {
         'raised_min': 2000,
         'raised_max': 4000,
+    }
+}
+
+const LASER_CONFIG = {
+    'laser_charge': {
+        'time_earned': 2,
     }
 }
 

@@ -28,7 +28,6 @@ var selected_sat = null
 var clicks = []
 var dragging = false
 
-const laser_max_charge = 2
 var laser_charge = 0
 var laser_active = false
 
@@ -176,10 +175,14 @@ func get_satellites():
 
 func state():
     var st = []
+    var debris_count = 0
     for sat in get_satellites():
         if sat.active and sat.type != "debris":
             st.append(sat.state())
-    return st
+        elif sat.active and sat.type == 'debris':
+            debris_count += 1
+    var m = get_node('Moon')
+    return [st, debris_count, [m.distance, m.start_distance]]
 
 
 func select_satellite(sat):
@@ -257,7 +260,7 @@ func finish_dragging(event):
 
 
 func charge_laser():
-    laser_charge = laser_max_charge
+    laser_charge = global.LASER_CONFIG.laser_charge["time_earned"]
     get_node("LaserCharge").visible = true
 
 
@@ -306,8 +309,8 @@ func _process(delta):
             get_node("LaserCharge").visible = false
 
     if laser_charge > 0:
-        get_node("LaserCharge").value = laser_charge / laser_max_charge
-
+        get_node("LaserCharge").value = laser_charge / global.LASER_CONFIG.laser_charge.time_earned
+        
 func _input(event):
     if event.is_action_pressed("missile"):
         new_craft("missile")

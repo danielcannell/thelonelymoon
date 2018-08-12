@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://UI/ShopButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Economy.gd" type="Script" id=3]
 [ext_resource path="res://UI/bg.png" type="Texture" id=4]
-[ext_resource path="res://UI/Notifications.gd" type="Script" id=5]
-[ext_resource path="res://UI/Notification.tscn" type="PackedScene" id=6]
-[ext_resource path="res://UI/SatInfo.gd" type="Script" id=7]
+[ext_resource path="res://UI/StatsPanel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/Notifications.gd" type="Script" id=6]
+[ext_resource path="res://UI/Notification.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/SatInfo.gd" type="Script" id=8]
 
 [node name="UI" type="Container"]
 
@@ -21,7 +22,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Margin" ]
+_sections_unfolded = [ "Anchor", "Margin", "Material" ]
 shop_item = ExtResource( 2 )
 
 [node name="Economy" type="Node" parent="." index="0"]
@@ -30,7 +31,6 @@ script = ExtResource( 3 )
 
 [node name="Shop" type="VBoxContainer" parent="." index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.5
 anchor_right = 0.0
@@ -45,7 +45,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
 alignment = 0
-_sections_unfolded = [ "Margin", "Rect" ]
+_sections_unfolded = [ "Margin", "Material", "Rect" ]
 
 [node name="Money" type="MarginContainer" parent="Shop" index="0"]
 
@@ -175,14 +175,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 28.0
 margin_right = 200.0
-margin_bottom = 600.0
+margin_bottom = 556.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
-_sections_unfolded = [ "Margin", "Rect" ]
+_sections_unfolded = [ "Margin", "Material", "Rect" ]
 
 [node name="Background" type="NinePatchRect" parent="Shop/Shop" index="0"]
 
@@ -192,7 +192,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
 margin_right = 200.0
-margin_bottom = 572.0
+margin_bottom = 528.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -204,7 +204,7 @@ patch_margin_left = 12
 patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
-_sections_unfolded = [ "Margin", "Size Flags" ]
+_sections_unfolded = [ "Margin", "Material", "Size Flags" ]
 
 [node name="Container" type="VBoxContainer" parent="Shop/Shop/Background" index="0"]
 
@@ -252,7 +252,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 24.0
 margin_right = 192.0
-margin_bottom = 572.0
+margin_bottom = 528.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -264,7 +264,38 @@ custom_constants/hseparation = 0
 columns = 2
 _sections_unfolded = [ "Rect", "custom_constants" ]
 
-[node name="Notifications" type="VBoxContainer" parent="." index="2"]
+[node name="ShowStats" type="CheckButton" parent="Shop" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 560.0
+margin_right = 200.0
+margin_bottom = 600.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = true
+enabled_focus_mode = 0
+shortcut = null
+group = null
+text = "Show Statistics"
+flat = false
+align = 2
+
+[node name="StatsPanel" parent="." index="2" instance=ExtResource( 5 )]
+
+visible = false
+margin_left = 200.0
+margin_top = -28.0
+margin_right = 598.0
+margin_bottom = 291.0
+
+[node name="Notifications" type="VBoxContainer" parent="." index="3"]
 
 anchor_left = 1.0
 anchor_top = 0.0
@@ -279,11 +310,11 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Anchor", "Rect" ]
-notification_template = ExtResource( 6 )
+notification_template = ExtResource( 7 )
 
-[node name="SatInfo" type="MarginContainer" parent="." index="3"]
+[node name="SatInfo" type="MarginContainer" parent="." index="4"]
 
 visible = false
 anchor_left = 0.0
@@ -300,7 +331,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Rect", "Visibility" ]
 
 [node name="Background" type="NinePatchRect" parent="SatInfo" index="0"]
@@ -600,5 +631,7 @@ text = "0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[connection signal="toggled" from="Shop/ShowStats" to="." method="on_showstats_toggled"]
 
 
