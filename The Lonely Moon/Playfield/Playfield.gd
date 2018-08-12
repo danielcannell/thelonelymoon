@@ -397,6 +397,13 @@ func _input(event):
     if event.is_action_pressed("missile"):
         new_missile()
 
+func _on_missile_pending():
+    emit_signal("notify", "King Jon Bing Bong is displeased with your efforts - PREPPING MISSILE!", global.NOTIFICATION_TYPE.BAD)
+
+func _on_missile_launched():
+    emit_signal("notify", "MISSLE LAUNCHED! - cost ~1.2M meals", global.NOTIFICATION_TYPE.BAD)
+    new_missile()
+
 
 func handle_game_over():
     get_tree().change_scene('res://GameOver.tscn')
