@@ -262,6 +262,7 @@ func finish_dragging(event):
 func charge_laser():
     laser_charge = global.LASER_CONFIG.laser_charge["time_earned"]
     get_node("LaserCharge").visible = true
+    get_node("Earth").show_laser_cannon()
 
 
 func _process(delta):

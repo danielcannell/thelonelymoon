@@ -37,3 +37,7 @@ func stop_laser():
     var laser_beam = get_node("LaserBeam")
     laser_beam.visible = false
     laser_beam.monitoring = false
+
+
+func show_laser_cannon():
+    get_node("laser_cannon").visible = true
