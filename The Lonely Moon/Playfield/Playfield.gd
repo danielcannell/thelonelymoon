@@ -107,7 +107,7 @@ func craft_collision(craft1, craft2):
         total += 3
 
     if craft2.type != "debris":
-        xplode(craft2.position)
+        explode(craft2.position)
         destroy_craft(craft2)
         total += 3
 
