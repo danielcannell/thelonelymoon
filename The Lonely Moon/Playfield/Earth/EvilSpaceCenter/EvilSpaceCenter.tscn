@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Playfield/Earth/EvilSpaceCenter/EvilSpaceCenter.gd" type="Script" id=1]
+[ext_resource path="res://Playfield/Earth/EvilSpaceCenter/launch_tower.png" type="Texture" id=2]
+[ext_resource path="res://Playfield/Earth/EvilSpaceCenter/spr_missile.png" type="Texture" id=3]
+
+[node name="EvilSpaceCenter" type="Node2D"]
+
+position = Vector2( 3.96112, -18.4792 )
+script = ExtResource( 1 )
+
+[node name="launch_tower" type="Sprite" parent="." index="0"]
+
+position = Vector2( -1.89887, -13.597 )
+texture = ExtResource( 2 )
+
+[node name="missile" type="Sprite" parent="." index="1"]
+
+position = Vector2( 10.3281, -20.1945 )
+rotation = -1.5708
+scale = Vector2( 1.24692, 1.24692 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+
