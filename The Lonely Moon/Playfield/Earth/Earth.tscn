@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Playfield/Earth/Earth.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Earth/north_pole_earth.png" type="Texture" id=2]
 [ext_resource path="res://Playfield/Earth/laser_cannon.png" type="Texture" id=3]
 [ext_resource path="res://Playfield/Earth/SpaceCenter/SpaceCenter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Playfield/Earth/EvilSpaceCenter/EvilSpaceCenter.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -90,5 +91,11 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 32.9968, -24.3235 )
 rotation = 0.921546
 scale = Vector2( 0.250934, 0.250934 )
+
+[node name="EvilSpaceCenter" parent="." index="5" instance=ExtResource( 5 )]
+
+position = Vector2( 1.38381, 36.9329 )
+rotation = -3.30861
+scale = Vector2( 0.204448, 0.204448 )
 
 
