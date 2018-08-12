@@ -37,7 +37,7 @@ func make_fundraise(id):
     var amt = rand_range(f.raised_min, f.raised_max)
     balance += amt
     emit_signal("update_balance", balance)
-    get_node("..").create_notification("\"" + displayname + "\" complete! Earned " + str(floor(amt)) + " btc!")
+    get_node("..").create_notification("\"" + displayname + "\" complete! Earned " + str(floor(amt)) + " btc!", global.NOTIFICATION_TYPE.INFO)
 
 
 func spend_money(amount):

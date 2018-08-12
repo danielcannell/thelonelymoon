@@ -249,7 +249,7 @@ func report_collision(name1, name2):
     if name2 == "Debris" and ["Earth", "Moon"].has(name1):
         return
 
-    emit_signal("notify", message % [name1, name2])
+    emit_signal("notify", message % [name1, name2], global.NOTIFICATION_TYPE.BAD)
 
 
 func get_satellites():

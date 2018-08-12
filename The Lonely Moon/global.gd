@@ -285,6 +285,12 @@ const LASER_CONFIG = {
     }
 }
 
+const NOTIFICATION_TYPE = {
+    'GOOD': 0,
+    'BAD': 1,
+    'INFO': 2
+}
+
 const METRES_PER_SCREEN_UNIT = 1.0 / 200.0;
 
 func ship_config(name):

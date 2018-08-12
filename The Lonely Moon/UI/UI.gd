@@ -29,8 +29,8 @@ func _ready():
     set_money(0)
 
 
-func create_notification(text):
-    get_node("Notifications").add_notification(text)
+func create_notification(text, type):
+    get_node("Notifications").add_notification(text, type)
 
 
 func btn_clicked(btn):
@@ -67,7 +67,7 @@ func btn_exited(btn):
 
 func make_satellite(id, name):
     emit_signal("spawn_satellite", id)
-    create_notification(name + " launched!")
+    create_notification(name + " launched!", global.NOTIFICATION_TYPE.GOOD)
 
 
 func make_fundraise(id):
@@ -76,7 +76,7 @@ func make_fundraise(id):
 
 func make_laser():
     emit_signal("charge_laser")
-    create_notification("Laser recharged!")
+    create_notification("Laser recharged!", global.NOTIFICATION_TYPE.GOOD)
 
 
 func set_money(amt):
