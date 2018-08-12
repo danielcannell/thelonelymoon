@@ -112,6 +112,10 @@ func explode(position, scale=1):
 
 
 func earth_collision(craft):
+    if craft == get_node("Earth"):
+        get_tree().change_scene("res://GameOver.tscn")
+        return
+
     if not craft.invunerable:
         explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
