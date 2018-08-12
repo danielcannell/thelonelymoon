@@ -3,15 +3,15 @@ extends Node2D
 signal satellite_summary
 signal satellite_selected
 
-var Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
-var Explosion = preload("res://Playfield/Satellite/Explosion.tscn");
-var SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatellite.tscn");
-var CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
-var ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
-var SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
+const Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
+const Explosion = preload("res://Playfield/Satellite/Explosion.tscn");
+const SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatellite.tscn");
+const CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
+const ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
+const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
 
 
-var satellites = {
+const satellites = {
     "debris": Debris,
     "cube_sat": CubeSat,
     "spy_satellite": SpySatellite,
@@ -62,13 +62,12 @@ func new_craft(type):
     var craft
     if type in satellites:
         craft = satellites[type].instance()
+        craft.init()
     else:
-        craft = Debris.instance()
-
+        return
 
     add_child(craft)
     craft.add_to_group("satellites")
-    craft.configure(type)
 
     var region = config.region
     var alt = 0.3

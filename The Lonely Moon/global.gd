@@ -90,6 +90,13 @@ const SHIP_CONFIG = {
         'income': 10000,
         'time_constant': 5000,
         'drag_ratio': 2
+    },
+    "debris": {
+        'region': null,
+        'delta_v': 0,
+        'income': 0,
+        'time_constant': 0,
+        'drag_ratio': 0.1,
     }
 }
 

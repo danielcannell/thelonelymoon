@@ -1,17 +1,18 @@
 extends KinematicBody2D
 
 const BURN_RATE = 0.1
+const type = "satellite"
 
+
+## state ##
 var pos = Vector2() setget set_pos, get_pos
 var vel = Vector2(0, 0)
+var alt_range = [] setget , get_alt_range
 
 var active = true
-var config = {}
-var alt_range = [0,1]
-var type = ""
+var invunerable = true
 var uptime = 0
 var delta_v = 0
-var invunerable = true
 
 # Launch
 var in_orbit = true
@@ -21,8 +22,23 @@ var launch_alt = 0
 var launch_vel_theta = 0
 var launch_vel_r = 0
 
+
+# props
+var props = {
+    "region": "leo",
+    "delta_v": 50,
+    "income": 10,
+    "time_constant": 5000,
+    "drag_ratio": 0.1
+}
+
 signal clicked(sat)
 
+func init(props=null):
+    if props != null:
+        if type in global.SHIP_CONFIG:
+            self.props = global.SHIP_CONFIG[type]
+    delta_v = self.props.delta_v
 
 func launch_trajectory():
     var progress = (self.pos.length() - launch_alt) / (leo_alt - launch_alt)
@@ -57,6 +73,9 @@ func set_pos(pos):
 
 func get_pos():
     return global.screen_to_metres(position)
+
+func get_alt_range():
+    return [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
 
 func destroy():
     active = false
@@ -102,19 +121,12 @@ func _process(delta):
     if invunerable and uptime > 0.1:
         invunerable = false
 
-
-func configure(typename):
-    type = typename
-    config = global.ship_config(type)
-    var region = config.region
-    alt_range = [global.SPACE_REGIONS[region].alt_min, global.SPACE_REGIONS[region].alt_max]
-    delta_v = config['delta_v']
-
 func move_and_collide_metres(vec):
     return self.move_and_collide(global.metres_to_screen(vec))
 
 
 func state():
+    var alt_range = [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
     var alt = position.length()
     var in_range = alt < alt_range[1] && alt > alt_range[0]
     return {

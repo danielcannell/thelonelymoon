@@ -5,11 +5,11 @@ extends "res://Playfield/Satellite/Satellite.gd"
 # var a = 2
 # var b = "textvar"
 
+const type = "debris"
+
 func _ready():
     # Called when the node is added to the scene for the first time.
     # Initialization here
-    type = "debris"
-    config.drag_ratio = 1
     pass
 
 #func _process(delta):
