@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Playfield/Earth/Earth.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Earth/north_pole_earth.png" type="Texture" id=2]
 [ext_resource path="res://Playfield/Earth/laser_cannon.png" type="Texture" id=3]
+[ext_resource path="res://Playfield/Earth/SpaceCenter/SpaceCenter.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -83,5 +84,11 @@ texture_rotation_degrees = 0.0
 invert_enable = false
 invert_border = 100.0
 _sections_unfolded = [ "Transform" ]
+
+[node name="SpaceCenter" parent="." index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 28.6714, -28.8752 )
+rotation = 0.815229
+scale = Vector2( 0.128097, 0.128097 )
 
 
