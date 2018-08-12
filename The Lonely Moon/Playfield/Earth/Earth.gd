@@ -21,6 +21,7 @@ func _on_body_entered(body, name):
 func _ready():
     connect("body_entered", self, "_on_body_entered", ["Earth"])
     get_node("LaserBeam").connect("body_entered", self, "_on_body_entered", ["Laser"])
+    get_node("LaserBeam/LaserSound").connect("finished", self, "laser_sound_end")
 
 
 func _process(delta):
@@ -31,13 +32,19 @@ func fire_laser():
     var laser_beam = get_node("LaserBeam")
     laser_beam.visible = true
     laser_beam.monitoring = true
+    get_node("LaserBeam/LaserSound").play()
 
 
 func stop_laser():
     var laser_beam = get_node("LaserBeam")
     laser_beam.visible = false
     laser_beam.monitoring = false
+    get_node("LaserBeam/LaserSound").stop()
 
 
 func show_laser_cannon():
     get_node("laser_cannon").visible = true
+
+
+func laser_sound_end():
+    get_node("LaserBeam/LaserSound").play(0)

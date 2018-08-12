@@ -17,18 +17,25 @@ func _on_laser_entered(body):
 
 func _ready():
     laser.connect("body_entered", self, "_on_laser_entered")
+    laser.get_node("Sound").connect("finished", self, "_laser_sound_loop")
 
 
 func turn_on_laser():
     laser.visible = true
     laser.monitoring = true
     laser_on = true
+    get_node("Laser/Sound").play()
 
 
 func turn_off_laser():
     laser.visible = false
     laser.monitoring = false
     laser_on = false
+    get_node("Laser/Sound").stop()
+    
+    
+func _laser_sound_loop():
+    laser.get_node("Sound").play()
 
 
 func _process(delta):

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/ShopButton.gd" type="Script" id=1]
 [ext_resource path="res://UI/cell_bg.png" type="Texture" id=2]
 [ext_resource path="res://UI/cube_sat_icon.png" type="Texture" id=3]
 [ext_resource path="res://UI/Wipe.gd" type="Script" id=4]
 [ext_resource path="res://UI/ShopButtonTheme.theme" type="Theme" id=5]
+[ext_resource path="res://Sound/build.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sound/bitcoin.wav" type="AudioStream" id=7]
 
 [node name="ShopButton" type="Container" index="0"]
 
@@ -130,5 +132,23 @@ group = null
 flat = false
 align = 1
 _sections_unfolded = [ "Theme" ]
+
+[node name="IssueBuild" type="AudioStreamPlayer" parent="." index="1"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="MoneyArrival" type="AudioStreamPlayer" parent="." index="2"]
+
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 
