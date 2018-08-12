@@ -31,6 +31,14 @@ var props = {
     "time_constant": 5000,
     "drag_ratio": 0.1,
     "thrust": 0.1,
+    "debris": {
+        "radius": 0.5,
+        "amount": 2,
+        "impluse": 0.1,
+    },
+    "explosion": {
+        "scale": 1
+    }
 }
 
 signal clicked(sat)

@@ -100,11 +100,11 @@ func destroy_craft(craft):
     craft.remove_from_group("satellites")
 
 
-func explode(position, scale=0.5):
+func explode(position, scale=1):
     var p = position
     var splode = Explosion.instance()
     add_child(splode)
-    splode.scale = Vector2(scale, scale)
+    splode.scale = splode.scale * scale
     splode.position = p
     splode.connect("animation_finished", self, "remove_child", [splode])
     splode.show()
@@ -112,19 +112,18 @@ func explode(position, scale=0.5):
 
 
 func earth_collision(craft):
-    var scale = 0.1 if craft.type == 'debris' else 0.5
     if not craft.invunerable:
-        explode(craft.position, scale)
+        explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
 
 
-func create_debris(pos, vel, amount):
+func create_debris(pos, vel, amount, radius, impluse):
     var craft
     var angle
     var x
     var y
-    var radius
-    var vel_strength
+    var d_radius
+    var d_impluse
     var craft_pos
     var craft_vel
 
@@ -133,12 +132,13 @@ func create_debris(pos, vel, amount):
         x = cos(angle)
         y = sin(angle)
 
-        radius = 0.01 + randf() * 0.03
-        vel_strength = 0.002 + randf() * 0.002
+        d_radius = radius * 0.2 + randf() * radius * 0.9
+        d_impluse = impluse * 0.1 + randf() * impluse  * 0.9
 
-        craft_pos = pos + Vector2(radius*x, radius*y)
-        craft_vel = vel + Vector2(vel_strength*x, vel_strength*y)
+        craft_pos = pos + Vector2(d_radius*x, d_radius*y)
+        craft_vel = vel + Vector2(d_impluse*x, d_impluse*y)
         craft = Debris.instance()
+        craft.init()
         add_child(craft)
 
         craft.vel = craft_vel
@@ -156,14 +156,16 @@ func craft_collision(craft1, craft2):
         return
 
     if craft1.type != "debris":
-        create_debris(craft1.pos, craft1.vel, 4)
-        explode(craft1.position)
+        create_debris(craft1.pos, craft1.vel,
+                     craft1.props.debris.amount, craft1.props.debris.radius, craft1.props.debris.impluse)
+        explode(craft1.position, craft1.props.explosion.scale)
         destroy_craft(craft1)
 
 
     if craft2.type != "debris":
-        create_debris(craft2.pos, craft2.vel, 4)
-        explode(craft2.position)
+        create_debris(craft2.pos, craft2.vel,
+                      craft2.props.debris.amount, craft2.props.debris.radius, craft2.props.debris.impluse)
+        explode(craft2.position, craft2.props.explosion.scale)
         destroy_craft(craft2)
 
 
