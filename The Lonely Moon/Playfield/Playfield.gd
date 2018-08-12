@@ -10,6 +10,7 @@ const CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
 const ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
 const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
 const Ark =  preload("res://Playfield/Satellite/ark/Ark.tscn");
+const Missile = preload("res://Playfield/Satellite/missile/Missile.tscn");
 
 
 const satellites = {
@@ -19,6 +20,7 @@ const satellites = {
     "science_station": ScienceStation,
     "space_hotel": SpaceHotel,
     "ark": Ark,
+    "missile": Missile
 }
 
 var selected_sat = null
@@ -303,6 +305,11 @@ func _process(delta):
 
     if laser_charge > 0:
         get_node("LaserCharge").value = laser_charge / laser_max_charge
+        
+func _input(event):
+    if event.is_action_pressed("missile"):
+        new_craft("missile")
+
 
 
 func handle_game_over():

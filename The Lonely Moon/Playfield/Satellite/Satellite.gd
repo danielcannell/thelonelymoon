@@ -86,11 +86,15 @@ func destroy():
 
 
 func select():
-    get_node("Selectbox").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
+    var node = get_node("Selectbox")
+    if node:
+        node.set_default_color(Color(0.2, 1.0, 0.2, 1.0))
 
 
 func deselect():
-    get_node("Selectbox").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
+    var node = get_node("Selectbox")
+    if node:
+        node.set_default_color(Color(0.0, 0.0, 0.0, 0.0))
 
 
 func burn(delta, is_prograde, is_fine):
@@ -129,9 +133,13 @@ func move_and_collide_metres(vec):
 
 
 func state():
-    var alt_range = [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
     var alt = position.length()
-    var in_range = alt < alt_range[1] && alt > alt_range[0]
+    var in_range = false
+    if props.region:
+         var alt_range = [global.SPACE_REGIONS[props.region].alt_min, global.SPACE_REGIONS[props.region].alt_max]
+         in_range = alt < alt_range[1] && alt > alt_range[0]
+    
+
     return {
         'in_range': in_range,
         'uptime': uptime,

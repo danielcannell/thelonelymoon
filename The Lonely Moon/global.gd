@@ -119,6 +119,13 @@ const SHIP_CONFIG = {
         'drag_ratio': 0.1,
         'thrust': 0,
     },
+    "missile": {
+        'region': null,
+        'delta_v': 0,
+        'income': 0,
+        'time_constant': 0,
+        'drag_ratio': 0.1,
+    }
 }
 
 const SPACE_REGIONS = {
