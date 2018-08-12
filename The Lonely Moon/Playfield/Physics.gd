@@ -11,12 +11,12 @@ func vel_for_pos(pos):
 
 func calculate_accel(pos, massive_bodies):
     var a = Vector2(0, 0)
-    
+
     for b in massive_bodies:
         var offset = b.pos - pos
         var distance = offset.length()
-        a += b.MASS * offset / pow(distance, 3)    
-    
+        a += b.MASS * offset / pow(distance, 3)
+
     return GRAVITY * a
 
 
@@ -30,33 +30,34 @@ func integrate_orbit(delta, pos, vel, massive_bodies):
 func predict_orbit(sat):
     var pos = sat.pos
     var vel = sat.vel
-    
+
     var prev_theta = pos.angle()
     var theta = 0
-    
+
     var massive_bodies = [get_node('../Earth')]
-    
+
     var path = [global.metres_to_screen(pos)]
 
-    for i in range(100):
-        var delta = 0.2 / vel.length()
+    for i in range(200):
+        var delta = min(0.2 / vel.length(), pos.length() / 4)
         var result = integrate_orbit(delta, pos, vel, massive_bodies)
         pos = result[0]
         vel = result[1]
-        path.append(global.metres_to_screen(pos))
-        
+
         var new_theta = pos.angle()
         var delta_theta = abs(new_theta - prev_theta)
-        
+
         if delta_theta > PI:
             delta_theta = abs(delta_theta - 2*PI)
-            
+
         theta += delta_theta
         prev_theta = new_theta
-        
-        if theta > 6:
+
+        if theta > 2*PI or pos.length() < 0.2:
             break
-        
+
+        path.append(global.metres_to_screen(pos))
+
     return path
 
 
@@ -79,4 +80,3 @@ func _physics_process(delta):
                 get_node("..").destroy_craft(s)
             else:
                 print("Satellite Collision!")
-        
