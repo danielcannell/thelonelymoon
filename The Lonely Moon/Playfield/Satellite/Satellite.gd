@@ -14,6 +14,7 @@ var alt_range = [] setget , get_alt_range
 var active = true
 var invunerable = true
 var uptime = 0
+var delta_v_max = 1
 var delta_v = 0
 
 # Launch
@@ -56,7 +57,8 @@ func init(props=null):
             props = global.SHIP_CONFIG[type]
 
     self.props = props
-    delta_v = self.props.delta_v / 100.0
+    delta_v_max = self.props.delta_v / 100.0
+    delta_v = delta_v_max
 
 
 func launch_trajectory():
@@ -196,4 +198,5 @@ func state():
         'uptime': uptime,
         'type': type,
         'delta_v': 100 * delta_v,
+        'delta_v_max': 100 * delta_v_max
     }
