@@ -16,7 +16,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="Playfield" type="Node2D" index="0"]
+[node name="Playfield" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -66,6 +66,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+monitorable = false
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 7 )

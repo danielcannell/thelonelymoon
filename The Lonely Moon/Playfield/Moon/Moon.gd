@@ -1,7 +1,5 @@
 extends Node2D
 
-signal game_over;
-
 const ANGULAR_VELOCITY = 0.2 # Radians per second
 const FALL_SPEED = 0.002
 const MASS = 0.123
@@ -14,7 +12,7 @@ var pos = Vector2() setget set_pos, get_pos
 
 func _ready():
     distance = start_distance
-    connect("body_entered", self, "_on_body_entered")
+    connect("area_entered", self, "_on_area_entered")
 
 
 func set_pos(pos):
@@ -24,11 +22,8 @@ func set_pos(pos):
 func get_pos():
     return global.screen_to_metres(position)
 
-
-func _on_body_entered(body):
+func _on_area_entered(body):
     get_node("..").earth_collision(body)
-
-
 
 
 func _process(delta):

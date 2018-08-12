@@ -11,6 +11,7 @@ const ScienceStation = preload("res://Playfield/Satellite/science_station/Scienc
 const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
 const Ark =  preload("res://Playfield/Satellite/ark/Ark.tscn");
 const Missile = preload("res://Playfield/Satellite/missile/Missile.tscn");
+const LaunchVehicle = preload("res://Playfield/LaunchVehicle/LaunchVehicle.tscn");
 
 
 const satellites = {
@@ -85,7 +86,8 @@ func new_craft(type):
     var x = alt * cos(theta)
     var y = alt * sin(theta)
     var leo_alt = 0.5
-    craft.launch(Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
+    
+    craft.launch(LaunchVehicle.instance(), Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
 
     craft.connect("clicked", self, "satellite_clicked")
 
@@ -112,6 +114,10 @@ func explode(position, scale=1):
 
 
 func earth_collision(craft):
+    if craft == get_node("Earth"):
+        get_tree().change_scene("res://GameOver.tscn")
+        return
+
     if not craft.invunerable:
         explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
@@ -262,6 +268,7 @@ func finish_dragging(event):
 func charge_laser():
     laser_charge = global.LASER_CONFIG.laser_charge["time_earned"]
     get_node("LaserCharge").visible = true
+    get_node("Earth").show_laser_cannon()
 
 
 func _process(delta):
@@ -311,10 +318,10 @@ func _process(delta):
     if laser_charge > 0:
         get_node("LaserCharge").value = laser_charge / global.LASER_CONFIG.laser_charge.time_earned
         
+
 func _input(event):
     if event.is_action_pressed("missile"):
         new_craft("missile")
-
 
 
 func handle_game_over():
