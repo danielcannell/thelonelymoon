@@ -195,9 +195,16 @@ func craft_collision(craft1, craft2):
 
 func report_collision(name1, name2):
     var message = "%s was destroyed colliding with %s!"
+    var namearr = [name1, name2]
+    
     if name1 == "Debris":
         name1 = name2
         name2 = "Debris"
+    
+    # If this is only a debris/celestial body object, ignore
+    if name2 == "Debris" and ["Earth", "Moon"].has(name1):
+        return
+        
     emit_signal("notify", message % [name1, name2])
 
 
