@@ -37,6 +37,7 @@ var launch_vehicle = null
 # props
 const default_props = {
     "region": "leo",
+    "match_rot_to_vel": true,
     "delta_v": 0,
     "income": 0,
     "time_constant": 0,
@@ -195,7 +196,8 @@ func _process(delta):
     if invunerable and uptime > 0.1:
         invunerable = false
 
-    rotation = vel.angle() + PI/2
+    if not self.in_orbit or self.props.match_rot_to_vel:
+        rotation = vel.angle() + PI/2
 
 
     if animation:

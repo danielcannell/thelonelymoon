@@ -16,7 +16,7 @@ height = 20.0
 
 [node name="UsedLaunchVehicle" type="KinematicBody2D" index="0"]
 
-scale = Vector2( 0.65, 0.65 )
+scale = Vector2( 0.55, 0.55 )
 input_pickable = false
 collision_layer = 2
 collision_mask = 3
@@ -32,9 +32,9 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -1.52789, -6.67862e-008 )
+position = Vector2( -7.87904, -3.44404e-007 )
 rotation = 1.5708
-scale = Vector2( 0.682803, 1.8002 )
+scale = Vector2( 0.682803, 1.44972 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 

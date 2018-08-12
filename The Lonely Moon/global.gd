@@ -90,6 +90,7 @@ const MENU_CONFIG = [
 
 const SHIP_CONFIG = {
     'cube_sat': {
+        "match_rot_to_vel": true,
         'region': 'leo',
         'delta_v': 50,
         'income': 10,
@@ -106,6 +107,7 @@ const SHIP_CONFIG = {
         }
     },
     'cleanup_sat': {
+        "match_rot_to_vel": true,
         'region': null,
         'delta_v': 100,
         'income': 0,
@@ -122,6 +124,7 @@ const SHIP_CONFIG = {
         }
     },
     'spy_satellite': {
+        "match_rot_to_vel": true,
         'region': 'region2',
         'delta_v': 100,
         'income': 25,
@@ -138,6 +141,7 @@ const SHIP_CONFIG = {
         }
     },
     'science_station': {
+        "match_rot_to_vel": true,
         'region': 'region3',
         'delta_v': 150,
         'income': 100,
@@ -155,6 +159,7 @@ const SHIP_CONFIG = {
         }
     },
     'space_hotel': {
+        "match_rot_to_vel": true,
         'region': 'region4',
         'delta_v': 150,
         'income': 10000,
@@ -172,6 +177,7 @@ const SHIP_CONFIG = {
         }
     },
     'ark': {
+        "match_rot_to_vel": true,
         'region': 'outer_space',
         'delta_v': 100,
         'income': 0,
@@ -189,6 +195,7 @@ const SHIP_CONFIG = {
         }
     },
     "debris": {
+        "match_rot_to_vel": false,
         'region': null,
         'delta_v': 0,
         'income': 0,
@@ -202,6 +209,7 @@ const SHIP_CONFIG = {
         }
     },
     "debris.used_launch_vehicle": {
+        "match_rot_to_vel": false,
         'region': null,
         'delta_v': 0,
         'income': 0,
@@ -219,6 +227,7 @@ const SHIP_CONFIG = {
         }
     },
     "missile": {
+        "match_rot_to_vel": true,
         'region': null,
         'delta_v': 0,
         'income': 0,

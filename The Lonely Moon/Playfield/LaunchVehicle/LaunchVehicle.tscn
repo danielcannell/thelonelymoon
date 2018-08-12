@@ -2,10 +2,11 @@
 
 [ext_resource path="res://Playfield/LaunchVehicle/LaunchVehicle.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/LaunchVehicle/tail.png" type="Texture" id=2]
-[ext_resource path="res://Playfield/LaunchVehicle/spr_missile.png" type="Texture" id=3]
+[ext_resource path="res://Playfield/LaunchVehicle/payload_rocket.png" type="Texture" id=3]
 
-[node name="LaunchVehicle" type="Area2D" index="0"]
+[node name="LaunchVehicle" type="Area2D"]
 
+position = Vector2( 0, -2.3916 )
 scale = Vector2( 20, 20 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -28,9 +29,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Body" type="Sprite" parent="." index="1"]
 
-position = Vector2( 0, 12 )
-rotation = 4.71239
-scale = Vector2( 0.4, 0.4 )
+position = Vector2( -0.0499999, 11.4 )
+scale = Vector2( 0.423331, 0.423331 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 

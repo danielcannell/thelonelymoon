@@ -103,9 +103,9 @@ func _on_satellite_entered_orbit(craft, lv):
     var ulv = UsedLaunchVehicle.instance()
     ulv.init()
 
-    ulv.pos = craft.pos - craft.vel.normalized() * 0.1
+    ulv.pos = craft.pos - craft.vel.normalized() * (0.09 + craft.props.debris.radius)
     ulv.set_rotation(craft.vel.angle())
-    ulv.vel = craft.vel * 0.95
+    ulv.vel = craft.vel * 0.9
 
     self.add_child(ulv)
     ulv.add_to_group("satellites")
