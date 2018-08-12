@@ -91,40 +91,26 @@ func earth_collision(craft):
     explode(craft.position)
     destroy_craft(craft)
 
-func craft_collision(craft1, craft2):
-    if craft1.type == "debris" and craft2.type == "debris":
-        return
-        
-    if not craft1.active or not craft2.active:
-        return
-    
-    var avg_vel = (craft1.vel + craft2.vel) / 2.0
-    var avg_pos = (craft1.pos + craft2.pos) / 2.0
-
+func create_debris(pos, vel, amount):
     var craft
+    var angle
+    var x
+    var y
+    var radius
+    var vel_strength
+    var craft_pos
+    var craft_vel
 
-    var total = 0
+    for i in range(amount):
+        angle = i * (2 * PI) / amount
+        x = cos(angle)
+        y = sin(angle)
 
-    if craft1.type != "debris":
-        explode(craft1.position)
-        destroy_craft(craft1)
-        total += 3
+        radius = 0.01 + randf() * 0.03
+        vel_strength = 0.002 + randf() * 0.002
 
-    if craft2.type != "debris":
-        explode(craft2.position)
-        destroy_craft(craft2)
-        total += 3
-
-
-    for i in range(total):
-        var angle = i * (2 * PI) / 5
-        var radius = 0.03
-        var vel_strength = 0.01
-        var x = cos(angle)
-        var y = sin(angle)
-    
-        var craft_pos = avg_pos + Vector2(radius*x, radius*y)
-        var craft_vel = avg_vel + Vector2(vel_strength*x, vel_strength*y)
+        craft_pos = pos + Vector2(radius*x, radius*y)
+        craft_vel = vel + Vector2(vel_strength*x, vel_strength*y)
         craft = Debris.instance()
         add_child(craft)
 
@@ -133,6 +119,24 @@ func craft_collision(craft1, craft2):
         craft.active = false
 
         inactive_debris.append(craft)
+
+func craft_collision(craft1, craft2):
+    if craft1.type == "debris" and craft2.type == "debris":
+        return
+        
+    if not craft1.active or not craft2.active:
+        return
+
+    if craft1.type != "debris":
+        create_debris(craft1.pos, craft1.vel, 4)
+        explode(craft1.position)
+        destroy_craft(craft1)
+
+
+    if craft2.type != "debris":
+        create_debris(craft2.pos, craft2.vel, 4)
+        explode(craft2.position)
+        destroy_craft(craft2)
 
 
 func get_satellites():
