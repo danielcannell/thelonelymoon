@@ -6,6 +6,7 @@ var pos = Vector2() setget set_pos, get_pos
 var vel = Vector2(0.1, -0.1)
 
 var config = {}
+var alt_range = [0,1]
 var type = ""
 var uptime = 0
 
@@ -37,13 +38,6 @@ func burn_retrograde(delta):
     vel -= vel.normalized() * delta * BURN_RATE
 
 
-func alt_range():
-    return [
-        global.SHIP_CONFIG[type]['alt_min'],
-        global.SHIP_CONFIG[type]['alt_max']
-    ]
-
-
 func _ready():
     deselect()
 
@@ -61,6 +55,8 @@ func _process(delta):
 func configure(typename):
     type = typename
     config = global.ship_config(type)
+    var region = config.region
+    alt_range = [global.SPACE_REGIONS[region].alt_min, global.SPACE_REGIONS[region].alt_max]
     
 func move_and_collide_metres(vec):
     return self.move_and_collide(global.metres_to_screen(vec))
@@ -68,7 +64,7 @@ func move_and_collide_metres(vec):
 
 func state():
     var alt = position.length()
-    var in_range = alt < config.alt_max && alt > config.alt_min
+    var in_range = alt < alt_range[1] && alt > alt_range[0]
     return {
         'in_range': in_range,
         'uptime': uptime,

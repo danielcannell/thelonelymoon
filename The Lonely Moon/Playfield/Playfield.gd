@@ -47,7 +47,9 @@ func new_craft(type):
     craft.add_to_group("satellites")
     craft.configure(type)
 
-    var alt = rand_range(config.alt_min, config.alt_max)
+    var region = config.region
+    var alt = rand_range(global.SPACE_REGIONS[region].alt_min, global.SPACE_REGIONS[region].alt_max)
+
     var theta = rand_range(0, 2 * PI)
     var x = alt * cos(theta)
     var y = alt * sin(theta)
@@ -84,7 +86,7 @@ func select_satellite(sat):
 
     if sat:
         sat.select()
-        var alt_range = sat.alt_range()
+        var alt_range = sat.alt_range
         good_orbit_range.set_range(alt_range[0], alt_range[1])
         good_orbit_range.visible = true
         orbit.visible = true
