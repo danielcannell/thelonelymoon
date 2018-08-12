@@ -45,6 +45,14 @@ const MENU_CONFIG = [
         'build_time': 5,
     },
     {
+        'id': 'cleanup_sat',
+        'display_name': 'Clean-up Satellite',
+        'description': 'Clear space with a blast of light (push space).',
+        'type': 'satellite',
+        'cost': 1000,
+        'build_time': 5,
+    },
+    {
         'id': 'spy_satellite',
         'display_name': 'Spy Satellite',
         'description': 'Keep an eye on the neighbours.',
@@ -85,6 +93,22 @@ const SHIP_CONFIG = {
         'income': 10,
         'time_constant': 60,
         'drag_ratio': 0.1,
+        'thrust': 0.1,
+        "debris": {
+            "radius": 0.03,
+            "amount": 3,
+            "impluse": 0.01,
+        },
+        "explosion": {
+            "scale": 0.4
+        }
+    },
+    'cleanup_sat': {
+        'region': null,
+        'delta_v': 100,
+        'income': 0,
+        'time_constant': 1,
+        'drag_ratio': 3,
         'thrust': 0.1,
         "debris": {
             "radius": 0.03,
