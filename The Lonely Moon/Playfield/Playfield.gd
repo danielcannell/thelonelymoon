@@ -41,8 +41,8 @@ func new_craft(type):
         craft = satellites[type].instance()
     else:
         craft = Debris.instance()
-        
-        
+
+
     add_child(craft)
     craft.add_to_group("satellites")
     craft.configure(type)
@@ -55,7 +55,7 @@ func new_craft(type):
     var y = alt * sin(theta)
     craft.position = Vector2(x, y)
     craft.vel = get_node('Physics').vel_for_pos(craft.pos)
-    
+
     craft.connect("clicked", self, "satellite_clicked")
 
 
@@ -63,6 +63,9 @@ func destroy_craft(craft):
     remove_child(craft)
     craft.remove_from_group("satellites")
     # craft.free()
+
+    if craft == selected_sat:
+        select_satellite(null)
 
 
 func get_satellites():
@@ -93,7 +96,7 @@ func select_satellite(sat):
     else:
         good_orbit_range.visible = false
         orbit.visible = false
-    
+
     emit_signal("satellite_selected", sat)
 
 
@@ -112,18 +115,18 @@ func _process(delta):
         # This click was not eaten by a satellite
         select_satellite(null)
     clicks.clear()
-    
+
     if selected_sat:
         if Input.is_action_pressed("burn_prograde"):
             selected_sat.burn_prograde(delta)
         elif Input.is_action_pressed("burn_retrograde"):
             selected_sat.burn_retrograde(delta)
-            
+
         var predicted_orbit = get_node('Physics').predict_orbit(selected_sat)
         var orbit = get_node('Orbit')
         orbit.points = PoolVector2Array(predicted_orbit)
         orbit.width = 2 * global.current_scale()
-    
+
 
 func handle_game_over():
     get_tree().change_scene('res://GameOver.tscn')
