@@ -29,10 +29,7 @@ func receive_state(delta, state):
 
 func make_fundraise(id):
     var f = global.FUNDRAISE_CONFIG[id]
-    var displayname = "unknown"
-    for m in global.MENU_CONFIG:
-        if m['id'] == id:
-            displayname = m["display_name"]
+    var displayname = global.id_display_lookup[id]
 
     var amt = rand_range(f.raised_min, f.raised_max)
     balance += amt
