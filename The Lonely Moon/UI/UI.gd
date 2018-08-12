@@ -12,6 +12,7 @@ var shop_items = []
 
 func _ready():
     get_node("Economy").connect("update_balance", self, "set_money")
+    get_node("../../Playfield").connect("notify", self, "create_notification")
 
     # Create buttons from config
     for x in global.MENU_CONFIG:
