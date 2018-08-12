@@ -46,7 +46,7 @@ const MENU_CONFIG = [
     },
     {
         'id': 'cleanup_sat',
-        'display_name': 'Clean-up Satellite',
+        'display_name': 'Laser Satellite',
         'description': 'Clear space with a blast of light (push space).',
         'type': 'satellite',
         'cost': 1000,
