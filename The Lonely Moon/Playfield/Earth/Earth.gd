@@ -21,6 +21,7 @@ func _on_body_entered(body):
 
 func _ready():
     connect("body_entered", self, "_on_body_entered")
+    get_node("LaserBeam").connect("body_entered", self, "_on_body_entered")
     
 
 func _process(delta):
@@ -28,8 +29,12 @@ func _process(delta):
 
 
 func fire_laser():
-    get_node("LaserBeam").visible = true
+    var laser_beam = get_node("LaserBeam")
+    laser_beam.visible = true
+    laser_beam.monitoring = true
 
 
 func stop_laser():
-    get_node("LaserBeam").visible = false
+    var laser_beam = get_node("LaserBeam")
+    laser_beam.visible = false
+    laser_beam.monitoring = false
