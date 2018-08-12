@@ -4,7 +4,9 @@ const BURN_RATE = 0.1
 
 var pos = Vector2() setget set_pos, get_pos
 var vel = Vector2(0.1, -0.1)
+var mass = 1
 
+var active = true
 var config = {}
 var type = ""
 var uptime = 0
@@ -19,6 +21,10 @@ func set_pos(pos):
 
 func get_pos():
     return global.screen_to_metres(position)
+
+func destroy():
+    active = false
+    remove_from_group("satellites")
 
 
 func select():

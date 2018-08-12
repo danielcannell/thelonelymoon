@@ -22,6 +22,8 @@ var selected_sat = null
 
 var clicks = []
 
+var inactive_debris = []
+
 
 func _ready():
     var orbit = get_node('Orbit')
@@ -59,8 +61,50 @@ func new_craft(type):
 
 func destroy_craft(craft):
     remove_child(craft)
+    craft.set_collision_layer_bit(1, false)
+    craft.set_collision_layer_bit(0, false)
     craft.remove_from_group("satellites")
-    # craft.free()
+
+func craft_collision(craft1, craft2):
+    if craft1.type == "debris" and craft2.type == "debris":
+        return
+        
+    if not craft1.active or not craft2.active:
+        return
+    
+    var avg_vel = (craft1.vel + craft2.vel) / 2.0
+    var avg_pos = (craft1.pos + craft2.pos) / 2.0
+
+    var craft
+
+    var total = 0
+
+    if craft1.type != "debris":
+        destroy_craft(craft1)
+        total += 3
+
+    if craft2.type != "debris":
+        destroy_craft(craft2)
+        total += 3
+
+
+    for i in range(total):
+        var angle = i * (2 * PI) / 5
+        var radius = 0.03
+        var vel_strength = 0.01
+        var x = cos(angle)
+        var y = sin(angle)
+    
+        var craft_pos = avg_pos + Vector2(radius*x, radius*y)
+        var craft_vel = avg_vel + Vector2(vel_strength*x, vel_strength*y)
+        craft = Debris.instance()
+        add_child(craft)
+
+        craft.vel = craft_vel
+        craft.pos = craft_pos
+        craft.active = false
+
+        inactive_debris.append(craft)
 
 
 func get_satellites():
@@ -70,7 +114,8 @@ func get_satellites():
 func state():
     var st = []
     for sat in get_satellites():
-        st.append(sat.state())
+        if sat.active and sat.type != "debris":
+            st.append(sat.state())
     return st
 
 
@@ -103,6 +148,10 @@ func satellite_clicked(sat, event):
     select_satellite(sat)
 
 
+func _physics_process(delta):
+    pass
+
+
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
 
@@ -121,6 +170,18 @@ func _process(delta):
         var orbit = get_node('Orbit')
         orbit.points = PoolVector2Array(predicted_orbit)
         orbit.width = 2 * global.current_scale()
+
+    for d in inactive_debris:
+        var colliding_bodies = d.get_node("PlacementArea").get_overlapping_bodies()
+        d.get_node("PlacementArea").monitorable = false
+        d.get_node("PlacementArea").monitoring = false
+        if colliding_bodies: 
+            destroy_craft(d)
+        else:
+            d.add_to_group("satellites")
+            d.active = true
+    
+    inactive_debris = []
     
 
 func handle_game_over():
