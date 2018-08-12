@@ -14,13 +14,13 @@ func set_pos(pos):
 func get_pos():
     return global.screen_to_metres(position)
 
-func _on_body_entered(body):
-    # called when a Physics body entered the earth
-    get_node("..").no_debris_collision(body, 'Laser')
+func _on_body_entered(body, name):
+    # called when a Physics body entered the earth, or its laser beam
+    get_node("..").no_debris_collision(body, name)
 
 func _ready():
-    connect("body_entered", self, "_on_body_entered")
-    get_node("LaserBeam").connect("body_entered", self, "_on_body_entered")
+    connect("body_entered", self, "_on_body_entered", ["Earth"])
+    get_node("LaserBeam").connect("body_entered", self, "_on_body_entered", ["Laser"])
 
 
 func _process(delta):
