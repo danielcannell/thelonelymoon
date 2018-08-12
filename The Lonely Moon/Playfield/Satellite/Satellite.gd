@@ -104,7 +104,7 @@ func add_glow():
         return
 
     # Debris and missiles don't have a glow
-    if type in ["debris", "missile"]:
+    if type in ["debris", "missile", "ark", "cleanup_sat"]:
         return
 
     has_glow = true
