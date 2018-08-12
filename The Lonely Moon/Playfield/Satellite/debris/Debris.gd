@@ -9,7 +9,6 @@ func _ready():
     # Called when the node is added to the scene for the first time.
     # Initialization here
     type = "debris"
-    mass = 0.2
     config.drag_ratio = 1
     pass
 

@@ -3,8 +3,7 @@ extends KinematicBody2D
 const BURN_RATE = 0.1
 
 var pos = Vector2() setget set_pos, get_pos
-var vel = Vector2(0.1, -0.1)
-var mass = 1
+var vel = Vector2(0, 0)
 
 var active = true
 var config = {}
@@ -13,8 +12,42 @@ var type = ""
 var uptime = 0
 var delta_v = 0
 
+# Launch
+var in_orbit = true
+var leo_alt = 0
+var leo_vel_theta = 0
+var launch_alt = 0
+var launch_vel_theta = 0
+var launch_vel_r = 0
 
 signal clicked(sat)
+
+
+func launch_trajectory():
+    var progress = (self.pos.length() - launch_alt) / (leo_alt - launch_alt)
+    var vel_theta = launch_vel_theta + progress * (leo_vel_theta - launch_vel_theta)
+    var vel_r = launch_vel_r * (1 - progress)
+    var theta = self.pos.angle()
+    vel = Vector2(
+        vel_r * cos(theta) - vel_theta * sin(theta),
+        vel_r * sin(theta) + vel_theta * cos(theta))
+
+    if progress > 0.99:
+        in_orbit = true
+
+    return vel
+
+
+func launch(p, leo_alt, leo_vel_theta):
+    in_orbit = false
+
+    self.leo_alt = leo_alt
+    self.leo_vel_theta = leo_vel_theta
+
+    launch_alt = p.length()
+    launch_vel_theta = 0.1
+    launch_vel_r = 0.1
+    self.pos = p
 
 
 func set_pos(pos):
@@ -38,6 +71,9 @@ func deselect():
 
 
 func burn(delta, is_prograde, is_fine):
+    # Abandon launch trajectory if the player takes control
+    in_orbit = true
+
     var dv = delta * BURN_RATE
     if is_fine:
         dv *= 0.2
