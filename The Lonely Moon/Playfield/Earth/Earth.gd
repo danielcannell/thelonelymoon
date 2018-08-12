@@ -16,12 +16,12 @@ func get_pos():
 
 func _on_body_entered(body):
     # called when a Physics body entered the earth
-    get_node("..").earth_collision(body)
+    get_node("..").no_debris_collision(body, 'Earth')
 
 func _ready():
     connect("body_entered", self, "_on_body_entered")
     get_node("LaserBeam").connect("body_entered", self, "_on_body_entered")
-    
+
 
 func _process(delta):
     rotate(-ANGULAR_VELOCITY * delta)

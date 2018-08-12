@@ -117,14 +117,13 @@ func explode(position, scale=1):
     splode.play()
 
 
-func earth_collision(craft):
+func no_debris_collision(craft, name):
     if not craft.invunerable:
         explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
-        
-        var name1 = global.id_display_lookup[craft.type]
-        var name2 = "Earth"
-        report_collision(name1, name2)
+
+        var craft_name = global.id_display_lookup[craft.type]
+        report_collision(craft_name, name)
 
 
 func moon_collision(craft):
@@ -135,7 +134,7 @@ func moon_collision(craft):
     if not craft.invunerable:
         explode(craft.position, craft.props.explosion.scale)
         destroy_craft(craft)
-        
+
         var name1 = global.id_display_lookup[craft.type]
         var name2 = "Moon"
         report_collision(name1, name2)
@@ -190,7 +189,7 @@ func craft_collision(craft1, craft2):
                       craft2.props.debris.amount, craft2.props.debris.radius, craft2.props.debris.impluse)
         explode(craft2.position, craft2.props.explosion.scale)
         destroy_craft(craft2)
-        
+
     var name1 = global.id_display_lookup[craft1.type]
     var name2 = global.id_display_lookup[craft2.type]
     report_collision(name1, name2)
@@ -199,15 +198,15 @@ func craft_collision(craft1, craft2):
 func report_collision(name1, name2):
     var message = "%s was destroyed colliding with %s!"
     var namearr = [name1, name2]
-    
+
     if name1 == "Debris":
         name1 = name2
         name2 = "Debris"
-    
+
     # If this is only a debris/celestial body object, ignore
     if name2 == "Debris" and ["Earth", "Moon"].has(name1):
         return
-        
+
     emit_signal("notify", message % [name1, name2])
 
 

@@ -12,7 +12,7 @@ var laser_phase = 0
 
 func _on_laser_entered(body):
     if body != self:
-        get_node("..").earth_collision(body)
+        get_node("..").no_debris_collision(body, 'a laser')
 
 
 func _ready():
@@ -35,9 +35,9 @@ func _process(delta):
     laser_phase += 5 * delta
     if laser_phase > 2 * PI:
         laser_phase -= 2 * PI
-    
+
     laser.rotation = laser_phase
-    
+
     if selected and not laser_on and Input.is_action_pressed("lasers"):
         turn_on_laser()
     elif laser_on and not selected or not Input.is_action_pressed("lasers"):
