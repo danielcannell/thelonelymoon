@@ -11,6 +11,7 @@ const ScienceStation = preload("res://Playfield/Satellite/science_station/Scienc
 const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
 const Ark =  preload("res://Playfield/Satellite/ark/Ark.tscn");
 const Missile = preload("res://Playfield/Satellite/missile/Missile.tscn");
+const LaunchVehicle = preload("res://Playfield/LaunchVehicle/LaunchVehicle.tscn");
 
 
 const satellites = {
@@ -85,7 +86,8 @@ func new_craft(type):
     var x = alt * cos(theta)
     var y = alt * sin(theta)
     var leo_alt = 0.5
-    craft.launch(Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
+    
+    craft.launch(LaunchVehicle.instance(), Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
 
     craft.connect("clicked", self, "satellite_clicked")
 
