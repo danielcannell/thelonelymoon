@@ -20,6 +20,14 @@ func get_pos():
     return global.screen_to_metres(position)
 
 
+func _on_body_entered(body):
+    get_node("..").earth_collision(body)
+
+
+func _ready():
+    connect("body_entered", self, "_on_body_entered")
+    
+
 func _process(delta):
     theta += ANGULAR_VELOCITY * delta
 
