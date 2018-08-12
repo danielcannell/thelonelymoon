@@ -87,6 +87,10 @@ func explode(position):
     splode.show()
     splode.play()
 
+func earth_collision(craft):
+    explode(craft.position)
+    destroy_craft(craft)
+
 func craft_collision(craft1, craft2):
     if craft1.type == "debris" and craft2.type == "debris":
         return
@@ -239,7 +243,8 @@ func _process(delta):
             d.add_to_group("satellites")
             d.active = true
     
-    inactive_debris = []
+    if inactive_debris:
+        inactive_debris = []
     
 
 func handle_game_over():
