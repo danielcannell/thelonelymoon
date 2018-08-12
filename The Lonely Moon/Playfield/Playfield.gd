@@ -30,8 +30,14 @@ func _ready():
 func _unhandled_input(event):
     if event is InputEventMouseButton:
         if event.button_index == 1:
-            if event.pressed:
-                clicks.append(event)
+            clicks.append(event)
+
+    if event is InputEventMouseMotion:
+        var sb = get_node("SelectionBox")
+        var viewport_pos = event.position
+        var sb_transform = sb.get_global_transform_with_canvas()
+        var local_pos = (viewport_pos - sb_transform.get_origin()) / sb_transform.get_scale()
+        get_node("SelectionBox").set_drag_end(local_pos)
 
 
 func new_craft(type):
@@ -108,12 +114,32 @@ func satellite_clicked(sat, event):
     select_satellite(sat)
 
 
+func start_dragging(event):
+    var sb = get_node("SelectionBox")
+    var viewport_pos = event.position
+    var sb_transform = sb.get_global_transform_with_canvas()
+    var local_pos = (viewport_pos - sb_transform.get_origin()) / sb_transform.get_scale()
+    sb.set_drag_start(local_pos)
+    sb.visible = true
+
+
+func finish_dragging(event):
+    var sb = get_node("SelectionBox")
+    sb.visible = false
+    var sats = sb.get_satellites_contained()
+    print(sats)
+
+
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
 
-    for click_left in clicks:
+    for click in clicks:
         # This click was not eaten by a satellite
-        select_satellite(null)
+        if click.pressed:
+            select_satellite(null)
+            start_dragging(click)
+        else:
+            finish_dragging(click)
     clicks.clear()
 
     if selected_sat:
