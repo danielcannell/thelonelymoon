@@ -88,8 +88,14 @@ func launch(p, leo_alt, leo_vel_theta):
 func add_glow():
     if has_glow:
         return
+
+    # Debris and missiles don't have a glow
+    if type in ["debris", "missile"]:
+        return
+
     has_glow = true
     var glow = glow_template.instance()
+    glow.scale = Vector2(1 / scale.x, 1 / scale.y)
     add_child(glow)
     animation = glow.get_node("Animation")
 
