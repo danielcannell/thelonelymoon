@@ -12,9 +12,9 @@ var distance
 
 var pos = Vector2() setget set_pos, get_pos
 
-
 func _ready():
     distance = start_distance
+    connect("body_entered", self, "_on_body_entered")
 
 
 func set_pos(pos):
@@ -29,9 +29,7 @@ func _on_body_entered(body):
     get_node("..").earth_collision(body)
 
 
-func _ready():
-    connect("body_entered", self, "_on_body_entered")
-    
+
 
 func _process(delta):
     theta += ANGULAR_VELOCITY * delta
