@@ -1,5 +1,6 @@
 extends MarginContainer
 
+var Economy = preload('res://UI/Economy.gd')
 var curr_sat = null
 
 func _ready():
@@ -27,6 +28,8 @@ func _process(delta):
             in_range_str = "yes"
         get_node("Background/C/InRange/InRangeVal").text = in_range_str
         get_node("Background/C/Deltav/DeltavVal").text = "%.1f" % state['delta_v']
+        var income = Economy.ship_income(state['uptime'], state['type']) if state['in_range'] else 0.0
+        get_node("Background/C/Income/IncomeVal").text = "%.1f btc/s" % income
 
 func on_satellite_selected(sat):
     curr_sat = sat

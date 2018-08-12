@@ -12,8 +12,10 @@ func _ready():
 
 func ship_income(uptime, type):
     var c = global.ship_config(type)
-    return c.income * exp(uptime / c.time_constant)
-
+    if uptime < c.time_constant:
+        return c.income
+    
+    return lerp(c.income, 0.25 * c.income, (uptime - c.time_constant) / (4 * c.time_constant))
 
 func receive_state(delta, state):
     var income = 0
