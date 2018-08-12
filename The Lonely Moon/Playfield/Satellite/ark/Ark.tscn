@@ -3,10 +3,10 @@
 [ext_resource path="res://Playfield/Satellite/ark/Ark.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Satellite/ark/ark.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+radius = 10.0
 
 [node name="Satellite" type="KinematicBody2D" index="0"]
 
@@ -19,7 +19,7 @@ _sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collisi
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-scale = Vector2( 3, 3 )
+scale = Vector2( 1.8, 1.8 )
 z_index = 1
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]

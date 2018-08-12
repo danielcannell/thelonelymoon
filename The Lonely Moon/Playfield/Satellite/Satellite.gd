@@ -29,7 +29,8 @@ var props = {
     "delta_v": 50,
     "income": 10,
     "time_constant": 5000,
-    "drag_ratio": 0.1
+    "drag_ratio": 0.1,
+    "thrust": 0.1,
 }
 
 signal clicked(sat)
@@ -96,7 +97,7 @@ func burn(delta, is_prograde, is_fine):
     # Abandon launch trajectory if the player takes control
     in_orbit = true
 
-    var dv = delta * BURN_RATE
+    var dv = delta * props['thrust']
     if is_fine:
         dv *= 0.2
     if dv > delta_v:

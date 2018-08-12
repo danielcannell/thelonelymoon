@@ -68,35 +68,40 @@ const SHIP_CONFIG = {
         'delta_v': 50,
         'income': 10,
         'time_constant': 5000,
-        'drag_ratio': 0.1
+        'drag_ratio': 0.1,
+        'thrust': 0.1,
     },
     'spy_satellite': {
         'region': 'region2',
         'delta_v': 100,
         'income': 25,
         'time_constant': 5000,
-        'drag_ratio': 0.3
+        'drag_ratio': 0.3,
+        'thrust': 0.1,
     },
     'science_station': {
         'region': 'region3',
         'delta_v': 150,
         'income': 100,
         'time_constant': 5000,
-        'drag_ratio': 0.7
+        'drag_ratio': 0.7,
+        'thrust': 0.1,
     },
     'space_hotel': {
         'region': 'region4',
         'delta_v': 150,
         'income': 10000,
         'time_constant': 5000,
-        'drag_ratio': 2
+        'drag_ratio': 2,
+        'thrust': 0.1,
     },
     'ark': {
         'region': 'outer_space',
         'delta_v': 150,
         'income': 0,
         'time_constant': 1,
-        'drag_ratio': 3,
+        'drag_ratio': 0.5,
+        'thrust': 0.01,
     },
     "debris": {
         'region': null,
@@ -104,6 +109,7 @@ const SHIP_CONFIG = {
         'income': 0,
         'time_constant': 0,
         'drag_ratio': 0.1,
+        'thrust': 0,
     },
 }
 

@@ -65,6 +65,10 @@ editor_draw_drag_margin = false
 script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
+[connection signal="hide_satellite_range" from="UiLayer/UI" to="Playfield" method="hide_satellite_range"]
+
+[connection signal="show_satellite_range" from="UiLayer/UI" to="Playfield" method="show_satellite_range"]
+
 [connection signal="spawn_satellite" from="UiLayer/UI" to="Playfield" method="new_craft"]
 
 [connection signal="satellite_selected" from="Playfield" to="UiLayer/UI" method="on_satellite_selected"]
