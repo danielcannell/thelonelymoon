@@ -162,6 +162,12 @@ const FUNDRAISE_CONFIG = {
     }
 }
 
+const LASER_CONFIG = {
+    'laser_charge': {
+        'time_earned': 2,
+    }
+}
+
 const METRES_PER_SCREEN_UNIT = 1.0 / 200.0;
 
 func ship_config(name):

@@ -28,7 +28,6 @@ var selected_sat = null
 var clicks = []
 var dragging = false
 
-const laser_max_charge = 2
 var laser_charge = 0
 var laser_active = false
 
@@ -259,7 +258,7 @@ func finish_dragging(event):
 
 
 func charge_laser():
-    laser_charge = laser_max_charge
+    laser_charge = global.LASER_CONFIG.laser_charge["time_earned"]
     get_node("LaserCharge").visible = true
 
 
@@ -308,7 +307,7 @@ func _process(delta):
             get_node("LaserCharge").visible = false
 
     if laser_charge > 0:
-        get_node("LaserCharge").value = laser_charge / laser_max_charge
+        get_node("LaserCharge").value = laser_charge / global.LASER_CONFIG.laser_charge.time_earned
         
 func _input(event):
     if event.is_action_pressed("missile"):
