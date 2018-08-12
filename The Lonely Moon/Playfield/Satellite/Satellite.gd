@@ -35,9 +35,11 @@ var props = {
 signal clicked(sat)
 
 func init(props=null):
-    if props != null:
+    if props == null:
         if type in global.SHIP_CONFIG:
-            self.props = global.SHIP_CONFIG[type]
+            props = global.SHIP_CONFIG[type]
+
+    self.props = props
     delta_v = self.props.delta_v
 
 func launch_trajectory():
