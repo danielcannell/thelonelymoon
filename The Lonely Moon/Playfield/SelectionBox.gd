@@ -30,7 +30,9 @@ func set_drag_end(pos):
 func get_satellites_contained():
     var sats = []
     for s in get_overlapping_bodies():
-        print(s.name)
         if "Satellite" in s.name:
             sats.append(s)
     return sats
+
+func get_center():
+    return (drag_start + drag_end) / 2

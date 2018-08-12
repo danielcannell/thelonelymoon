@@ -126,8 +126,17 @@ func start_dragging(event):
 func finish_dragging(event):
     var sb = get_node("SelectionBox")
     sb.visible = false
+
     var sats = sb.get_satellites_contained()
-    print(sats)
+    var center = sb.get_center()
+    var nearest = null
+    var nearest_dist = 99999999999999
+    for sat in sats:
+        var dist = center.distance_to(sat.position)
+        if dist < nearest_dist:
+            nearest_dist = dist
+            nearest = sat
+    select_satellite(nearest)
 
 
 func _process(delta):
