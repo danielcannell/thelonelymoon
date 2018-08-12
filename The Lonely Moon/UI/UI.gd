@@ -1,6 +1,8 @@
 extends Container
 
 signal spawn_satellite
+signal show_satellite_range
+signal hide_satellite_range
 
 export (PackedScene) var shop_item
 
@@ -15,6 +17,8 @@ func _ready():
         var btn = shop_item.instance()
         btn.connect("clicked", self, "btn_clicked", [btn])
         btn.connect("finished", self, "btn_finished", [btn])
+        btn.connect("entered", self, "btn_entered", [btn])
+        btn.connect("exited", self, "btn_exited", [btn])
         btn.set_thing(x)
         shop_items.append(btn)
         get_node("Shop/Shop/Background/Container/Tiles").add_child(btn)
@@ -43,6 +47,16 @@ func btn_finished(btn):
         make_fundraise(id)
     elif type == "ark":
         get_tree().change_scene("res://Victory.tscn")
+
+
+func btn_entered(btn):
+    var thing = btn.thing
+    if thing.type == "satellite":
+        emit_signal("show_satellite_range", thing.id)
+
+
+func btn_exited(btn):
+    emit_signal("hide_satellite_range")
 
 
 func make_satellite(id, name):

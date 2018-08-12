@@ -2,15 +2,21 @@ extends Container
 
 signal clicked;
 signal finished;
+signal entered;
+signal exited;
 
 var thing = {}
 
+var disabled = true
 var busy = false
 var time_left = 0
 var timer = null
 
 func _ready():
-    get_node("Background/Button").connect("pressed", self, "clicked")
+    var btn = get_node("Background/Button")
+    btn.connect("pressed", self, "clicked")
+    btn.connect("mouse_entered", self, "entered")
+    btn.connect("mouse_exited", self, "exited")
     get_node("Background/Cost").text = str(thing['cost']) + "btc"
     get_node("Background/Name").text = thing['display_name']
     get_node("Background/Button").hint_tooltip = description()
@@ -30,14 +36,26 @@ func set_thing(x):
 
 
 func set_enabled(enabled):
-    if !busy:
-        get_node("Background/Button").disabled = !enabled
+    disabled = !enabled
+    var btn = get_node("Background/Button")
+    btn.disabled = disabled
+    if btn.is_hovered() and disabled:
+        emit_signal("exited")
 
 
 func clicked():
     if !busy:
         emit_signal("clicked")
         start_building()
+
+
+func entered():
+    if !disabled:
+        emit_signal("entered")
+
+
+func exited():
+    emit_signal("exited")
 
 
 func start_building():
@@ -56,7 +74,7 @@ func finish_building():
     remove_child(timer)
     timer = null
     emit_signal("finished")
-    
+
     
 func description():
     var usage
@@ -73,4 +91,3 @@ func description():
         usage = 'ERROR'
         stats = 'ERROR'
     return thing.description + '\n\n' + usage + '\n\n' + stats
-    

@@ -44,6 +44,19 @@ func _unhandled_input(event):
         get_node("SelectionBox").set_drag_end(local_pos)
 
 
+func show_satellite_range(id):
+    var region = global.SHIP_CONFIG[id].region
+    var alt_min = global.SPACE_REGIONS[region].alt_min
+    var alt_max = global.SPACE_REGIONS[region].alt_max
+    var orbit_range = get_node("ShopOrbitRange")
+    orbit_range.set_range(alt_min, alt_max)
+    orbit_range.visible = true
+
+
+func hide_satellite_range():
+    get_node("ShopOrbitRange").visible = false
+
+
 func new_craft(type):
     var config = global.ship_config(type)
     var craft
@@ -78,6 +91,7 @@ func destroy_craft(craft):
     craft.set_collision_layer_bit(0, false)
     craft.remove_from_group("satellites")
 
+
 func explode(position):
     var p = position
     var splode = Explosion.instance()
@@ -87,9 +101,11 @@ func explode(position):
     splode.show()
     splode.play()
 
+
 func earth_collision(craft):
     explode(craft.position)
     destroy_craft(craft)
+
 
 func create_debris(pos, vel, amount):
     var craft
@@ -119,6 +135,7 @@ func create_debris(pos, vel, amount):
         craft.active = false
 
         inactive_debris.append(craft)
+
 
 func craft_collision(craft1, craft2):
     if craft1.type == "debris" and craft2.type == "debris":
@@ -181,8 +198,10 @@ func satellite_clicked(sat, event):
 
     select_satellite(sat)
 
+
 func _physics_process(delta):
     pass
+
 
 func start_dragging(event):
     dragging = true
