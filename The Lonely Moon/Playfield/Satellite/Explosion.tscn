@@ -40,7 +40,7 @@ animations = [ {
 "speed": 60.0
 } ]
 
-[node name="Explosion" type="AnimatedSprite" index="0"]
+[node name="Explosion" type="AnimatedSprite"]
 
 position = Vector2( 0.311092, -22.5511 )
 scale = Vector2( 0.529787, 0.529787 )
