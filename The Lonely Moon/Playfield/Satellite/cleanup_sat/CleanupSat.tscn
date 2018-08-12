@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Playfield/Satellite/cleanup_sat/CleanupSat.gd" type="Script" id=1]
+[ext_resource path="res://Playfield/Satellite/cleanup_sat/cleanup_sat.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 149.84, 4923.53 )
+
+[node name="Satellite" type="KinematicBody2D" index="0"]
+
+scale = Vector2( 0.015, 0.015 )
+input_pickable = true
+collision_layer = 2
+collision_mask = 3
+collision/safe_margin = 0.5
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Selectbox" type="Line2D" parent="." index="1"]
+
+position = Vector2( -4.81983, 16.0946 )
+scale = Vector2( 6.22255, 3.7538 )
+points = PoolVector2Array( -100, 60, 100, 60, 100, -60, -100, -60, -100, 60 )
+width = 10.0
+default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = -13556705
+sharp_limit = 2.0
+round_precision = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+scale = Vector2( 49.6219, 14 )
+z_index = 1
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Laser" type="Area2D" parent="." index="3"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+monitorable = false
+collision_layer = 2
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser" index="0"]
+
+position = Vector2( 0, -5272.01 )
+scale = Vector2( 1, 0.998913 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Polygon2D" type="Polygon2D" parent="Laser" index="1"]
+
+polygon = PoolVector2Array( 100, -400, 100, -10000, -100, -10000, -100, -400 )
+uv = PoolVector2Array(  )
+color = Color( 1, 0, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+
