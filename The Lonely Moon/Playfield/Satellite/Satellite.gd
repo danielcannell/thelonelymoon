@@ -28,6 +28,8 @@ var launch_vel_r = 0
 # Glow
 var has_glow = false
 var animation = null
+var launch_vehicle = null
+
 
 # props
 var props = {
@@ -69,14 +71,16 @@ func launch_trajectory():
         vel_r * sin(theta) + vel_theta * cos(theta))
 
     if progress > 0.99:
-        in_orbit = true
-        add_glow()
+        enter_orbit()
 
     return vel
 
 
-func launch(p, leo_alt, leo_vel_theta):
+func launch(lv, p, leo_alt, leo_vel_theta):
     in_orbit = false
+
+    launch_vehicle = lv
+    add_child(lv)
 
     self.leo_alt = leo_alt
     self.leo_vel_theta = -leo_vel_theta
@@ -85,6 +89,12 @@ func launch(p, leo_alt, leo_vel_theta):
     launch_vel_theta = -0.1
     launch_vel_r = 0.1
     self.pos = p
+
+func enter_orbit():
+    in_orbit = true
+    remove_child(launch_vehicle)
+    launch_vehicle = null
+    add_glow()
 
 
 func add_glow():
@@ -133,8 +143,8 @@ func deselect():
 
 func burn(delta, is_prograde, is_fine):
     # Abandon launch trajectory if the player takes control
-    in_orbit = true
-    add_glow()
+    if not in_orbit:
+        enter_orbit()
 
     var dv = delta * props['thrust']
     if is_fine:
@@ -169,6 +179,10 @@ func _process(delta):
 
     if invunerable and uptime > 0.1:
         invunerable = false
+
+    if not in_orbit:
+        rotation = vel.angle() + PI/2
+
 
     if animation:
         animation.set_animation("good" if in_range() else "bad")
