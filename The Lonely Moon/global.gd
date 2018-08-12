@@ -9,6 +9,8 @@ func _ready():
         id_menu_lookup[m.id] = m
         id_display_lookup[m.id] = m['display_name']
     id_display_lookup['debris'] = "Debris"
+    id_display_lookup['debris.used_launch_vehicle'] = "Debris"
+    id_display_lookup['missile'] = "Missile"
 
 
 const MENU_CONFIG = [
@@ -175,6 +177,23 @@ const SHIP_CONFIG = {
             "scale": 0.2
         }
     },
+    "debris.used_launch_vehicle": {
+        'region': null,
+        'delta_v': 0,
+        'income': 0,
+        'time_constant': 0,
+        'drag_ratio': 1.5,
+        'thrust': 0,
+        "radius":  0.04,
+        "debris": {
+            "radius": 0.05,
+            "amount": 3,
+            "impluse": 0.1,
+        },
+        "explosion": {
+            "scale": 0.7
+        }
+    },
     "missile": {
         'region': null,
         'delta_v': 0,
@@ -236,7 +255,10 @@ const LASER_CONFIG = {
 const METRES_PER_SCREEN_UNIT = 1.0 / 200.0;
 
 func ship_config(name):
-    return SHIP_CONFIG[name]
+    if name in SHIP_CONFIG:
+        return SHIP_CONFIG[name]
+    else:
+        return null
 
 func screen_to_metres(vec):
     return vec * METRES_PER_SCREEN_UNIT

@@ -13,6 +13,7 @@ const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.ts
 const Ark =  preload("res://Playfield/Satellite/ark/Ark.tscn");
 const Missile = preload("res://Playfield/Satellite/missile/Missile.tscn");
 const LaunchVehicle = preload("res://Playfield/LaunchVehicle/LaunchVehicle.tscn");
+const UsedLaunchVehicle = preload("res://Playfield/Satellite/used_launch_vehicle/UsedLaunchVehicle.tscn");
 
 
 const satellites = {
@@ -22,7 +23,8 @@ const satellites = {
     "science_station": ScienceStation,
     "space_hotel": SpaceHotel,
     "ark": Ark,
-    "missile": Missile
+    "missile": Missile,
+    "used_launch_vehicle": UsedLaunchVehicle
 }
 
 var selected_sat = null
@@ -87,10 +89,25 @@ func new_craft(type):
     var x = alt * cos(theta)
     var y = alt * sin(theta)
     var leo_alt = 0.5
-    
-    craft.launch(LaunchVehicle.instance(), Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
 
+    var lv = LaunchVehicle.instance()
+    craft.connect("satellite_entered_orbit", self, "_on_satellite_entered_orbit")
     craft.connect("clicked", self, "satellite_clicked")
+    craft.launch(lv, Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
+
+
+func _on_satellite_entered_orbit(craft, lv):
+    var ulv = UsedLaunchVehicle.instance()
+    ulv.init()
+
+    ulv.pos = craft.pos - craft.vel.normalized() * 0.1
+    ulv.set_rotation(craft.vel.angle())
+    ulv.vel = craft.vel * 0.95
+
+    self.add_child(ulv)
+    ulv.add_to_group("satellites")
+
+    craft.disconnect("satellite_entered_orbit", self, "_on_satellite_entered_orbit")
 
 
 func destroy_craft(craft):
