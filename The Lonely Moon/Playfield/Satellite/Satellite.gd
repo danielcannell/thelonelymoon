@@ -25,6 +25,7 @@ var leo_vel_theta = 0
 var launch_alt = 0
 var launch_vel_theta = 0
 var launch_vel_r = 0
+var orbit_progress_threshold = 0.99
 
 # Glow
 var has_glow = false
@@ -71,7 +72,7 @@ func launch_trajectory():
         vel_r * cos(theta) - vel_theta * sin(theta),
         vel_r * sin(theta) + vel_theta * cos(theta))
 
-    if progress > 0.99:
+    if progress > self.orbit_progress_threshold:
         enter_orbit()
 
     return vel
@@ -91,6 +92,7 @@ func launch(lv, p, leo_alt, leo_vel_theta):
     launch_vel_theta = -0.1
     launch_vel_r = 0.1
     self.pos = p
+
 
 func enter_orbit():
     in_orbit = true

@@ -9,6 +9,7 @@ func _ready():
         id_menu_lookup[m.id] = m
         id_display_lookup[m.id] = m['display_name']
     id_display_lookup['debris'] = "Debris"
+    id_display_lookup['missile'] = "Missile"
 
 
 const MENU_CONFIG = [

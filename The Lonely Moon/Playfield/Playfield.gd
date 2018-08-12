@@ -96,6 +96,31 @@ func new_craft(type):
     craft.connect("clicked", self, "satellite_clicked")
 
 
+func new_missile():
+    var missile = satellites["missile"].instance()
+    missile.init()
+
+    add_child(missile)
+    missile.connect("explode", self, "missile_explode", [missile])
+    missile.add_to_group("satellites")
+
+    var alt = 0.3
+
+    var theta = rand_range(0, 2 * PI)
+    var x = alt * cos(theta)
+    var y = alt * sin(theta)
+
+    missile.launch(Vector2(x, y))
+
+
+func missile_explode(object, missile):
+    if object:
+        craft_collision(object, missile)
+    else:
+        explode(missile.position, missile.props.explosion.scale)
+        destroy_craft(missile)
+
+
 func destroy_craft(craft):
     if selected_sat == craft:
         select_satellite(null)
@@ -269,10 +294,6 @@ func fire_button_released():
     laser_active = false
 
 
-func _physics_process(delta):
-    pass
-
-
 func start_dragging(event):
     dragging = true
     var sb = get_node("SelectionBox")
@@ -358,7 +379,7 @@ func _process(delta):
 
 func _input(event):
     if event.is_action_pressed("missile"):
-        new_craft("missile")
+        new_missile()
 
 
 func handle_game_over():
