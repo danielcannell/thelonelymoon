@@ -246,7 +246,7 @@ func report_collision(name1, name2):
         name2 = "Debris"
 
     # If this is only a debris/celestial body object, ignore
-    if name2 == "Debris" and ["Earth", "Moon"].has(name1):
+    if name2 == "Debris" and ["Earth", "Moon", "Laser"].has(name1):
         return
 
     emit_signal("notify", message % [name1, name2], global.NOTIFICATION_TYPE.BAD)
