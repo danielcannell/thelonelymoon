@@ -34,5 +34,6 @@ func get_satellites_contained():
             sats.append(s)
     return sats
 
+
 func get_center():
     return (drag_start + drag_end) / 2

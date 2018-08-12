@@ -22,6 +22,7 @@ var satellites = {
 var selected_sat = null
 
 var clicks = []
+var dragging = false
 
 
 func _ready():
@@ -122,10 +123,13 @@ func satellite_clicked(sat, event):
     if event in clicks:
         clicks.remove(clicks.find(event))
 
+    dragging = false
+
     select_satellite(sat)
 
 
 func start_dragging(event):
+    dragging = true
     var sb = get_node("SelectionBox")
     var viewport_pos = event.position
     var sb_transform = sb.get_global_transform_with_canvas()
@@ -135,6 +139,9 @@ func start_dragging(event):
 
 
 func finish_dragging(event):
+    if not dragging:
+        return
+
     var sb = get_node("SelectionBox")
     sb.visible = false
 
