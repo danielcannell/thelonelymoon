@@ -36,11 +36,14 @@ func set_thing(x):
 
 
 func set_enabled(enabled):
-    disabled = !enabled
     var btn = get_node("Background/Button")
-    btn.disabled = disabled
-    if btn.is_hovered() and disabled:
-        emit_signal("exited")
+    btn.disabled = !enabled
+    if btn.is_hovered():
+        if disabled and enabled:
+            emit_signal("entered")
+        elif !disabled and !enabled:
+            emit_signal("exited")
+    disabled = !enabled
 
 
 func clicked():
