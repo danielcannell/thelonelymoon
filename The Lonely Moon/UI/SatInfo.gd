@@ -26,6 +26,7 @@ func _process(delta):
         if state['in_range']:
             in_range_str = "yes"
         get_node("Background/C/InRange/InRangeVal").text = in_range_str
+        get_node("Background/C/Deltav/DeltavVal").text = "%.1f" % state['delta_v']
 
 func on_satellite_selected(sat):
     curr_sat = sat

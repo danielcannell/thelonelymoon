@@ -31,8 +31,14 @@ func _ready():
 func _unhandled_input(event):
     if event is InputEventMouseButton:
         if event.button_index == 1:
-            if event.pressed:
-                clicks.append(event)
+            clicks.append(event)
+
+    if event is InputEventMouseMotion:
+        var sb = get_node("SelectionBox")
+        var viewport_pos = event.position
+        var sb_transform = sb.get_global_transform_with_canvas()
+        var local_pos = (viewport_pos - sb_transform.get_origin()) / sb_transform.get_scale()
+        get_node("SelectionBox").set_drag_end(local_pos)
 
 
 func new_craft(type):
@@ -42,8 +48,8 @@ func new_craft(type):
         craft = satellites[type].instance()
     else:
         craft = Debris.instance()
-        
-        
+
+
     add_child(craft)
     craft.add_to_group("satellites")
     craft.configure(type)
@@ -56,7 +62,7 @@ func new_craft(type):
     var y = alt * sin(theta)
     craft.position = Vector2(x, y)
     craft.vel = get_node('Physics').vel_for_pos(craft.pos)
-    
+
     craft.connect("clicked", self, "satellite_clicked")
 
 
@@ -74,6 +80,9 @@ func destroy_craft(craft):
     splode.show()
     splode.play()
 
+
+    if craft == selected_sat:
+        select_satellite(null)
 
 
 func get_satellites():
@@ -104,7 +113,7 @@ func select_satellite(sat):
     else:
         good_orbit_range.visible = false
         orbit.visible = false
-    
+
     emit_signal("satellite_selected", sat)
 
 
@@ -116,25 +125,55 @@ func satellite_clicked(sat, event):
     select_satellite(sat)
 
 
+func start_dragging(event):
+    var sb = get_node("SelectionBox")
+    var viewport_pos = event.position
+    var sb_transform = sb.get_global_transform_with_canvas()
+    var local_pos = (viewport_pos - sb_transform.get_origin()) / sb_transform.get_scale()
+    sb.set_drag_start(local_pos)
+    sb.visible = true
+
+
+func finish_dragging(event):
+    var sb = get_node("SelectionBox")
+    sb.visible = false
+
+    var sats = sb.get_satellites_contained()
+    var center = sb.get_center()
+    var nearest = null
+    var nearest_dist = 99999999999999
+    for sat in sats:
+        var dist = center.distance_to(sat.position)
+        if dist < nearest_dist:
+            nearest_dist = dist
+            nearest = sat
+    select_satellite(nearest)
+
+
 func _process(delta):
     emit_signal("satellite_summary", delta, state())
 
-    for click_left in clicks:
+    for click in clicks:
         # This click was not eaten by a satellite
-        select_satellite(null)
+        if click.pressed:
+            select_satellite(null)
+            start_dragging(click)
+        else:
+            finish_dragging(click)
     clicks.clear()
-    
+
     if selected_sat:
+        var burn_fine = Input.is_action_pressed("burn_fine")
         if Input.is_action_pressed("burn_prograde"):
-            selected_sat.burn_prograde(delta)
+            selected_sat.burn(delta, true, burn_fine)
         elif Input.is_action_pressed("burn_retrograde"):
-            selected_sat.burn_retrograde(delta)
-            
+            selected_sat.burn(delta, false, burn_fine)
+
         var predicted_orbit = get_node('Physics').predict_orbit(selected_sat)
         var orbit = get_node('Orbit')
         orbit.points = PoolVector2Array(predicted_orbit)
         orbit.width = 2 * global.current_scale()
-    
+
 
 func handle_game_over():
     get_tree().change_scene('res://GameOver.tscn')
