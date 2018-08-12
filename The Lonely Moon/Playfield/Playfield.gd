@@ -71,13 +71,13 @@ func new_craft(type):
     craft.configure(type)
 
     var region = config.region
-    var alt = rand_range(global.SPACE_REGIONS[region].alt_min, global.SPACE_REGIONS[region].alt_max)
+    var alt = 0.3
 
     var theta = rand_range(0, 2 * PI)
     var x = alt * cos(theta)
     var y = alt * sin(theta)
-    craft.position = Vector2(x, y)
-    craft.vel = get_node('Physics').vel_for_pos(craft.pos)
+    var leo_alt = 0.5
+    craft.launch(Vector2(x, y), leo_alt, get_node('Physics').speed_for_alt(leo_alt))
 
     craft.connect("clicked", self, "satellite_clicked")
 
