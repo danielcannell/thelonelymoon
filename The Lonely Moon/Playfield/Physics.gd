@@ -1,6 +1,7 @@
 extends Node
 
-
+const ATMOS_MIN = 0.18
+const ATMOS_CUTOFF = 1.2
 const GRAVITY = 0.1
 
 
@@ -18,11 +19,28 @@ func calculate_accel(pos, massive_bodies):
         a += b.MASS * offset / pow(distance, 3)
 
     return GRAVITY * a
+        
+
+func atmospheric_drag(s, pos, vel):
+    var earth = get_node('../Earth')
+    var dist = (earth.pos - pos).length()
+    
+    if dist > ATMOS_CUTOFF:
+        return Vector2(0, 0)
+    if dist < ATMOS_MIN:
+        dist = ATMOS_MIN
+        
+    var scale = s.config.drag_ratio * vel.length()
+
+    # Compute drag in opposite direction to velocity    
+    var drag = - scale * 0.5 * exp((ATMOS_MIN - dist)/ATMOS_MIN) * vel
+    return drag
 
 
-func integrate_orbit(delta, pos, vel, massive_bodies):
+func integrate_orbit(s, delta, pos, vel, massive_bodies):
     pos += vel * delta / 2
     vel += calculate_accel(pos, massive_bodies) * delta
+    vel += atmospheric_drag(s, pos, vel) * delta
     pos += vel * delta / 2
     return [pos, vel]
 
@@ -40,7 +58,7 @@ func predict_orbit(sat):
 
     for i in range(200):
         var delta = min(0.2 / vel.length(), pos.length() / 4)
-        var result = integrate_orbit(delta, pos, vel, massive_bodies)
+        var result = integrate_orbit(sat, delta, pos, vel, massive_bodies)
         pos = result[0]
         vel = result[1]
 
@@ -71,7 +89,7 @@ func _physics_process(delta):
 
     for s in satellites:
         if s and s.active:   
-            var result = integrate_orbit(delta, s.pos, s.vel, massive_bodies)
+            var result = integrate_orbit(s, delta, s.pos, s.vel, massive_bodies)
             # s.pos = result[0]
             s.vel = result[1]
             
