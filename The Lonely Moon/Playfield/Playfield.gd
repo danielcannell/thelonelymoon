@@ -9,6 +9,7 @@ const SpySatellite = preload("res://Playfield/Satellite/spy_satellite/SpySatelli
 const CubeSat = preload("res://Playfield/Satellite/cube_sat/CubeSat.tscn");
 const ScienceStation = preload("res://Playfield/Satellite/science_station/ScienceStation.tscn");
 const SpaceHotel =  preload("res://Playfield/Satellite/space_hotel/SpaceHotel.tscn");
+const Ark =  preload("res://Playfield/Satellite/ark/Ark.tscn");
 
 
 const satellites = {
@@ -17,6 +18,7 @@ const satellites = {
     "spy_satellite": SpySatellite,
     "science_station": ScienceStation,
     "space_hotel": SpaceHotel,
+    "ark": Ark,
 }
 
 var selected_sat = null
@@ -83,7 +85,7 @@ func new_craft(type):
 
 func destroy_craft(craft):
     if selected_sat == craft:
-        select_satellite(null) 
+        select_satellite(null)
 
     remove_child(craft)
     craft.set_collision_layer_bit(1, false)
@@ -142,7 +144,7 @@ func create_debris(pos, vel, amount):
 func craft_collision(craft1, craft2):
     if craft1.type == "debris" and craft2.type == "debris":
         return
-        
+
     if not craft1.active or not craft2.active:
         return
 
@@ -262,15 +264,15 @@ func _process(delta):
         var colliding_bodies = d.get_node("PlacementArea").get_overlapping_bodies()
         d.get_node("PlacementArea").monitorable = false
         d.get_node("PlacementArea").monitoring = false
-        if colliding_bodies: 
+        if colliding_bodies:
             destroy_craft(d)
         else:
             d.add_to_group("satellites")
             d.active = true
-    
+
     if inactive_debris:
         inactive_debris = []
-    
+
 
 func handle_game_over():
     get_tree().change_scene('res://GameOver.tscn')

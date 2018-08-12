@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Playfield/Earth/Earth.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Earth/north_pole_earth.png" type="Texture" id=2]
+[ext_resource path="res://Playfield/Earth/laser_cannon.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 10.0
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 2.5, 50 )
 
 [node name="Earth" type="Area2D" index="0"]
 
@@ -32,6 +38,48 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( -0.0778377, 0.174634 )
 scale = Vector2( 0.0784724, 0.0784724 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="laser_cannon" type="Sprite" parent="." index="2"]
+
+position = Vector2( 0, -51 )
+scale = Vector2( 0.428749, 0.428749 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="LaserBeam" type="Area2D" parent="." index="3"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="HitArea" type="CollisionShape2D" parent="LaserBeam" index="0"]
+
+position = Vector2( 0, -106 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Beam" type="Polygon2D" parent="LaserBeam" index="1"]
+
+position = Vector2( -1.2, -56 )
+polygon = PoolVector2Array( 0, 0, 2.4, 0, 2.4, -100, 0, -100 )
+uv = PoolVector2Array(  )
+color = Color( 1, 0, 0, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = true
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+_sections_unfolded = [ "Transform" ]
 
 

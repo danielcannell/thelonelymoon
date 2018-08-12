@@ -45,8 +45,6 @@ func btn_finished(btn):
         make_satellite(id, thing.display_name)
     elif type == "fundraise":
         make_fundraise(id)
-    elif type == "ark":
-        get_tree().change_scene("res://Victory.tscn")
 
 
 func btn_entered(btn):
