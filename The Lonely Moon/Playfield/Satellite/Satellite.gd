@@ -29,15 +29,18 @@ var props = {
     "delta_v": 50,
     "income": 10,
     "time_constant": 5000,
-    "drag_ratio": 0.1
+    "drag_ratio": 0.1,
+    "thrust": 0.1,
 }
 
 signal clicked(sat)
 
 func init(props=null):
-    if props != null:
+    if props == null:
         if type in global.SHIP_CONFIG:
-            self.props = global.SHIP_CONFIG[type]
+            props = global.SHIP_CONFIG[type]
+
+    self.props = props
     delta_v = self.props.delta_v
 
 func launch_trajectory():
@@ -94,7 +97,7 @@ func burn(delta, is_prograde, is_fine):
     # Abandon launch trajectory if the player takes control
     in_orbit = true
 
-    var dv = delta * BURN_RATE
+    var dv = delta * props['thrust']
     if is_fine:
         dv *= 0.2
     if dv > delta_v:
