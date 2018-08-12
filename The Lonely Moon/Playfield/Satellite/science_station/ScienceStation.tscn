@@ -3,12 +3,13 @@
 [ext_resource path="res://Playfield/Satellite/science_station/ScienceStation.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Satellite/science_station/science_station.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+radius = 10.0
+height = 20.0
 
-[node name="Satellite" type="KinematicBody2D" index="0"]
+[node name="Satellite" type="KinematicBody2D"]
 
 scale = Vector2( 0.02, 0.02 )
 input_pickable = true
@@ -24,8 +25,8 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -5.0106, -20.5948 )
-scale = Vector2( 78.974, 37.7839 )
+position = Vector2( -5.09844, 24.1118 )
+scale = Vector2( 66.4906, 20.0006 )
 shape = SubResource( 1 )
 
 [node name="Selectbox" type="Line2D" parent="." index="2"]

@@ -85,12 +85,15 @@ func description():
     if thing.type == "fundraise":
         var c = global.FUNDRAISE_CONFIG[thing.id]
         usage = "Earn money when task completes."
-        stats = 'Income: Between %d and %d btc.' % [c.raised_min, c.raised_max]
-    elif thing.type == "satellite":
+        stats = 'Wait time: %d seconds\nIncome: Between %d and %d btc.' % [thing.build_time, c.raised_min, c.raised_max]
+    elif thing.type == "satellite" or thing.type == "ark":
         var c = global.SHIP_CONFIG[thing.id]
         usage = "Launch satellite when task completes."
-        stats = 'Starting Income: %d btc/second.\nDelta-V: %d' % [c.income, c.delta_v]
-    else:
-        usage = 'ERROR'
-        stats = 'ERROR'
+        stats = 'Build time: %d seconds\nStarting Income: %d btc/second.\nDelta-V: %d' % [thing.build_time, c.income, c.delta_v]
+    elif thing.type == "laser":
+        var c = global.LASER_CONFIG[thing.id]
+        usage = 'Charge the lasers up so you can click the button and fire!'
+        stats = 'Wait time: %d seconds\nLaser time set to: %d seconds' % [thing.build_time, c.time_earned]
+    if thing.id == "ark":
+        usage += "\nNavigate the Ark Away from the Earth and to safety!"
     return thing.description + '\n\n' + usage + '\n\n' + stats

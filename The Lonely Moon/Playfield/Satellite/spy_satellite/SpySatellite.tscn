@@ -3,10 +3,11 @@
 [ext_resource path="res://Playfield/Satellite/spy_satellite/SpySatellite.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Satellite/spy_satellite/spy_sat.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+radius = 10.0
+height = 20.0
 
 [node name="Satellite" type="KinematicBody2D" index="0"]
 
@@ -24,9 +25,9 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -5.0106, 3.33984 )
-scale = Vector2( 78.974, 55.7232 )
+scale = Vector2( 69.4167, 27.2379 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Selectbox" type="Line2D" parent="." index="2"]
 

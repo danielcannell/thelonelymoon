@@ -18,7 +18,6 @@ func _on_body_entered(body):
     # called when a Physics body entered the earth
     get_node("..").earth_collision(body)
 
-
 func _ready():
     connect("body_entered", self, "_on_body_entered")
     get_node("LaserBeam").connect("body_entered", self, "_on_body_entered")

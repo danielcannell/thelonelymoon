@@ -3,14 +3,15 @@
 [ext_resource path="res://Playfield/Satellite/cube_sat/CubeSat.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Satellite/cube_sat/cube_sat.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+radius = 10.0
+height = 20.0
 
-[node name="Satellite" type="KinematicBody2D" index="0"]
+[node name="Satellite" type="KinematicBody2D"]
 
-scale = Vector2( 0.02, 0.02 )
+scale = Vector2( 0.015, 0.015 )
 input_pickable = true
 collision_layer = 2
 collision_mask = 3
@@ -18,19 +19,12 @@ collision/safe_margin = 0.5
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-
-position = Vector2( -1.45585, 4.06064 )
-scale = Vector2( 77.4526, 21.1569 )
-z_index = 1
-shape = SubResource( 1 )
-_sections_unfolded = [ "Z Index" ]
-
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Selectbox" type="Line2D" parent="." index="2"]
+[node name="Selectbox" type="Line2D" parent="." index="1"]
 
 position = Vector2( -4.81983, 16.0946 )
 scale = Vector2( 6.22255, 3.7538 )
@@ -40,5 +34,12 @@ default_color = Color( 0.4, 0.5, 1, 1 )
 texture_mode = -13556705
 sharp_limit = 2.0
 round_precision = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+scale = Vector2( 49.6219, 14 )
+z_index = 1
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 

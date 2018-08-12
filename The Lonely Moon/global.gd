@@ -75,33 +75,67 @@ const SHIP_CONFIG = {
         'region': 'leo',
         'delta_v': 50,
         'income': 10,
-        'time_constant': 5000,
+        'time_constant': 60,
         'drag_ratio': 0.1,
         'thrust': 0.1,
+        "debris": {
+            "radius": 0.03,
+            "amount": 3,
+            "impluse": 0.01,
+        },
+        "explosion": {
+            "scale": 0.4
+        }
     },
     'spy_satellite': {
         'region': 'region2',
         'delta_v': 100,
         'income': 25,
-        'time_constant': 5000,
+        'time_constant': 60,
         'drag_ratio': 0.3,
         'thrust': 0.1,
+        "debris": {
+            "radius": 0.04,
+            "amount": 5,
+            "impluse": 0.02,
+        },
+        "explosion": {
+            "scale": 0.6
+        }
     },
     'science_station': {
         'region': 'region3',
         'delta_v': 150,
         'income': 100,
-        'time_constant': 5000,
+        'time_constant': 200,
         'drag_ratio': 0.7,
         'thrust': 0.1,
+        "radius":  0.04,
+        "debris": {
+            "radius": 0.05,
+            "amount": 10,
+            "impluse": 0.01,
+        },
+        "explosion": {
+            "scale": 0.8
+        }
     },
     'space_hotel': {
         'region': 'region4',
         'delta_v': 150,
         'income': 10000,
-        'time_constant': 5000,
+        'time_constant': 40,
         'drag_ratio': 2,
         'thrust': 0.1,
+        "radius":  0.04,
+        "debris": {
+            "radius": 0.07,
+            "amount": 20,
+            "impluse": 0.01,
+        },
+        "explosion": {
+            "scale": 1
+        }
     },
     'ark': {
         'region': 'outer_space',
@@ -110,6 +144,15 @@ const SHIP_CONFIG = {
         'time_constant': 1,
         'drag_ratio': 0.2,
         'thrust': 0.01,
+        "radius":  0.4,
+        "debris": {
+            "radius": 0.1,
+            "amount": 50,
+            "impluse": 0.5,
+        },
+        "explosion": {
+            "scale": 2
+        }
     },
     "debris": {
         'region': null,
@@ -118,6 +161,11 @@ const SHIP_CONFIG = {
         'time_constant': 0,
         'drag_ratio': 0.1,
         'thrust': 0,
+        "radius":  0.04,
+        "debris": null,
+        "explosion": {
+            "scale": 0.2
+        }
     },
     "missile": {
         'region': null,
@@ -125,6 +173,15 @@ const SHIP_CONFIG = {
         'income': 0,
         'time_constant': 0,
         'drag_ratio': 0.1,
+        "radius":  0.04,
+        "debris": {
+            "radius": 0.07,
+            "amount": 15,
+            "impluse": 0.07,
+        },
+        "explosion": {
+            "scale": 1.5
+        }
     }
 }
 
@@ -159,6 +216,12 @@ const FUNDRAISE_CONFIG = {
     'indiegogo': {
         'raised_min': 2000,
         'raised_max': 4000,
+    }
+}
+
+const LASER_CONFIG = {
+    'laser_charge': {
+        'time_earned': 2,
     }
 }
 
