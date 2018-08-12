@@ -16,7 +16,7 @@ func get_pos():
 
 func _on_body_entered(body):
     # called when a Physics body entered the earth
-    get_node("..").no_debris_collision(body, 'Earth')
+    get_node("..").no_debris_collision(body, 'Laser')
 
 func _ready():
     connect("body_entered", self, "_on_body_entered")

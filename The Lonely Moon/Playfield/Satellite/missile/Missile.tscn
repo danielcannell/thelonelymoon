@@ -1,39 +1,76 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Playfield/Satellite/missile/Missile.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Satellite/missile/tail.png" type="Texture" id=2]
 [ext_resource path="res://Playfield/Satellite/missile/spr_missile.png" type="Texture" id=3]
-
+[ext_resource path="res://Playfield/Satellite/missile/Circle.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 75.0
+
 [node name="Missile" type="KinematicBody2D" index="0"]
 
 position = Vector2( 0, 0.258385 )
+scale = Vector2( 0.5, 0.5 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Tail" type="Sprite" parent="." index="0"]
 
-position = Vector2( -31.7279, -0.569321 )
+position = Vector2( -0.684446, 32.0787 )
+rotation = -1.5708
 scale = Vector2( 0.640781, 0.448241 )
 texture = ExtResource( 2 )
 offset = Vector2( -19.5556, -0.550032 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Body" type="Sprite" parent="." index="1"]
 
+rotation = -1.5708
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
 position = Vector2( -0.3161, -0.364671 )
+rotation = -1.5708
 scale = Vector2( 2.97539, 0.62898 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BlastRadius" type="Area2D" parent="." index="3"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitorable = false
+collision_layer = 2
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlastRadius" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="Circle" type="Node2D" parent="BlastRadius" index="1"]
+
+script = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+radius = 75.0
 
 
