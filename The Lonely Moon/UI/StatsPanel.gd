@@ -14,7 +14,7 @@ func increment(dict, key, update=1):
     dict[key] += update
     
 
-func update_stats(delta, stats, debris_count):
+func update_stats(delta, stats, debris_count, moon_state):
     var in_range = {}
     var up = {}
     var income = {}
@@ -35,6 +35,10 @@ func update_stats(delta, stats, debris_count):
             message += fmt % [m.display_name, up[m.id], in_range[m.id], income[m.id]]
     
     message += """Debris:
-        in space: %d""" % debris_count
+        in space: %d
+""" % debris_count
+        
+    message += """Moon distance:
+        %d units (from %d units)""" % moon_state
 
     status.text = message

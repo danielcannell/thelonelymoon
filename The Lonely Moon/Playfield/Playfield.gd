@@ -180,7 +180,8 @@ func state():
             st.append(sat.state())
         elif sat.active and sat.type == 'debris':
             debris_count += 1
-    return [st, debris_count]
+    var m = get_node('Moon')
+    return [st, debris_count, [m.distance, m.start_distance]]
 
 
 func select_satellite(sat):

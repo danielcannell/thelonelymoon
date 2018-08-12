@@ -87,8 +87,9 @@ func set_money(amt):
 func _on_Playfield_satellite_summary(delta, state):
     var satellites = state[0]
     var debris_count = state[1]
+    var moon_state = state[2]
     get_node("Economy").receive_state(delta, satellites)
-    get_node("StatsPanel").update_stats(delta, satellites, debris_count)
+    get_node("StatsPanel").update_stats(delta, satellites, debris_count, moon_state)
 
 
 func on_satellite_selected(sat):

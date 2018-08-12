@@ -7,9 +7,14 @@ const FALL_SPEED = 0.01
 const MASS = 0.123
 
 var theta = 0
-var distance = 5000
+var start_distance = 5000
+var distance
 
 var pos = Vector2() setget set_pos, get_pos
+
+
+func _ready():
+    distance = start_distance
 
 
 func set_pos(pos):
