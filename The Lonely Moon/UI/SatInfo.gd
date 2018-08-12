@@ -5,11 +5,7 @@ var curr_sat = null
 
 
 func lookup_sat_name(type):
-    for e in global.MENU_CONFIG:
-        if e['id'] == type:
-            return e['display_name']
-
-    return "UNKNOWN"
+    return global.id_display_lookup[type]
 
 
 func _process(delta):

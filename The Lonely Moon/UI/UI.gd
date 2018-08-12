@@ -12,6 +12,7 @@ var shop_items = []
 
 func _ready():
     get_node("Economy").connect("update_balance", self, "set_money")
+    get_node("../../Playfield").connect("notify", self, "create_notification")
 
     # Create buttons from config
     for x in global.MENU_CONFIG:
@@ -48,8 +49,6 @@ func btn_finished(btn):
         make_fundraise(id)
     elif type == "laser":
         make_laser()
-    elif type == "ark":
-        get_tree().change_scene("res://Victory.tscn")
 
 
 func btn_entered(btn):

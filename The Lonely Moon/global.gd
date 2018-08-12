@@ -1,7 +1,15 @@
 extends Node
 
+var id_display_lookup = {}
+var id_menu_lookup = {}
+
+
 func _ready():
-    pass
+    for m in MENU_CONFIG:
+        id_menu_lookup[m.id] = m
+        id_display_lookup[m.id] = m['display_name']
+    id_display_lookup['debris'] = "Debris"
+
 
 const MENU_CONFIG = [
     {

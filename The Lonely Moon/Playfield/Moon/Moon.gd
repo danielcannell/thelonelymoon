@@ -12,7 +12,8 @@ var pos = Vector2() setget set_pos, get_pos
 
 func _ready():
     distance = start_distance
-    connect("area_entered", self, "_on_area_entered")
+    connect("area_entered", self, "_on_entered")
+    connect("body_entered", self, "_on_entered")
 
 
 func set_pos(pos):
@@ -22,8 +23,9 @@ func set_pos(pos):
 func get_pos():
     return global.screen_to_metres(position)
 
-func _on_area_entered(body):
-    get_node("..").earth_collision(body)
+
+func _on_entered(body):
+    get_node("..").moon_collision(body)
 
 
 func _process(delta):
