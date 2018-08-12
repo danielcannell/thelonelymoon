@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://starfield.jpg" type="Texture" id=1]
-[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Camera.gd" type="Script" id=4]
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://starfield.jpg" type="Texture" id=2]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Playfield/Playfield.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera.gd" type="Script" id=5]
 
 [node name="Node" type="Node"]
+
+script = ExtResource( 1 )
 
 [node name="StarfieldLayer" type="CanvasLayer" parent="." index="0"]
 
@@ -19,7 +22,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 position = Vector2( 612, 300 )
 z_index = -100
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="UiLayer" type="CanvasLayer" parent="." index="1"]
@@ -30,9 +33,9 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="UI" parent="UiLayer" index="0" instance=ExtResource( 2 )]
+[node name="UI" parent="UiLayer" index="0" instance=ExtResource( 3 )]
 
-[node name="Playfield" parent="." index="2" instance=ExtResource( 3 )]
+[node name="Playfield" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 612, 300 )
 _sections_unfolded = [ "Anchor", "Rect", "Visibility" ]
@@ -62,7 +65,7 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Transform" ]
 
 [connection signal="charge_laser" from="UiLayer/UI" to="Playfield" method="charge_laser"]
