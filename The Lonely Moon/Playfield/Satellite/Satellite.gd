@@ -41,7 +41,7 @@ func init(props=null):
             props = global.SHIP_CONFIG[type]
 
     self.props = props
-    delta_v = self.props.delta_v
+    delta_v = self.props.delta_v / 100.0
 
 func launch_trajectory():
     var progress = (self.pos.length() - launch_alt) / (leo_alt - launch_alt)
@@ -136,5 +136,5 @@ func state():
         'in_range': in_range,
         'uptime': uptime,
         'type': type,
-        'delta_v': delta_v,
+        'delta_v': 100 * delta_v,
     }
