@@ -42,7 +42,11 @@ round_precision = 8
 
 [node name="GoodOrbitRange" parent="." index="5" instance=ExtResource( 5 )]
 
+filled = true
+
 [node name="ShopOrbitRange" parent="." index="6" instance=ExtResource( 5 )]
+
+filled = false
 
 [node name="Atmosphere" type="Sprite" parent="." index="7"]
 
