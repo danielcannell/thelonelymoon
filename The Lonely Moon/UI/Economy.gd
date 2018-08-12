@@ -10,7 +10,7 @@ func _ready():
     pass
     
 
-func ship_income(uptime, type):
+static func ship_income(uptime, type):
     var c = global.ship_config(type)
     if uptime < c.time_constant:
         return c.income
