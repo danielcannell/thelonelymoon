@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Playfield/Satellite/debris/Debris.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Satellite/debris/debris_1.png" type="Texture" id=2]
@@ -8,15 +8,20 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[sub_resource type="CircleShape2D" id=2]
 
-scale = Vector2( 0.2, 0.2 )
-input_pickable = true
-collision_layer = 1
-collision_mask = 1
+custom_solver_bias = 0.0
+radius = 10.0
+
+[node name="Debris" type="KinematicBody2D" index="0"]
+
+scale = Vector2( 0.06, 0.06 )
+input_pickable = false
+collision_layer = 2
+collision_mask = 3
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Pickable", "Transform" ]
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "collision" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -40,5 +45,27 @@ default_color = Color( 0.4, 0.5, 1, 1 )
 texture_mode = -13556705
 sharp_limit = 2.0
 round_precision = 8
+
+[node name="PlacementArea" type="Area2D" parent="." index="3"]
+
+input_pickable = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitorable = false
+collision_layer = 2
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Pickable" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementArea" index="0"]
+
+modulate = Color( 0.75, 0.562834, 0.146484, 1 )
+show_behind_parent = true
+scale = Vector2( 9, 9 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 
