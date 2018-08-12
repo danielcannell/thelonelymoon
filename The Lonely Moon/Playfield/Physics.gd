@@ -1,9 +1,8 @@
 extends Node
 
-
-const GRAVITY = 0.1
 const ATMOS_MIN = 0.18
 const ATMOS_CUTOFF = 1.2
+const GRAVITY = 0.1
 
 
 func vel_for_pos(pos):
@@ -18,9 +17,9 @@ func calculate_accel(pos, massive_bodies):
         var offset = b.pos - pos
         var distance = offset.length()
         a += b.MASS * offset / pow(distance, 3)
-        
+
     return GRAVITY * a
-    
+        
 
 func atmospheric_drag(s, pos, vel):
     var earth = get_node('../Earth')
@@ -89,12 +88,20 @@ func _physics_process(delta):
     var satellites = get_node('..').get_satellites()
 
     for s in satellites:
-        var result = integrate_orbit(s, delta, s.pos, s.vel, massive_bodies)
-        s.vel = result[1]
-        var collision_info = s.move_and_collide_metres(result[0] - s.pos)
-        if collision_info:
-            print(collision_info.collider.type + " Collision")
-            if collision_info.collider.type == "earth":
-                get_node("..").destroy_craft(s)
-            else:
-                print("Satellite Collision!")
+        if s and s.active:   
+            var result = integrate_orbit(s, delta, s.pos, s.vel, massive_bodies)
+            # s.pos = result[0]
+            s.vel = result[1]
+            
+            if s.type == "debris":
+                s.pos = result[0]
+                continue
+
+            var collision_info = s.move_and_collide_metres(result[0] - s.pos)
+            
+            if collision_info:
+                if collision_info.collider.type == "earth":
+                    get_node("..").earth_collision(s)
+                else:
+                    get_node("..").craft_collision(s, collision_info.collider)
+            

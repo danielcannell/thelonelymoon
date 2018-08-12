@@ -1,6 +1,5 @@
 extends "res://Playfield/Satellite/Satellite.gd"
 
-const type = "debris"
 
 # class member variables go here, for example:
 # var a = 2
@@ -9,6 +8,8 @@ const type = "debris"
 func _ready():
     # Called when the node is added to the scene for the first time.
     # Initialization here
+    type = "debris"
+    mass = 0.2
     pass
 
 #func _process(delta):
