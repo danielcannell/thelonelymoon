@@ -252,8 +252,15 @@ func report_collision(name1, name2):
     emit_signal("notify", message % [name1, name2], global.NOTIFICATION_TYPE.BAD)
 
 
-func get_satellites():
-    return get_tree().get_nodes_in_group("satellites")
+func get_satellites(type=null):
+    if type == null:
+        return get_tree().get_nodes_in_group("satellites")
+
+    var matches = []
+    for s in get_tree().get_nodes_in_group("satellites"):
+        if s.type == type:
+            matches.append(s)
+    return matches
 
 
 func state():
@@ -261,7 +268,7 @@ func state():
     var debris_count = 0
     for sat in get_satellites():
         if sat.active and sat.type != "debris":
-            st.append(sat.state())
+            st.append(sat)
         elif sat.active and sat.type == 'debris':
             debris_count += 1
     var m = get_node('Moon')

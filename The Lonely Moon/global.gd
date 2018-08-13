@@ -94,6 +94,7 @@ const SHIP_CONFIG = {
         'region': 'leo',
         'delta_v': 50,
         'income': 10,
+        'constellation_bonus': 1.2,
         'time_constant': 60,
         'drag_ratio': 0.1,
         'thrust': 0.1,
@@ -111,6 +112,7 @@ const SHIP_CONFIG = {
         'region': null,
         'delta_v': 100,
         'income': 0,
+        'constellation_bonus': 0,
         'time_constant': 1,
         'drag_ratio': 3,
         'thrust': 0.1,
@@ -128,6 +130,7 @@ const SHIP_CONFIG = {
         'region': 'region2',
         'delta_v': 100,
         'income': 25,
+        'constellation_bonus': 1,
         'time_constant': 60,
         'drag_ratio': 0.3,
         'thrust': 0.1,
@@ -145,6 +148,7 @@ const SHIP_CONFIG = {
         'region': 'region3',
         'delta_v': 150,
         'income': 100,
+        'constellation_bonus': 0,
         'time_constant': 200,
         'drag_ratio': 0.7,
         'thrust': 0.1,
@@ -163,6 +167,7 @@ const SHIP_CONFIG = {
         'region': 'region4',
         'delta_v': 150,
         'income': 10000,
+        'constellation_bonus': 0,
         'time_constant': 40,
         'drag_ratio': 2,
         'thrust': 0.1,
@@ -181,6 +186,7 @@ const SHIP_CONFIG = {
         'region': 'outer_space',
         'delta_v': 100,
         'income': 0,
+        'constellation_bonus': 0,
         'time_constant': 1,
         'drag_ratio': 0.2,
         'thrust': 0.01,
@@ -199,8 +205,9 @@ const SHIP_CONFIG = {
         'region': null,
         'delta_v': 0,
         'income': 0,
+        'constellation_bonus': 0,
         'time_constant': 0,
-        'drag_ratio': 0.1,
+        'drag_ratio': 0.12,
         'thrust': 0,
         "radius":  0.04,
         "debris": null,
@@ -213,6 +220,7 @@ const SHIP_CONFIG = {
         'region': null,
         'delta_v': 0,
         'income': 0,
+        'constellation_bonus': 0,
         'time_constant': 0,
         'drag_ratio': 1.5,
         'thrust': 0,
@@ -231,6 +239,7 @@ const SHIP_CONFIG = {
         'region': null,
         'delta_v': 0,
         'income': 0,
+        'constellation_bonus': 0,
         'time_constant': 0,
         'drag_ratio': 0.1,
         "radius":  0.04,
@@ -313,3 +322,54 @@ func set_pos_metres(node, pos):
 
 func current_scale():
     return get_node('/root/Node/Playfield/Camera').zoom.x
+
+
+func _filter_in_range_satellites(sats, type):
+    var matches = []
+    for s in sats:
+        if s.type == type and s.in_range():
+            matches.append(s)
+    return matches
+
+func constellation_size(sats, type):
+    return _filter_in_range_satellites(sats, type).size()
+
+
+func deep_copy(v):
+    var t = typeof(v)
+
+    if t == TYPE_DICTIONARY:
+        var d = {}
+        for k in v:
+            d[k] = deep_copy(v[k])
+        return d
+
+    elif t == TYPE_ARRAY:
+        var d = []
+        d.resize(len(v))
+        for i in range(len(v)):
+            d[i] = deep_copy(v[i])
+        return d
+
+    elif t == TYPE_OBJECT:
+        if v.has_method("duplicate"):
+            return v.duplicate()
+        else:
+            print("Found an object, but I don't know how to copy it!")
+            return v
+
+    else:
+        # Other types should be fine,
+        # they are value types (except poolarrays maybe)
+        return v
+
+func merge_dict(target, patch):
+    for key in patch:
+        if target.has(key):
+            var tv = target[key]
+            if typeof(tv) == TYPE_DICTIONARY:
+                merge_dict(tv, patch[key])
+            else:
+                target[key] = patch[key]
+        else:
+            target[key] = patch[key]

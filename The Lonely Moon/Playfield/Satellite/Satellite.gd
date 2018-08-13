@@ -41,6 +41,7 @@ const default_props = {
     "match_rot_to_vel": true,
     "delta_v": 0,
     "income": 0,
+    "constellation_bonus": 0,
     "time_constant": 0,
     "drag_ratio": 0.1,
     "thrust": 0.1,

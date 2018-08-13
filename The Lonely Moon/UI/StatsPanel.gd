@@ -21,8 +21,8 @@ func update_stats(delta, stats, debris_count, moon_state):
     
     for sat in stats:
         increment(up, sat.type)
-        increment(in_range, sat.type, 1 if sat.in_range else 0)
-        increment(income, sat.type, economy.ship_income(sat.uptime, sat.type) if sat.in_range else 0)
+        increment(in_range, sat.type, 1 if sat.in_range() else 0)
+        increment(income, sat.type, economy.ship_income(sat, stats) if sat.in_range() else 0)
         
     var fmt = """%s
         in space: %d

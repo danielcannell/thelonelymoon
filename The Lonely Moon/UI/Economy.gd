@@ -9,22 +9,30 @@ func _ready():
     # Initialization here
     pass
     
+static func constellation_bonus(sat, size):
+    return (1 + sat.props.constellation_bonus * (size - 1))
 
-static func ship_income(uptime, type):
-    var c = global.ship_config(type)
-    if c == null:
+static func ship_income(ship, satellites):
+    var props = ship.props
+    var state = ship.state()
+    
+    if props.income == 0:
         return 0
-    
-    if uptime < c.time_constant:
-        return c.income
-    
-    return lerp(c.income, 0.25 * c.income, (uptime - c.time_constant) / (4 * c.time_constant))
+
+    var constell_size = global.constellation_size(satellites, ship.type)
+    var base_income = props.income * constellation_bonus(ship, constell_size)
+
+    if state.uptime < props.time_constant:
+        return base_income
+
+    return lerp(base_income, 0.25 * base_income, (state.uptime - props.time_constant) / (4 * props.time_constant))
+
 
 func receive_state(delta, state):
     var income = 0
     for ship in state:
-        if ship.in_range:
-            income += delta * ship_income(ship.uptime, ship.type)
+        if ship.in_range():
+            income += delta * ship_income(ship, state)
     balance += income
 
     emit_signal("update_balance", balance)
