@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Satellite" type="KinematicBody2D" index="0"]
+[node name="Satellite" type="KinematicBody2D"]
 
 input_pickable = true
 collision_layer = 2
@@ -27,17 +27,6 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Selectbox" type="Line2D" parent="." index="2"]
-
-scale = Vector2( 0.5, 0.5 )
-points = PoolVector2Array( -60, 60, 60, 60, 60, -60, -60, -60, -60, 60 )
-width = 10.0
-default_color = Color( 0.4, 0.5, 1, 1 )
-texture_mode = -13556705
-sharp_limit = 2.0
-round_precision = 8
 _sections_unfolded = [ "Transform" ]
 
 

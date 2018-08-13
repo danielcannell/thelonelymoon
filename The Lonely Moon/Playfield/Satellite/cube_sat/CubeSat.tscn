@@ -24,18 +24,7 @@ _sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collisi
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Selectbox" type="Line2D" parent="." index="1"]
-
-position = Vector2( -4.81983, 16.0946 )
-scale = Vector2( 6.22255, 3.7538 )
-points = PoolVector2Array( -100, 60, 100, 60, 100, -60, -100, -60, -100, 60 )
-width = 10.0
-default_color = Color( 0.4, 0.5, 1, 1 )
-texture_mode = -13556705
-sharp_limit = 2.0
-round_precision = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 scale = Vector2( 49.6219, 14 )
 z_index = 1

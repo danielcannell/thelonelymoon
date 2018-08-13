@@ -13,7 +13,7 @@ radius = 10.0
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Debris" type="KinematicBody2D" index="0"]
+[node name="Debris" type="KinematicBody2D"]
 
 scale = Vector2( 0.06, 0.06 )
 input_pickable = false
@@ -35,18 +35,7 @@ scale = Vector2( 4.05401, 4.05401 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Selectbox" type="Line2D" parent="." index="2"]
-
-position = Vector2( -0.372728, 1.12548 )
-scale = Vector2( 0.401014, 0.591339 )
-points = PoolVector2Array( -100, 60, 100, 60, 100, -60, -100, -60, -100, 60 )
-width = 10.0
-default_color = Color( 0.4, 0.5, 1, 1 )
-texture_mode = -13556705
-sharp_limit = 2.0
-round_precision = 8
-
-[node name="PlacementArea" type="Area2D" parent="." index="3"]
+[node name="PlacementArea" type="Area2D" parent="." index="2"]
 
 input_pickable = false
 gravity_vec = Vector2( 0, 1 )

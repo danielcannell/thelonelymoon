@@ -29,16 +29,4 @@ scale = Vector2( 70.0698, 20.1925 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Selectbox" type="Line2D" parent="." index="2"]
-
-position = Vector2( 8.72981, 7.8682 )
-scale = Vector2( 7.46091, 8.41044 )
-points = PoolVector2Array( -100, 60, 100, 60, 100, -60, -100, -60, -100, 60 )
-width = 10.0
-default_color = Color( 0.4, 0.5, 1, 1 )
-texture_mode = -13556705
-sharp_limit = 2.0
-round_precision = 8
-_sections_unfolded = [ "Transform" ]
-
 

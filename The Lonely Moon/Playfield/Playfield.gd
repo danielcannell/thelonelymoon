@@ -286,6 +286,7 @@ func select_satellite(sat):
 
     var good_orbit_range = get_node('GoodOrbitRange')
     var orbit = get_node('Orbit')
+    var box = get_node('Selected')
 
     if sat:
         sat.select()
@@ -294,9 +295,11 @@ func select_satellite(sat):
             good_orbit_range.set_range(alt_range[0], alt_range[1])
             good_orbit_range.visible = true
         orbit.visible = true
+        box.visible = true
     else:
         good_orbit_range.visible = false
         orbit.visible = false
+        box.visible = false
 
     emit_signal("satellite_selected", sat)
 
@@ -380,6 +383,8 @@ func _process(delta):
         var orbit = get_node('Orbit')
         orbit.points = PoolVector2Array(predicted_orbit)
         orbit.width = 2 * global.current_scale()
+        
+        get_node("Selected").place(selected_sat.position)
 
     for d in inactive_debris:
         var colliding_bodies = d.get_node("PlacementArea").get_overlapping_bodies()
