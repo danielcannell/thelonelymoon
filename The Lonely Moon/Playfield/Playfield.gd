@@ -328,6 +328,7 @@ func start_dragging(event):
     var sb_transform = sb.get_global_transform_with_canvas()
     var local_pos = (viewport_pos - sb_transform.get_origin()) / sb_transform.get_scale()
     sb.set_drag_start(local_pos)
+    sb.set_drag_end(local_pos)
     sb.visible = true
 
 
