@@ -6,6 +6,7 @@ extends "res://Playfield/Satellite/Satellite.gd"
 const type = "cleanup_sat"
 
 onready var laser = get_node("Laser")
+onready var barrel = get_node("Barrel")
 var laser_on = false
 var laser_phase = 0
 
@@ -44,6 +45,7 @@ func _process(delta):
         laser_phase -= 2 * PI
 
     laser.rotation = laser_phase
+    barrel.rotation = laser_phase
 
     if selected and not laser_on and Input.is_action_pressed("lasers"):
         turn_on_laser()

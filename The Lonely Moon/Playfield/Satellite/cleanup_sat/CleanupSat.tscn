@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Playfield/Satellite/cleanup_sat/CleanupSat.gd" type="Script" id=1]
-[ext_resource path="res://Playfield/Satellite/cleanup_sat/cleanup_sat.png" type="Texture" id=2]
-[ext_resource path="res://Sound/space laser loop.wav" type="AudioStream" id=3]
+[ext_resource path="res://Playfield/Satellite/cleanup_sat/barrel.png" type="Texture" id=2]
+[ext_resource path="res://Playfield/Satellite/cleanup_sat/cleanup_sat.png" type="Texture" id=3]
+[ext_resource path="res://Sound/space laser loop.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -13,9 +14,9 @@ height = 20.0
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 149.84, 4923.53 )
+extents = Vector2( 149.84, 4780.6 )
 
-[node name="Satellite" type="KinematicBody2D"]
+[node name="Satellite" type="KinematicBody2D" index="0"]
 
 scale = Vector2( 0.015, 0.015 )
 input_pickable = true
@@ -25,12 +26,19 @@ collision/safe_margin = 0.5
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index", "collision" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Barrel" type="Sprite" parent="." index="0"]
 
+scale = Vector2( 10, 10 )
 texture = ExtResource( 2 )
+offset = Vector2( 0.495214, -36.7593 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Selectbox" type="Line2D" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Selectbox" type="Line2D" parent="." index="2"]
 
 position = Vector2( -4.81983, 16.0946 )
 scale = Vector2( 6.22255, 3.7538 )
@@ -41,15 +49,16 @@ texture_mode = -13556705
 sharp_limit = 2.0
 round_precision = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 
 scale = Vector2( 49.6219, 14 )
 z_index = 1
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
-[node name="Laser" type="Area2D" parent="." index="3"]
+[node name="Laser" type="Area2D" parent="." index="4"]
 
+scale = Vector2( 1, 1 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -65,13 +74,14 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Laser" index="0"]
 
-position = Vector2( 0, -5272.01 )
-scale = Vector2( 1, 0.998913 )
+position = Vector2( 0, -5264.74 )
+scale = Vector2( 1, 1.03377 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Polygon2D" type="Polygon2D" parent="Laser" index="1"]
 
+position = Vector2( 0, -200.001 )
 polygon = PoolVector2Array( 100, -400, 100, -10000, -100, -10000, -100, -400 )
 uv = PoolVector2Array(  )
 color = Color( 1, 0, 0, 1 )
@@ -87,7 +97,7 @@ invert_border = 100.0
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="Laser" index="2"]
 
-stream = ExtResource( 3 )
+stream = ExtResource( 4 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
