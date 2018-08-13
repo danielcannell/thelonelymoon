@@ -1,12 +1,6 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 func _ready():
-    # Called when the node is added to the scene for the first time.
-    # Initialization here
     var ui = get_node("UiLayer/UI")
     var space_center = get_node("Playfield/Earth/SpaceCenter")
 
@@ -20,9 +14,12 @@ func _ready():
     playfield.connect("craft_collision", evil_space_center, "_on_craft_collision")
     playfield.connect("craft_destroyed", evil_space_center, "_on_craft_destroyed")
 
-    
+    ui.connect("charge_laser", playfield, "charge_laser")
+    ui.connect("hide_satellite_range", playfield, "hide_satellite_range")
+    ui.connect("show_satellite_range", playfield, "show_satellite_range")
+    ui.connect("spawn_satellite", playfield, "new_craft")
 
-#func _process(delta):
-#    # Called every frame. Delta is time since last frame.
-#    # Update game logic here.
-#    pass
+    playfield.connect("satellite_selected", ui, "on_satellite_selected")
+    playfield.connect("satellite_summary", ui, "on_satellite_summary")
+
+    ui.connect("eat_click", playfield, "eat_click")
