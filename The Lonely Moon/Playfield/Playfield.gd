@@ -405,10 +405,6 @@ func _process(delta):
         get_node("LaserCharge").value = laser_charge / global.LASER_CONFIG.laser_charge.time_earned
 
 
-func _input(event):
-    if event.is_action_pressed("missile"):
-        new_missile()
-
 func _on_missile_pending():
     pass
     

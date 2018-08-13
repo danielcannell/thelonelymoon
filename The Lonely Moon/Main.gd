@@ -21,5 +21,3 @@ func _ready():
 
     playfield.connect("satellite_selected", ui, "on_satellite_selected")
     playfield.connect("satellite_summary", ui, "on_satellite_summary")
-
-    ui.connect("eat_click", playfield, "eat_click")
