@@ -580,7 +580,6 @@ max_lines_visible = -1
 
 [node name="Deltav" type="HBoxContainer" parent="SatInfo/Background/C" index="4"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -709,7 +708,7 @@ align = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Rect", "Theme", "custom_constants" ]
 
 [node name="IncomeVal" type="Label" parent="SatInfo/Background/C/Income" index="1"]
 
@@ -718,7 +717,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 74.0
-margin_right = 126.0
+margin_right = 118.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -726,7 +725,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "0 btc / s"
+text = "0 btc/s"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

@@ -25,8 +25,9 @@ func _process(delta):
         get_node("Background/C/Deltav/PrgBar/Text").text = "%.1f" % state['delta_v']
         get_node("Background/C/Deltav/PrgBar").value = (state['delta_v'] / state['delta_v_max']) * 100
         var income = Economy.ship_income(curr_sat, satellites) if state['in_range'] else 0.0
-        get_node("Background/C/Income/IncomeVal").text = "%.1f btc/s" % income
-        get_node("Background/C/Constellation/ConstellVal").text = "%s" % constellation_size
+        var constellation_bonus = Economy.constellation_bonus(curr_sat, constellation_size)
+        get_node("Background/C/Income/IncomeVal").text = "%.1f btc/s" % income 
+        get_node("Background/C/Constellation/ConstellVal").text = "%s" % constellation_size + " (%0.1fx income)" % constellation_bonus
 
 
 func on_satellite_selected(sat):
