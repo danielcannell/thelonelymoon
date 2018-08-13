@@ -16,6 +16,8 @@ func _ready():
     get_node("../../Playfield").connect("notify", self, "create_notification")
     get_node("../../Playfield/Earth/EvilSpaceCenter").connect("notify", self, "create_notification")
 
+    get_node("HelpButton").connect("pressed", self, "show_help")
+
     # Create buttons from config
     for x in global.MENU_CONFIG:
         var btn = shop_item.instance()
@@ -28,6 +30,10 @@ func _ready():
         get_node("Shop/Shop/Background/Container/Tiles").add_child(btn)
 
     set_money(0)
+
+
+func show_help():
+    get_node("HelpWindow").popup()
 
 
 func create_notification(text, type):
