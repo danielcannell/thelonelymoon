@@ -398,10 +398,10 @@ func _input(event):
         new_missile()
 
 func _on_missile_pending():
-    emit_signal("notify", "King Jon Bing Bong is displeased with your efforts - PREPPING MISSILE!", global.NOTIFICATION_TYPE.BAD)
+    emit_signal("notify", "'Democratic Republic of the Supreme Master Chef' is displeased - PREPPING MISSILE!", global.NOTIFICATION_TYPE.BAD)
 
 func _on_missile_launched():
-    emit_signal("notify", "MISSLE LAUNCHED! - cost ~1.2M meals", global.NOTIFICATION_TYPE.BAD)
+    emit_signal("notify", "MISSLE LAUNCHED! - cost 1.2M meals", global.NOTIFICATION_TYPE.BAD)
     new_missile()
 
 
