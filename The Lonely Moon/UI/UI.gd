@@ -90,7 +90,7 @@ func set_money(amt):
         item.set_enabled(item.thing.cost <= amt)
 
 
-func _on_Playfield_satellite_summary(delta, state):
+func on_satellite_summary(delta, state):
     var satellites = state[0]
     var debris_count = state[1]
     var moon_state = state[2]
