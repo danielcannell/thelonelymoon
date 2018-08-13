@@ -6,31 +6,31 @@
 [ext_resource path="res://Playfield/Satellite/missile/spr_missile.png" type="Texture" id=4]
 [ext_resource path="res://Playfield/Satellite/missile/Circle.gd" type="Script" id=5]
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=1]
 
 offsets = PoolRealArray( 0, 0.195266, 1 )
 colors = PoolColorArray( 0.546875, 0.433054, 0.31189, 1, 0.503906, 0.422018, 0.356277, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=7]
+[sub_resource type="GradientTexture" id=2]
 
 flags = 4
-gradient = SubResource( 6 )
+gradient = SubResource( 1 )
 width = 2048
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=3]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
+[sub_resource type="CurveTexture" id=4]
 
 flags = 4
 width = 2048
-curve = SubResource( 8 )
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=5]
 
 render_priority = 0
 trail_divisor = 1
@@ -59,8 +59,8 @@ angle = 0.0
 angle_random = 0.0
 scale = 0.4
 scale_random = 0.0
-scale_curve = SubResource( 9 )
-color_ramp = SubResource( 7 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 0.0
@@ -70,17 +70,17 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Damping", "Gravity", "Hue Variation", "Initial Velocity", "Scale", "Spread" ]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=7]
 
 custom_solver_bias = 0.0
 radius = 75.0
 
-[node name="Missile" type="KinematicBody2D" index="0"]
+[node name="Missile" type="KinematicBody2D"]
 
 position = Vector2( 0, 0.258385 )
 scale = Vector2( 0.5, 0.5 )
@@ -108,7 +108,7 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 10 )
+process_material = SubResource( 5 )
 texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
@@ -135,7 +135,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( -0.3161, -0.364671 )
 rotation = -1.5708
 scale = Vector2( 2.97539, 0.62898 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="BlastRadius" type="Area2D" parent="." index="4"]
@@ -154,7 +154,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlastRadius" index="0"]
 
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="Circle" type="Node2D" parent="BlastRadius" index="1"]
 

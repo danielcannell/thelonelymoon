@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Playfield/Playfield.gd" type="Script" id=1]
 [ext_resource path="res://Playfield/Earth/Earth.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Playfield/Earth/laser_charge_bg.png" type="Texture" id=8]
 [ext_resource path="res://Playfield/Earth/laser_charge_fg.png" type="Texture" id=9]
 [ext_resource path="res://Playfield/FireButtonTheme.theme" type="Theme" id=10]
+[ext_resource path="res://Playfield/Selected.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -133,5 +134,10 @@ text = "LASER"
 flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Theme" ]
+
+[node name="Selected" type="Node2D" parent="." index="10"]
+
+visible = false
+script = ExtResource( 11 )
 
 
