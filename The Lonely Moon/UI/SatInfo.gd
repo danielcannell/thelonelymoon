@@ -27,7 +27,7 @@ func _process(delta):
         var income = Economy.ship_income(curr_sat, satellites) if state['in_range'] else 0.0
         var constellation_bonus = Economy.constellation_bonus(curr_sat, constellation_size)
         get_node("Background/C/Income/IncomeVal").text = "%.1f btc/s" % income 
-        get_node("Background/C/Constellation/ConstellVal").text = "%s" % constellation_size + " (%0.1fx income)" % constellation_bonus
+        get_node("Background/C/Constellation/ConstellVal").text = "%s" % constellation_size + " (%0.1fx)" % constellation_bonus
 
 
 func on_satellite_selected(sat):
