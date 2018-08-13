@@ -15,7 +15,7 @@ func _ready():
     self.get_node("missile").visible = false
     self.man_timer = self.get_node("AngryManTimer")
     self.man_timer.one_shot = true
-    self.man_timer.wait_time = 60
+    self.man_timer.wait_time = 180
 
     self.launch_timer = self.get_node("LaunchTimer")
     self.launch_timer.one_shot = true
