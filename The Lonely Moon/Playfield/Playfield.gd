@@ -2,6 +2,8 @@ extends Node2D
 
 signal satellite_summary
 signal satellite_selected
+signal craft_destroyed
+signal craft_collision
 signal notify
 
 const Debris = preload("res://Playfield/Satellite/debris/Debris.tscn");
@@ -142,6 +144,7 @@ func destroy_craft(craft):
     if selected_sat == craft:
         select_satellite(null)
 
+    emit_signal("craft_destroyed", craft)
     remove_child(craft)
     craft.set_collision_layer_bit(1, false)
     craft.set_collision_layer_bit(0, false)
@@ -235,6 +238,7 @@ func craft_collision(craft1, craft2):
     var name1 = global.id_display_lookup[craft1.type]
     var name2 = global.id_display_lookup[craft2.type]
     report_collision(name1, name2)
+    emit_signal("craft_collision", craft1, craft2)
 
 
 func report_collision(name1, name2):
@@ -405,10 +409,9 @@ func _input(event):
         new_missile()
 
 func _on_missile_pending():
-    emit_signal("notify", "'Democratic Republic of the Supreme Master Chef' is displeased - PREPPING MISSILE!", global.NOTIFICATION_TYPE.BAD)
-
+    pass
+    
 func _on_missile_launched():
-    emit_signal("notify", "MISSLE LAUNCHED! - cost 1.2M meals", global.NOTIFICATION_TYPE.BAD)
     new_missile()
 
 

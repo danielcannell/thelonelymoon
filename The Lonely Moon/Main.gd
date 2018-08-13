@@ -17,6 +17,8 @@ func _ready():
     var evil_space_center = get_node("Playfield/Earth/EvilSpaceCenter")
     evil_space_center.connect("missile_pending", playfield, "_on_missile_pending")
     evil_space_center.connect("missile_launched", playfield, "_on_missile_launched")
+    playfield.connect("craft_collision", evil_space_center, "_on_craft_collision")
+    playfield.connect("craft_destroyed", evil_space_center, "_on_craft_destroyed")
 
     
 
