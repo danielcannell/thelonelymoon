@@ -21,11 +21,14 @@ static func ship_income(ship, satellites):
 
     var constell_size = global.constellation_size(satellites, ship.type)
     var base_income = props.income * constellation_bonus(ship, constell_size)
+    var cutoff_time = 4 * props.time_constant
 
     if state.uptime < props.time_constant:
         return base_income
-
-    return lerp(base_income, 0.25 * base_income, (state.uptime - props.time_constant) / (4 * props.time_constant))
+    elif state.uptime > cutoff_time:
+        return base_income / 4
+    else:
+        return lerp(base_income, base_income / 4, (state.uptime - props.time_constant) / cutoff_time)
 
 
 func receive_state(delta, state):
