@@ -140,7 +140,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="BlastRadius" type="Area2D" parent="." index="4"]
 
-visible = false
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
