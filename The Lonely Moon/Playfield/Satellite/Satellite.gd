@@ -6,6 +6,7 @@ const BURN_RATE = 0.1
 const type = "satellite"
 
 var glow_template = preload("res://Playfield/Satellite/Glow.tscn")
+var staging_sfx = preload("res://Playfield/Satellite/StagingSound.tscn")
 
 
 ## state ##
@@ -106,6 +107,10 @@ func enter_orbit():
     in_orbit = true
     remove_child(launch_vehicle)
     add_glow()
+    
+    var sfx = staging_sfx.instance()
+    add_child(sfx)
+    sfx.connect("finished", self, "remove_child", [sfx])
     
     emit_signal("satellite_entered_orbit", self, launch_vehicle)
     launch_vehicle = null
