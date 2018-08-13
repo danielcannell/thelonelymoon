@@ -10,7 +10,7 @@ func _ready():
     pass
     
 static func constellation_bonus(sat, size):
-    return (1 + sat.props.constellation_bonus * (size - 1))
+    return max((1 + sat.props.constellation_bonus * (size - 1)), 1)
 
 static func ship_income(ship, satellites):
     var props = ship.props
