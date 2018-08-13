@@ -27,15 +27,15 @@ const MENU_CONFIG = [
         'display_name': 'Indiegogo',
         'description': 'Venture capital not working out? Try taking money from strangers!',
         'type': 'fundraise',
-        'cost': 200,
-        'build_time': 2
+        'cost': 20,
+        'build_time': 3
     },
     {
         'id': 'cube_sat',
         'display_name': 'CubeSat',
         'description': 'Pretend that you\'re NASA, on the cheap.',
         'type': 'satellite',
-        'cost': 500,
+        'cost': 150,
         'build_time': 1,
     },
     {
@@ -55,27 +55,27 @@ const MENU_CONFIG = [
         'build_time': 5,
     },
     {
-        'id': 'spy_satellite',
-        'display_name': 'Spy Satellite',
-        'description': 'Keep an eye on the neighbours.',
-        'type': 'satellite',
-        'cost': 1000,
-        'build_time': 1,
-    },
-    {
         'id': 'science_station',
         'display_name': 'Science Station',
         'description': 'We\'re doing science and we\'re still alive <3',
         'type': 'satellite',
-        'cost': 10000,
+        'cost': 15000,
         'build_time': 20,
+    },
+    {
+        'id': 'spy_satellite',
+        'display_name': 'Spy Satellite',
+        'description': 'Keep an eye on the neighbours.',
+        'type': 'satellite',
+        'cost': 50000,
+        'build_time': 5,
     },
     {
         'id': 'space_hotel',
         'display_name': 'Space Hotel',
         'description': '"****: Not much atmosphere, but great views."',
         'type': 'satellite',
-        'cost': 100000,
+        'cost': 200000,
         'build_time': 30,
     },
     {
@@ -83,7 +83,7 @@ const MENU_CONFIG = [
         'display_name': 'The Ark',
         'description': 'Escape the world\'s destruction in the lap of refined luxury!',
         'type': 'satellite',
-        'cost': 999999,
+        'cost': 9999999,
         'build_time': 60,
     }
 ]
@@ -92,8 +92,8 @@ const SHIP_CONFIG = {
     'cube_sat': {
         "match_rot_to_vel": true,
         'region': 'leo',
-        'delta_v': 50,
-        'income': 10,
+        'delta_v': 40,
+        'income': 20,
         'constellation_bonus': 1.2,
         'time_constant': 60,
         'drag_ratio': 0.1,
@@ -128,8 +128,8 @@ const SHIP_CONFIG = {
     'spy_satellite': {
         "match_rot_to_vel": true,
         'region': 'region2',
-        'delta_v': 100,
-        'income': 25,
+        'delta_v': 50,
+        'income': 1000,
         'constellation_bonus': 1,
         'time_constant': 60,
         'drag_ratio': 0.3,
@@ -146,8 +146,8 @@ const SHIP_CONFIG = {
     'science_station': {
         "match_rot_to_vel": true,
         'region': 'region3',
-        'delta_v': 150,
-        'income': 100,
+        'delta_v': 50,
+        'income': 500,
         'constellation_bonus': 0,
         'time_constant': 200,
         'drag_ratio': 0.7,
@@ -165,9 +165,9 @@ const SHIP_CONFIG = {
     'space_hotel': {
         "match_rot_to_vel": true,
         'region': 'region4',
-        'delta_v': 150,
+        'delta_v': 50,
         'income': 10000,
-        'constellation_bonus': 0,
+        'constellation_bonus': 0.5,
         'time_constant': 40,
         'drag_ratio': 2,
         'thrust': 0.1,
@@ -184,7 +184,7 @@ const SHIP_CONFIG = {
     'ark': {
         "match_rot_to_vel": true,
         'region': 'outer_space',
-        'delta_v': 100,
+        'delta_v': 75,
         'income': 0,
         'constellation_bonus': 0,
         'time_constant': 1,
@@ -257,7 +257,7 @@ const SHIP_CONFIG = {
 const SPACE_REGIONS = {
     'leo': {
         'alt_min': 100,
-        'alt_max': 200,
+        'alt_max': 250,
     },
     'region2': {
         'alt_min': 500,
@@ -265,7 +265,7 @@ const SPACE_REGIONS = {
     },
     'region3': {
         'alt_min': 600,
-        'alt_max': 700,
+        'alt_max': 1000,
     },
     'region4': {
         'alt_min': 300,
@@ -279,18 +279,18 @@ const SPACE_REGIONS = {
 
 const FUNDRAISE_CONFIG = {
     'press_conference': {
-        'raised_min': 500,
-        'raised_max': 1000,
+        'raised_min': 5,
+        'raised_max': 15,
     },
     'indiegogo': {
-        'raised_min': 2000,
-        'raised_max': 4000,
+        'raised_min': 100,
+        'raised_max': 200,
     }
 }
 
 const LASER_CONFIG = {
     'laser_charge': {
-        'time_earned': 2,
+        'time_earned': 4,
     }
 }
 

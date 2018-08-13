@@ -153,16 +153,14 @@ func destroy():
 
 func select():
     selected = true
-    var node = get_node("Selectbox")
-    if node:
-        node.set_default_color(Color(0.2, 1.0, 0.2, 1.0))
+    if has_node("Selectbox"):
+        get_node("Selectbox").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
 
 
 func deselect():
     selected = false
-    var node = get_node("Selectbox")
-    if node:
-        node.set_default_color(Color(0.0, 0.0, 0.0, 0.0))
+    if has_node("Selectbox"):
+        get_node("Selectbox").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
 
 
 func burn(delta, is_prograde, is_fine):
