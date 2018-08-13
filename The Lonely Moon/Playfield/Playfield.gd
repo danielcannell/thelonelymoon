@@ -145,7 +145,7 @@ func destroy_craft(craft):
         select_satellite(null)
 
     emit_signal("craft_destroyed", craft)
-    remove_child(craft)
+    call_deferred("remove_child", craft)
     craft.set_collision_layer_bit(1, false)
     craft.set_collision_layer_bit(0, false)
     craft.remove_from_group("satellites")
