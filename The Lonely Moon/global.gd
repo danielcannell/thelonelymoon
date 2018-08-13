@@ -129,7 +129,7 @@ const SHIP_CONFIG = {
         "match_rot_to_vel": true,
         'region': 'region2',
         'delta_v': 50,
-        'income': 1000,
+        'income': 10000,
         'constellation_bonus': 1,
         'time_constant': 60,
         'drag_ratio': 0.3,
