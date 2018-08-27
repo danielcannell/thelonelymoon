@@ -90,7 +90,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="LaserSound" type="AudioStreamPlayer2D" parent="LaserBeam" index="2"]
 
 stream = ExtResource( 4 )
-volume_db = 0.0
+volume_db = -20.0
 pitch_scale = 1.0
 autoplay = false
 max_distance = 2000.0
