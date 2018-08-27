@@ -29,7 +29,7 @@ func unpause():
 
 
 func _input(ev):
-    if ev is InputEventKey and ev.scancode == KEY_P and !ev.pressed:
+    if ev is InputEventKey and [KEY_P, KEY_ESCAPE].has(ev.scancode) and !ev.pressed:
         _toggle_pause()
 
 
