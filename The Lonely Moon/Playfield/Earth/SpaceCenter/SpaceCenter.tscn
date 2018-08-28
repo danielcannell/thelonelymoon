@@ -24,7 +24,7 @@ _sections_unfolded = [ "Visibility" ]
 [node name="LaunchSound" type="AudioStreamPlayer2D" parent="." index="2"]
 
 stream = ExtResource( 4 )
-volume_db = 0.0
+volume_db = -10.0
 pitch_scale = 1.0
 autoplay = false
 max_distance = 2000.0

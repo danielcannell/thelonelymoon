@@ -136,7 +136,7 @@ _sections_unfolded = [ "Theme" ]
 [node name="IssueBuild" type="AudioStreamPlayer" parent="." index="1"]
 
 stream = ExtResource( 6 )
-volume_db = 0.0
+volume_db = -30.0
 pitch_scale = 1.0
 autoplay = false
 mix_target = 0
@@ -145,7 +145,7 @@ bus = "Master"
 [node name="MoneyArrival" type="AudioStreamPlayer" parent="." index="2"]
 
 stream = ExtResource( 7 )
-volume_db = 0.0
+volume_db = -30.0
 pitch_scale = 1.0
 autoplay = false
 mix_target = 0

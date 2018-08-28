@@ -52,7 +52,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="Sound" type="AudioStreamPlayer2D" parent="." index="0"]
 
 stream = ExtResource( 31 )
-volume_db = 0.0
+volume_db = -10.0
 pitch_scale = 1.0
 autoplay = true
 max_distance = 2000.0
