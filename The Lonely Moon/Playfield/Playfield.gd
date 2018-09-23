@@ -217,6 +217,9 @@ func create_debris(pos, vel, amount, radius, impluse):
 
 
 func craft_collision(craft1, craft2):
+    if craft1.type == "debris" and craft2.type == "debris":
+        return
+
     if not craft1.active or not craft2.active:
         return
 
@@ -380,7 +383,7 @@ func _process(delta):
         var orbit = get_node('Orbit')
         orbit.points = PoolVector2Array(predicted_orbit)
         orbit.width = 2 * global.current_scale()
-        
+
         get_node("Selected").place(selected_sat.position)
 
     for d in inactive_debris:
@@ -409,7 +412,7 @@ func _process(delta):
 
 func _on_missile_pending():
     pass
-    
+
 func _on_missile_launched():
     new_missile()
 
