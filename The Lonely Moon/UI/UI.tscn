@@ -12,7 +12,7 @@
 [ext_resource path="res://UI/prg_fg.png" type="Texture" id=10]
 [ext_resource path="res://UI/Helpbox.tscn" type="PackedScene" id=11]
 
-[node name="UI" type="Container" index="0"]
+[node name="UI" type="Container"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -798,14 +798,17 @@ max_lines_visible = -1
 
 [node name="HelpWindow" parent="." index="5" instance=ExtResource( 11 )]
 
+pause_mode = 2
 visible = false
 margin_left = 415.0
 margin_top = 89.0
 margin_right = 749.0
 margin_bottom = 504.0
+_sections_unfolded = [ "Pause", "Popup" ]
 
 [node name="HelpButton" type="Button" parent="." index="6"]
 
+pause_mode = 2
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -828,6 +831,7 @@ group = null
 text = "Show Help"
 flat = false
 align = 1
+_sections_unfolded = [ "Pause" ]
 
 [connection signal="toggled" from="Shop/ShowStats" to="." method="on_showstats_toggled"]
 
