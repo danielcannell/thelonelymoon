@@ -242,16 +242,16 @@ func craft_collision(craft1, craft2):
 
 
 func report_collision(name1, name2):
+    var boring_types = ["Debris", "a laser", "Earth", "Moon", "Laser"]
+    if boring_types.has(name1) and boring_types.has(name2):
+        return
+
     var message = "%s was destroyed colliding with %s!"
     var namearr = [name1, name2]
 
     if name1 == "Debris":
         name1 = name2
         name2 = "Debris"
-
-    # If this is only a debris/celestial body object, ignore
-    if name2 == "Debris" and ["Earth", "Moon", "Laser"].has(name1):
-        return
 
     emit_signal("notify", message % [name1, name2], global.NOTIFICATION_TYPE.BAD)
 
@@ -383,7 +383,7 @@ func _process(delta):
         var orbit = get_node('Orbit')
         orbit.points = PoolVector2Array(predicted_orbit)
         orbit.width = 2 * global.current_scale()
-        
+
         get_node("Selected").place(selected_sat.position)
 
     for d in inactive_debris:
@@ -412,7 +412,7 @@ func _process(delta):
 
 func _on_missile_pending():
     pass
-    
+
 func _on_missile_launched():
     new_missile()
 
